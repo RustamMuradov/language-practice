@@ -1,1338 +1,1911 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Language Practice</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #fffafc;
-      color: #3d3540;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .app {
-      min-height: 100vh;
-      padding: 24px 18px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .decoration {
-      position: fixed;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .decoration.one {
-      top: -100px;
-      right: -80px;
-      background: #f8dce8;
-      opacity: 0.45;
-    }
-
-    .decoration.two {
-      bottom: -120px;
-      left: -100px;
-      background: #dfeaf8;
-      opacity: 0.4;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: 28px;
-    }
-
-    .menu-button {
-      width: 48px;
-      height: 48px;
-      border: none;
-      border-radius: 16px;
-      background: white;
-      box-shadow: 0 5px 20px rgba(80, 55, 70, 0.09);
-      cursor: pointer;
-      color: #594d57;
-      font-size: 24px;
-    }
-
-    .menu-button:active {
-      transform: scale(0.96);
-    }
-
-    .hero {
-      text-align: center;
-      padding: 28px 10px 30px;
-    }
-
-    .flower {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(32px, 8vw, 48px);
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: #403741;
-    }
-
-    .hero p {
-      margin: 12px auto 0;
-      max-width: 420px;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #827680;
-    }
-
-    .section-title {
-      margin: 8px 4px 14px;
-      font-size: 17px;
-      font-weight: 600;
-      color: #665a64;
-    }
-
-    .modes {
-      display: grid;
-      gap: 14px;
-    }
-
-    .mode-card {
-      width: 100%;
-      border: 1px solid #f0e4ea;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 20px;
-      text-align: left;
-      box-shadow: 0 8px 30px rgba(80, 55, 70, 0.07);
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .mode-card:active {
-      transform: scale(0.985);
-    }
-
-    .mode-icon {
-      font-size: 27px;
-      margin-bottom: 10px;
-    }
-
-    .mode-card h2 {
-      margin: 0 0 6px;
-      font-size: 20px;
-      color: #443a43;
-    }
-
-    .mode-card p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.5;
-      color: #8a7d86;
-    }
-
-    /* МЕНЮ */
-
-    .menu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(45, 35, 42, 0.25);
-      backdrop-filter: blur(5px);
-      display: none;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding: 78px 18px 20px;
-      z-index: 10;
-    }
-
-    .menu-overlay.open {
-      display: flex;
-    }
-
-    .menu-panel {
-      width: min(340px, 100%);
-      background: #fff;
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: 0 20px 60px rgba(40, 30, 40, 0.2);
-    }
-
-    .menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .menu-header h2 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .close-menu {
-      width: 38px;
-      height: 38px;
-      border: none;
-      border-radius: 12px;
-      background: #f7f1f4;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    .language-option {
-      width: 100%;
-      border: none;
-      background: #faf6f8;
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 9px;
-      text-align: left;
-      color: #51464f;
-      cursor: pointer;
-    }
-
-    .language-option.active {
-      background: #f3dce7;
-      font-weight: 600;
-    }
-
-    .language-option:active {
-      transform: scale(0.985);
-    }
-
-    /* ЭКРАН ПРАКТИКИ */
-
-    .practice-screen {
-      display: none;
-    }
-
-    .practice-screen.active {
-      display: block;
-    }
-
-    .home-screen.hidden {
-      display: none;
-    }
-
-    .practice-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-    }
-
-    .back-button {
-      border: none;
-      background: white;
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(80, 55, 70, 0.08);
-      cursor: pointer;
-      font-size: 22px;
-      color: #594d57;
-    }
-
-    .practice-title {
-      text-align: center;
-      flex: 1;
-      margin: 0 12px;
-    }
-
-    .practice-title h2 {
-      margin: 0;
-      font-size: 21px;
-      color: #443a43;
-    }
-
-    .practice-title p {
-      margin: 4px 0 0;
-      color: #8a7d86;
-      font-size: 13px;
-    }
-
-    .progress-area {
-      margin-bottom: 18px;
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      color: #7d7079;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .progress-bar {
-      height: 8px;
-      background: #f0e6eb;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #d79ab6;
-      border-radius: 20px;
-      transition: width 0.25s ease;
-    }
-
-    .word-card {
-      background: white;
-      border: 1px solid #f0e4ea;
-      border-radius: 26px;
-      padding: 32px 22px;
-      text-align: center;
-      box-shadow: 0 10px 35px rgba(80, 55, 70, 0.08);
-      margin-bottom: 16px;
-    }
-
-    .word-language {
-      font-size: 13px;
-      color: #9a8b94;
-      margin-bottom: 14px;
-    }
-
-    .word-main {
-      font-size: clamp(29px, 8vw, 42px);
-      font-weight: 700;
-      color: #403741;
-      margin-bottom: 22px;
-      line-height: 1.25;
-      word-break: break-word;
-    }
-
-    .answer-box {
-      min-height: 60px;
-      border-radius: 17px;
-      background: #faf6f8;
-      padding: 15px;
-      color: #665a64;
-      font-size: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .answer-box.hidden {
-      color: #a99ba3;
-      font-size: 15px;
-    }
-
-    .show-answer {
-      margin-top: 14px;
-      border: none;
-      background: #f3e1e9;
-      color: #594d57;
-      padding: 13px 20px;
-      border-radius: 15px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .practice-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .practice-button {
-      border: none;
-      border-radius: 17px;
-      padding: 15px 10px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .repeat-button {
-      background: #f3edf0;
-      color: #655963;
-    }
-
-    .know-button {
-      background: #e8f2eb;
-      color: #4f6757;
-    }
-
-    .next-button {
-      width: 100%;
-      border: none;
-      border-radius: 17px;
-      padding: 15px;
-      background: #403741;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .timer-box {
-      text-align: center;
-      margin-bottom: 14px;
-    }
-
-    .timer-value {
-      font-size: 30px;
-      font-weight: 700;
-      color: #403741;
-    }
-
-    .timer-select {
-      margin-top: 10px;
-      border: 1px solid #eadde4;
-      background: white;
-      border-radius: 14px;
-      padding: 12px;
-      width: 100%;
-      color: #594d57;
-    }
-
-    .timer-start {
-      width: 100%;
-      margin-top: 10px;
-      border: none;
-      border-radius: 15px;
-      padding: 13px;
-      background: #f3dce7;
-      color: #594d57;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .finish-box {
-      display: none;
-      text-align: center;
-      background: white;
-      border: 1px solid #f0e4ea;
-      border-radius: 25px;
-      padding: 30px 20px;
-      box-shadow: 0 10px 35px rgba(80, 55, 70, 0.08);
-    }
-
-    .finish-box.active {
-      display: block;
-    }
-
-    .finish-box .big {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-
-    .finish-box h2 {
-      margin: 0 0 8px;
-    }
-
-    .finish-box p {
-      color: #81747d;
-      line-height: 1.5;
-    }
-
-    .restart-button {
-      border: none;
-      border-radius: 16px;
-      background: #403741;
-      color: white;
-      padding: 14px 22px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-
-    @media (min-width: 600px) {
-      .app {
-        padding-top: 40px;
-      }
-
-      .modes {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Practice</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #fffafc;
+  color: #3d3540;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px 18px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.decoration {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration.one {
+  top: -100px;
+  right: -80px;
+  background: #f8dce8;
+  opacity: 0.45;
+}
+
+.decoration.two {
+  bottom: -120px;
+  left: -100px;
+  background: #dfeaf8;
+  opacity: 0.4;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ГЛАВНЫЙ ЭКРАН */
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.menu-button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 5px 20px rgba(80, 55, 70, 0.09);
+  cursor: pointer;
+  color: #594d57;
+  font-size: 24px;
+}
+
+.hero {
+  text-align: center;
+  padding: 28px 10px 30px;
+}
+
+.flower {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(32px, 8vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #403741;
+}
+
+.hero p {
+  margin: 12px auto 0;
+  max-width: 420px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #827680;
+}
+
+.section-title {
+  margin: 8px 4px 14px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #665a64;
+}
+
+.modes {
+  display: grid;
+  gap: 14px;
+}
+
+.mode-card {
+  width: 100%;
+  border: 1px solid #f0e4ea;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 20px;
+  text-align: left;
+  box-shadow: 0 8px 30px rgba(80, 55, 70, 0.07);
+  cursor: pointer;
+}
+
+.mode-icon {
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.mode-card h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #443a43;
+}
+
+.mode-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8a7d86;
+}
+
+/* МЕНЮ */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 35, 42, 0.25);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 78px 18px 20px;
+  z-index: 10;
+}
+
+.menu-overlay.open {
+  display: flex;
+}
+
+.menu-panel {
+  width: min(340px, 100%);
+  background: #fff;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(40, 30, 40, 0.2);
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.menu-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.close-menu {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 12px;
+  background: #f7f1f4;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.language-option {
+  width: 100%;
+  border: none;
+  background: #faf6f8;
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 9px;
+  text-align: left;
+  color: #51464f;
+  cursor: pointer;
+}
+
+.language-option.active {
+  background: #f3dce7;
+  font-weight: 600;
+}
+
+/* ЭКРАН ПРАКТИКИ */
+
+.practice-screen {
+  display: none;
+}
+
+.practice-screen.active {
+  display: block;
+}
+
+.home-screen.hidden {
+  display: none;
+}
+
+.practice-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.back-button {
+  border: none;
+  background: white;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(80, 55, 70, 0.08);
+  cursor: pointer;
+  font-size: 22px;
+  color: #594d57;
+}
+
+.practice-title {
+  text-align: center;
+  flex: 1;
+  margin: 0 12px;
+}
+
+.practice-title h2 {
+  margin: 0;
+  font-size: 21px;
+  color: #443a43;
+}
+
+.practice-title p {
+  margin: 4px 0 0;
+  color: #8a7d86;
+  font-size: 13px;
+}
+
+/* ПРОГРЕСС */
+
+.progress-area {
+  margin-bottom: 18px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  color: #7d7079;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #f0e6eb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #d79ab6;
+  border-radius: 20px;
+  transition: width 0.25s;
+}
+
+/* СТОЛБИКИ */
+
+.match-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.round-info {
+  flex: 1;
+  text-align: center;
+  color: #7d7079;
+  font-size: 13px;
+}
+
+.errors-info {
+  font-size: 13px;
+  color: #8a7d86;
+  background: #faf6f8;
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.match-column {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.word-tile {
+  width: 100%;
+  min-height: 64px;
+  border: 1px solid #f0e4ea;
+  border-radius: 17px;
+  background: white;
+  color: #443a43;
+  padding: 12px 8px;
+  box-shadow: 0 6px 20px rgba(80, 55, 70, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.word-tile:active {
+  transform: scale(0.985);
+}
+
+.word-tile.selected {
+  border: 2px solid #79b78d;
+  background: #fbfffc;
+  box-shadow: 0 0 0 2px rgba(121, 183, 141, 0.08);
+}
+
+.word-tile.wrong {
+  border: 2px solid #d88989;
+  background: #fff7f7;
+  animation: wrong 0.22s ease;
+}
+
+.word-tile.correct {
+  border-color: #9bcaa8;
+  background: #eff9f1;
+  animation: correct 0.28s ease;
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+.word-tile.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tile-main {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+@keyframes wrong {
+  50% {
+    transform: translateX(4px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes correct {
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+}
+
+/* СЕКУНДОМЕР */
+
+.stopwatch {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #7d7079;
+  font-size: 13px;
+}
+
+.stopwatch strong {
+  font-size: 18px;
+  color: #403741;
+}
+
+/* ТАЙМЕР */
+
+.timer-box {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.timer-value {
+  font-size: 30px;
+  font-weight: 700;
+  color: #403741;
+}
+
+.timer-select {
+  margin-top: 10px;
+  border: 1px solid #eadde4;
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  width: 100%;
+  color: #594d57;
+}
+
+.timer-start {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 15px;
+  padding: 13px;
+  background: #f3dce7;
+  color: #594d57;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ЗАВЕРШЕНИЕ */
+
+.finish-box {
+  display: none;
+  text-align: center;
+  background: white;
+  border: 1px solid #f0e4ea;
+  border-radius: 25px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 35px rgba(80, 55, 70, 0.08);
+}
+
+.finish-box.active {
+  display: block;
+}
+
+.finish-box .big {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.finish-box h2 {
+  margin: 0 0 8px;
+}
+
+.finish-box p {
+  color: #81747d;
+  line-height: 1.5;
+}
+
+.restart-button {
+  border: none;
+  border-radius: 16px;
+  background: #403741;
+  color: white;
+  padding: 14px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+  .app {
+    padding-top: 40px;
+  }
+
+  .modes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <div class="decoration one"></div>
-    <div class="decoration two"></div>
+  <div class="decoration one"></div>
+  <div class="decoration two"></div>
 
-    <div class="content">
+  <div class="content">
 
-      <!-- ГЛАВНЫЙ ЭКРАН -->
+    <!-- ГЛАВНЫЙ ЭКРАН -->
 
-      <div class="home-screen" id="homeScreen">
+    <div class="home-screen" id="homeScreen">
 
-        <header class="topbar">
-          <button class="menu-button" id="menuButton" aria-label="Открыть меню">
-            ☰
-          </button>
-        </header>
-
-        <main>
-
-          <section class="hero">
-            <div class="flower">🌸</div>
-
-            <h1>Language Practice</h1>
-
-            <p>
-              Уютное место для практики английского
-              и корейского языка.
-            </p>
-          </section>
-
-          <section>
-
-            <div class="section-title">
-              Выбери режим практики
-            </div>
-
-            <div class="modes">
-
-              <button class="mode-card" id="normalMode">
-                <div class="mode-icon">🌿</div>
-
-                <h2>Обычная практика</h2>
-
-                <p>
-                  Проходи слова спокойно.
-                  Секундомер покажет, сколько времени
-                  заняла тренировка.
-                </p>
-              </button>
-
-              <button class="mode-card" id="timerMode">
-                <div class="mode-icon">⏱️</div>
-
-                <h2>Практика с таймером</h2>
-
-                <p>
-                  Выбери время и попробуй пройти
-                  как можно больше слов до окончания таймера.
-                </p>
-              </button>
-
-            </div>
-
-          </section>
-
-        </main>
-
-      </div>
-
-
-      <!-- ЭКРАН ПРАКТИКИ -->
-
-      <div class="practice-screen" id="practiceScreen">
-
-        <div class="practice-top">
-
-          <button class="back-button" id="backButton">
-            ←
-          </button>
-
-          <div class="practice-title">
-            <h2 id="practiceHeading">Практика</h2>
-            <p id="pairHeading">Корейский — Русский</p>
-          </div>
-
-          <div style="width:46px;"></div>
-
-        </div>
-
-
-        <!-- Таймер -->
-
-        <div class="timer-box" id="timerBox" style="display:none;">
-
-          <div class="timer-value" id="timerValue">
-            05:00
-          </div>
-
-          <select class="timer-select" id="timerSelect">
-            <option value="60">1 минута</option>
-            <option value="180">3 минуты</option>
-            <option value="300" selected>5 минут</option>
-            <option value="600">10 минут</option>
-          </select>
-
-          <button class="timer-start" id="timerStart">
-            ▶ Начать таймер
-          </button>
-
-        </div>
-
-
-        <!-- Прогресс -->
-
-        <div class="progress-area">
-
-          <div class="progress-info">
-            <span id="progressText">Слово 1 из 1</span>
-            <span id="scoreText">Знаю: 0</span>
-          </div>
-
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-
-        </div>
-
-
-        <!-- Карточка слова -->
-
-        <div class="word-card" id="wordCard">
-
-          <div class="word-language" id="wordLanguage">
-            КОРЕЙСКИЙ
-          </div>
-
-          <div class="word-main" id="wordMain">
-            Загрузка...
-          </div>
-
-          <div class="answer-box hidden" id="answerBox">
-            Нажми «Показать перевод»
-          </div>
-
-          <button class="show-answer" id="showAnswer">
-            Показать перевод
-          </button>
-
-        </div>
-
-
-        <!-- Кнопки -->
-
-        <div class="practice-buttons">
-
-          <button class="practice-button repeat-button" id="repeatButton">
-            🔁 Повторить
-          </button>
-
-          <button class="practice-button know-button" id="knowButton">
-            ✅ Знаю
-          </button>
-
-        </div>
-
-        <button class="next-button" id="nextButton">
-          Следующее слово →
+      <header class="topbar">
+        <button class="menu-button" id="menuButton">
+          ☰
         </button>
+      </header>
 
+      <main>
 
-        <!-- Завершение -->
+        <section class="hero">
 
-        <div class="finish-box" id="finishBox">
+          <div class="flower">🌸</div>
 
-          <div class="big">🎉</div>
+          <h1>Language Practice</h1>
 
-          <h2>Тренировка закончена!</h2>
-
-          <p id="finishText">
-            Отличная работа!
+          <p>
+            Уютное место для практики английского
+            и корейского языка.
           </p>
 
-          <button class="restart-button" id="restartButton">
-            🔄 Начать снова
-          </button>
+        </section>
+
+        <section>
+
+          <div class="section-title">
+            Выбери режим практики
+          </div>
+
+          <div class="modes">
+
+            <button class="mode-card" id="normalMode">
+
+              <div class="mode-icon">🌿</div>
+
+              <h2>Обычная практика</h2>
+
+              <p>
+                Проходи слова спокойно.
+                Секундомер покажет, сколько времени
+                заняла тренировка.
+              </p>
+
+            </button>
+
+            <button class="mode-card" id="timerMode">
+
+              <div class="mode-icon">⏱️</div>
+
+              <h2>Практика с таймером</h2>
+
+              <p>
+                Выбери время и попробуй пройти
+                как можно больше слов до окончания таймера.
+              </p>
+
+            </button>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+
+    <!-- ЭКРАН ПРАКТИКИ -->
+
+    <div class="practice-screen" id="practiceScreen">
+
+      <div class="practice-top">
+
+        <button class="back-button" id="backButton">
+          ←
+        </button>
+
+        <div class="practice-title">
+
+          <h2 id="practiceHeading">
+            Обычная практика
+          </h2>
+
+          <p id="pairHeading">
+            Английский — Русский
+          </p>
+
+        </div>
+
+        <div style="width:46px;"></div>
+
+      </div>
+
+
+      <!-- ТАЙМЕР -->
+
+      <div class="timer-box" id="timerBox">
+
+        <div class="timer-value" id="timerValue">
+          05:00
+        </div>
+
+        <select class="timer-select" id="timerSelect">
+
+          <option value="180">
+            3 минуты
+          </option>
+
+          <option value="240">
+            4 минуты
+          </option>
+
+          <option value="300" selected>
+            5 минут
+          </option>
+
+          <option value="420">
+            7 минут
+          </option>
+
+          <option value="600">
+            10 минут
+          </option>
+
+        </select>
+
+        <button class="timer-start" id="timerStart">
+          Начать
+        </button>
+
+      </div>
+
+
+      <!-- СЕКУНДОМЕР -->
+
+      <div class="stopwatch" id="stopwatch">
+        Время: <strong>00:00</strong>
+      </div>
+
+
+      <!-- ПРОГРЕСС -->
+
+      <div class="progress-area">
+
+        <div class="progress-info">
+
+          <span id="progressText">
+            Слово 0 из 0
+          </span>
+
+          <span id="scoreText">
+            Знаю: 0
+          </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            id="progressFill">
+          </div>
 
         </div>
 
       </div>
 
-    </div>
-  </div>
+
+      <!-- ИНФОРМАЦИЯ О РАУНДЕ -->
+
+      <div class="match-toolbar">
+
+        <div
+          class="round-info"
+          id="roundInfo">
+          Раунд 1
+        </div>
+
+        <div
+          class="errors-info"
+          id="errorsInfo">
+          Ошибки: 0
+        </div>
+
+      </div>
 
 
-  <!-- МЕНЮ -->
+      <!-- ДВА СТОЛБИКА -->
 
-  <div class="menu-overlay" id="menuOverlay">
+      <div class="columns" id="columns">
 
-    <div class="menu-panel">
+        <div
+          class="match-column"
+          id="leftColumn">
+        </div>
 
-      <div class="menu-header">
+        <div
+          class="match-column"
+          id="rightColumn">
+        </div>
 
-        <h2>Языковая пара</h2>
+      </div>
 
-        <button class="close-menu" id="closeMenu">
-          ✕
+
+      <!-- ЗАВЕРШЕНИЕ -->
+
+      <div
+        class="finish-box"
+        id="finishBox">
+
+        <div class="big">
+          🌸
+        </div>
+
+        <h2 id="finishTitle">
+          Раунд завершён
+        </h2>
+
+        <p id="finishText">
+        </p>
+
+        <button
+          class="restart-button"
+          id="restartButton">
+          Ещё раз
         </button>
 
       </div>
 
-      <button class="language-option active" data-pair="kr-ru">
-        🇰🇷 Корейский — Русский
-      </button>
-
-      <button class="language-option" data-pair="en-ru">
-        🇬🇧 Английский — Русский
-      </button>
-
-      <button class="language-option" data-pair="kr-en">
-        🇰🇷 Корейский — Английский
-      </button>
-
     </div>
 
   </div>
 
-
-  <script>
-
-    /* =========================
-       ОСНОВНЫЕ ПЕРЕМЕННЫЕ
-    ========================= */
-
-    let words = [];
-    let practiceWords = [];
-    let currentIndex = 0;
-    let score = 0;
-    let currentPair = "kr-ru";
-    let practiceMode = "normal";
-
-    let timerInterval = null;
-    let timerSeconds = 300;
-    let timerRunning = false;
-
-    let normalStartTime = null;
-    let normalTimerInterval = null;
+</div>
 
 
-    /* =========================
-       ЭЛЕМЕНТЫ
-    ========================= */
+<!-- МЕНЮ ЯЗЫКА -->
 
-    const homeScreen = document.getElementById("homeScreen");
-    const practiceScreen = document.getElementById("practiceScreen");
+<div
+  class="menu-overlay"
+  id="menuOverlay">
 
-    const menuButton = document.getElementById("menuButton");
-    const closeMenu = document.getElementById("closeMenu");
-    const menuOverlay = document.getElementById("menuOverlay");
+  <div class="menu-panel">
 
-    const normalMode = document.getElementById("normalMode");
-    const timerMode = document.getElementById("timerMode");
+    <div class="menu-header">
 
-    const backButton = document.getElementById("backButton");
+      <h2>
+        Выбор языка
+      </h2>
 
-    const practiceHeading = document.getElementById("practiceHeading");
-    const pairHeading = document.getElementById("pairHeading");
+      <button
+        class="close-menu"
+        id="closeMenu">
+        ×
+      </button>
 
-    const wordLanguage = document.getElementById("wordLanguage");
-    const wordMain = document.getElementById("wordMain");
-    const answerBox = document.getElementById("answerBox");
+    </div>
 
-    const showAnswer = document.getElementById("showAnswer");
+    <button
+      class="language-option active"
+      data-language="en">
+      🇬🇧 Английский — Русский
+    </button>
 
-    const repeatButton = document.getElementById("repeatButton");
-    const knowButton = document.getElementById("knowButton");
-    const nextButton = document.getElementById("nextButton");
+    <button
+      class="language-option"
+      data-language="ko">
+      🇰🇷 Корейский — Русский
+    </button>
 
-    const progressText = document.getElementById("progressText");
-    const scoreText = document.getElementById("scoreText");
-    const progressFill = document.getElementById("progressFill");
+  </div>
 
-    const finishBox = document.getElementById("finishBox");
-    const finishText = document.getElementById("finishText");
-    const restartButton = document.getElementById("restartButton");
-
-    const timerBox = document.getElementById("timerBox");
-    const timerValue = document.getElementById("timerValue");
-    const timerSelect = document.getElementById("timerSelect");
-    const timerStart = document.getElementById("timerStart");
+</div>
 
 
-    /* =========================
-       ЗАГРУЗКА СЛОВ
-    ========================= */
+<script>
 
-    async function loadWords() {
+const homeScreen =
+  document.getElementById("homeScreen");
 
-      try {
+const practiceScreen =
+  document.getElementById("practiceScreen");
 
-        const response = await fetch("data/words.json");
+const menuOverlay =
+  document.getElementById("menuOverlay");
 
-        if (!response.ok) {
-          throw new Error("Не удалось загрузить слова");
+const leftColumn =
+  document.getElementById("leftColumn");
+
+const rightColumn =
+  document.getElementById("rightColumn");
+
+const progressText =
+  document.getElementById("progressText");
+
+const progressFill =
+  document.getElementById("progressFill");
+
+const scoreText =
+  document.getElementById("scoreText");
+
+const errorsInfo =
+  document.getElementById("errorsInfo");
+
+const roundInfo =
+  document.getElementById("roundInfo");
+
+const finishBox =
+  document.getElementById("finishBox");
+
+const finishTitle =
+  document.getElementById("finishTitle");
+
+const finishText =
+  document.getElementById("finishText");
+
+const timerBox =
+  document.getElementById("timerBox");
+
+const timerValue =
+  document.getElementById("timerValue");
+
+const timerSelect =
+  document.getElementById("timerSelect");
+
+const timerStart =
+  document.getElementById("timerStart");
+
+const stopwatch =
+  document.getElementById("stopwatch");
+
+
+let allWords = [];
+
+let language = "en";
+
+let mode = "normal";
+
+let roundWords = [];
+
+let remainingWords = [];
+
+let selectedTile = null;
+
+let knownCount = 0;
+
+let errors = 0;
+
+let roundNumber = 0;
+
+let stopwatchSeconds = 0;
+
+let stopwatchId = null;
+
+let timerSeconds = 300;
+
+let timerId = null;
+
+let running = false;
+
+
+const labels = {
+
+  en: {
+    name: "Английский — Русский",
+    key: "english"
+  },
+
+  ko: {
+    name: "Корейский — Русский",
+    key: "korean"
+  }
+
+};
+
+
+function normalizeWords(data) {
+
+  if (Array.isArray(data)) {
+
+    return data.filter(
+      word =>
+        word &&
+        word.russian &&
+        (word.english || word.korean)
+    );
+
+  }
+
+  if (
+    data &&
+    Array.isArray(data.words)
+  ) {
+
+    return data.words.filter(
+      word =>
+        word &&
+        word.russian &&
+        (word.english || word.korean)
+    );
+
+  }
+
+  return [];
+
+}
+
+
+async function loadWords() {
+
+  try {
+
+    const response =
+      await fetch(
+        "data/words.json",
+        {
+          cache: "no-store"
         }
+      );
 
-        words = await response.json();
+    if (!response.ok) {
 
-        console.log("Загружено слов:", words.length);
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(
-          "Не удалось загрузить слова. Проверь, что файл data/words.json существует."
-        );
-
-      }
+      throw new Error(
+        "Не удалось загрузить words.json"
+      );
 
     }
 
+    allWords =
+      normalizeWords(
+        await response.json()
+      );
 
-    /* =========================
-       ПЕРЕМЕШИВАНИЕ
-    ========================= */
+    if (!allWords.length) {
 
-    function shuffle(array) {
-
-      const result = [...array];
-
-      for (let i = result.length - 1; i > 0; i--) {
-
-        const j = Math.floor(Math.random() * (i + 1));
-
-        [result[i], result[j]] = [result[j], result[i]];
-
-      }
-
-      return result;
+      throw new Error(
+        "В words.json нет подходящих слов"
+      );
 
     }
 
+  } catch (error) {
 
-    /* =========================
-       ЯЗЫКОВАЯ ПАРА
-    ========================= */
+    console.error(error);
 
-    function getPairInfo() {
+    allWords = [];
 
-      if (currentPair === "kr-ru") {
+    alert(
+      "Не удалось загрузить слова из data/words.json."
+    );
 
-        return {
-          source: "korean",
-          answer: "russian",
-          sourceName: "КОРЕЙСКИЙ",
-          pairName: "Корейский — Русский"
-        };
+  }
 
-      }
-
-      if (currentPair === "en-ru") {
-
-        return {
-          source: "english",
-          answer: "russian",
-          sourceName: "АНГЛИЙСКИЙ",
-          pairName: "Английский — Русский"
-        };
-
-      }
-
-      return {
-        source: "korean",
-        answer: "english",
-        sourceName: "КОРЕЙСКИЙ",
-        pairName: "Корейский — Английский"
-      };
-
-    }
+}
 
 
-    /* =========================
-       ОТКРЫТИЕ ПРАКТИКИ
-    ========================= */
+function shuffle(array) {
 
-    async function startPractice(mode) {
+  const result = [...array];
 
-      if (words.length === 0) {
-        await loadWords();
-      }
+  for (
+    let i = result.length - 1;
+    i > 0;
+    i--
+  ) {
 
-      if (words.length === 0) {
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
+
+    [
+      result[i],
+      result[j]
+    ] =
+    [
+      result[j],
+      result[i]
+    ];
+
+  }
+
+  return result;
+
+}
+
+
+function getText(word) {
+
+  return word[
+    labels[language].key
+  ];
+
+}
+
+
+function updateLanguageUI() {
+
+  document.getElementById(
+    "pairHeading"
+  ).textContent =
+    labels[language].name;
+
+  document
+    .querySelectorAll(
+      ".language-option"
+    )
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.language === language
+      );
+
+    });
+
+}
+
+
+function formatTime(seconds) {
+
+  const minutes =
+    Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+
+  const secs =
+    (seconds % 60)
+      .toString()
+      .padStart(2, "0");
+
+  return `${minutes}:${secs}`;
+
+}
+
+
+function updateTimerSelect() {
+
+  timerSeconds =
+    Number(timerSelect.value);
+
+  timerValue.textContent =
+    formatTime(timerSeconds);
+
+}
+
+
+function resetClocks() {
+
+  clearInterval(stopwatchId);
+
+  clearInterval(timerId);
+
+  stopwatchId = null;
+
+  timerId = null;
+
+  stopwatchSeconds = 0;
+
+  stopwatch.innerHTML =
+    'Время: <strong>00:00</strong>';
+
+  timerSeconds =
+    Number(timerSelect.value);
+
+  timerValue.textContent =
+    formatTime(timerSeconds);
+
+}
+
+
+function startStopwatch() {
+
+  clearInterval(stopwatchId);
+
+  stopwatchId =
+    setInterval(() => {
+
+      if (!running) {
         return;
       }
 
-      practiceMode = mode;
+      stopwatchSeconds++;
 
-      practiceWords = shuffle(words);
+      stopwatch.innerHTML =
+        `Время: <strong>${formatTime(
+          stopwatchSeconds
+        )}</strong>`;
 
-      currentIndex = 0;
-      score = 0;
+    }, 1000);
 
-      finishBox.classList.remove("active");
-      document.getElementById("wordCard").style.display = "block";
-
-      homeScreen.classList.add("hidden");
-      practiceScreen.classList.add("active");
-
-      const pair = getPairInfo();
-
-      pairHeading.textContent = pair.pairName;
-
-      if (mode === "normal") {
-
-        practiceHeading.textContent = "Обычная практика";
-
-        timerBox.style.display = "none";
-
-        startNormalTimer();
-
-      } else {
-
-        practiceHeading.textContent = "Практика с таймером";
-
-        timerBox.style.display = "block";
-
-        timerRunning = false;
-
-        timerSeconds = Number(timerSelect.value);
-
-        updateTimerDisplay();
-
-      }
-
-      showWord();
-
-    }
+}
 
 
-    /* =========================
-       ПОКАЗ СЛОВА
-    ========================= */
+function startTimer() {
 
-    function showWord() {
+  clearInterval(timerId);
 
-      if (currentIndex >= practiceWords.length) {
+  timerSeconds =
+    Number(timerSelect.value);
 
-        finishPractice();
+  timerValue.textContent =
+    formatTime(timerSeconds);
 
+  timerId =
+    setInterval(() => {
+
+      if (!running) {
         return;
-
       }
 
-      const word = practiceWords[currentIndex];
-      const pair = getPairInfo();
-
-      wordLanguage.textContent = pair.sourceName;
-
-      wordMain.textContent = word[pair.source];
-
-      answerBox.textContent = "Нажми «Показать перевод»";
-      answerBox.classList.add("hidden");
-
-      showAnswer.textContent = "Показать перевод";
-
-      updateProgress();
-
-    }
-
-
-    /* =========================
-       ПОКАЗ ПЕРЕВОДА
-    ========================= */
-
-    showAnswer.addEventListener("click", () => {
-
-      const word = practiceWords[currentIndex];
-
-      if (!word) return;
-
-      const pair = getPairInfo();
-
-      answerBox.textContent = word[pair.answer];
-
-      answerBox.classList.remove("hidden");
-
-      showAnswer.textContent = "Перевод показан ✓";
-
-    });
-
-
-    /* =========================
-       ПРОГРЕСС
-    ========================= */
-
-    function updateProgress() {
-
-      const total = practiceWords.length;
-
-      const current = Math.min(currentIndex + 1, total);
-
-      progressText.textContent =
-        "Слово " + current + " из " + total;
-
-      scoreText.textContent =
-        "Знаю: " + score;
-
-      const percentage =
-        total > 0 ? (currentIndex / total) * 100 : 0;
-
-      progressFill.style.width =
-        Math.min(percentage, 100) + "%";
-
-    }
-
-
-    /* =========================
-       ЗНАЮ
-    ========================= */
-
-    knowButton.addEventListener("click", () => {
-
-      score++;
-
-      nextWord();
-
-    });
-
-
-    /* =========================
-       ПОВТОРИТЬ
-    ========================= */
-
-    repeatButton.addEventListener("click", () => {
-
-      if (practiceWords.length > 1) {
-
-        const currentWord = practiceWords[currentIndex];
-
-        practiceWords.splice(currentIndex, 1);
-
-        const randomPosition =
-          Math.min(
-            currentIndex + 2,
-            practiceWords.length
-          );
-
-        practiceWords.splice(
-          randomPosition,
-          0,
-          currentWord
-        );
-
-      }
-
-      nextWord();
-
-    });
-
-
-    /* =========================
-       СЛЕДУЮЩЕЕ
-    ========================= */
-
-    nextButton.addEventListener("click", () => {
-
-      nextWord();
-
-    });
-
-
-    function nextWord() {
-
-      currentIndex++;
-
-      showWord();
-
-    }
-
-
-    /* =========================
-       ОБЫЧНЫЙ ТАЙМЕР
-    ========================= */
-
-    function startNormalTimer() {
-
-      clearInterval(normalTimerInterval);
-
-      normalStartTime = Date.now();
-
-      normalTimerInterval = setInterval(() => {
-
-        if (practiceMode !== "normal") {
-          clearInterval(normalTimerInterval);
-        }
-
-      }, 1000);
-
-    }
-
-
-    /* =========================
-       ТАЙМЕР
-    ========================= */
-
-    timerSelect.addEventListener("change", () => {
-
-      if (!timerRunning) {
-
-        timerSeconds =
-          Number(timerSelect.value);
-
-        updateTimerDisplay();
-
-      }
-
-    });
-
-
-    timerStart.addEventListener("click", () => {
-
-      if (timerRunning) return;
-
-      timerRunning = true;
-
-      timerSelect.disabled = true;
-
-      timerStart.textContent = "⏱️ Таймер запущен";
-
-      timerInterval = setInterval(() => {
-
-        timerSeconds--;
-
-        updateTimerDisplay();
-
-        if (timerSeconds <= 0) {
-
-          clearInterval(timerInterval);
-
-          timerRunning = false;
-
-          finishPractice();
-
-        }
-
-      }, 1000);
-
-    });
-
-
-    function updateTimerDisplay() {
-
-      const minutes =
-        Math.floor(timerSeconds / 60)
-          .toString()
-          .padStart(2, "0");
-
-      const seconds =
-        (timerSeconds % 60)
-          .toString()
-          .padStart(2, "0");
+      timerSeconds--;
 
       timerValue.textContent =
-        minutes + ":" + seconds;
+        formatTime(timerSeconds);
+
+      if (timerSeconds <= 0) {
+
+        clearInterval(timerId);
+
+        running = false;
+
+        finishGame(true);
+
+      }
+
+    }, 1000);
+
+}
+
+
+function openPractice(selectedMode) {
+
+  if (!allWords.length) {
+    return;
+  }
+
+  mode = selectedMode;
+
+  remainingWords =
+    shuffle(allWords);
+
+  roundWords = [];
+
+  knownCount = 0;
+
+  errors = 0;
+
+  roundNumber = 0;
+
+  errorsInfo.textContent =
+    "Ошибки: 0";
+
+  homeScreen.classList.add(
+    "hidden"
+  );
+
+  practiceScreen.classList.add(
+    "active"
+  );
+
+  document.getElementById(
+    "practiceHeading"
+  ).textContent =
+    mode === "normal"
+      ? "Обычная практика"
+      : "Практика с таймером";
+
+  timerBox.style.display =
+    mode === "timer"
+      ? "block"
+      : "none";
+
+  stopwatch.style.display =
+    mode === "normal"
+      ? "block"
+      : "none";
+
+  finishBox.classList.remove(
+    "active"
+  );
+
+  resetClocks();
+
+  if (mode === "normal") {
+
+    running = true;
+
+    startStopwatch();
+
+    startRound();
+
+  } else {
+
+    running = false;
+
+    timerStart.disabled = false;
+
+    timerStart.textContent =
+      "Начать";
+
+  }
+
+}
+
+
+function startRound() {
+
+  if (!remainingWords.length) {
+
+    remainingWords =
+      shuffle(allWords);
+
+  }
+
+  roundNumber++;
+
+  roundWords =
+    remainingWords.splice(
+      0,
+      Math.min(
+        8,
+        remainingWords.length
+      )
+    );
+
+  renderRound();
+
+}
+
+
+function renderRound() {
+
+  selectedTile = null;
+
+  leftColumn.innerHTML = "";
+
+  rightColumn.innerHTML = "";
+
+  finishBox.classList.remove(
+    "active"
+  );
+
+  roundInfo.textContent =
+    `Раунд ${roundNumber}`;
+
+  const shuffledPairs =
+    shuffle(roundWords);
+
+  const left =
+    shuffle(shuffledPairs);
+
+  const right =
+    shuffle(shuffledPairs);
+
+  left.forEach(
+    (word, index) => {
+
+      leftColumn.appendChild(
+        createTile(
+          word,
+          "foreign",
+          index
+        )
+      );
+
+    }
+  );
+
+  right.forEach(
+    (word, index) => {
+
+      rightColumn.appendChild(
+        createTile(
+          word,
+          "russian",
+          index
+        )
+      );
+
+    }
+  );
+
+  updateProgress();
+
+}
+
+
+function createTile(
+  word,
+  side,
+  index
+) {
+
+  const tile =
+    document.createElement(
+      "button"
+    );
+
+  tile.className =
+    "word-tile";
+
+  tile.dataset.id =
+    String(
+      roundWords.indexOf(word)
+    );
+
+  tile.dataset.side =
+    side;
+
+  tile.innerHTML =
+    `<span class="tile-main">${
+      escapeHtml(
+        side === "foreign"
+          ? getText(word)
+          : word.russian
+      )
+    }</span>`;
+
+  tile.addEventListener(
+    "click",
+    () => selectTile(
+      tile,
+      word
+    )
+  );
+
+  return tile;
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value).replace(
+    /[&<>"']/g,
+    character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[character])
+  );
+
+}
+
+
+function selectTile(
+  tile,
+  word
+) {
+
+  if (
+    !running ||
+    tile.classList.contains("correct") ||
+    tile.classList.contains("wrong")
+  ) {
+
+    return;
+
+  }
+
+
+  const side =
+    tile.dataset.side;
+
+
+  if (
+    selectedTile &&
+    selectedTile.tile.dataset.side === side
+  ) {
+
+    selectedTile.tile.classList.remove(
+      "selected"
+    );
+
+    selectedTile = null;
+
+  }
+
+
+  if (!selectedTile) {
+
+    tile.classList.add(
+      "selected"
+    );
+
+    selectedTile = {
+      tile: tile,
+      word: word
+    };
+
+    return;
+
+  }
+
+
+  const first =
+    selectedTile;
+
+
+  tile.classList.add(
+    "selected"
+  );
+
+
+  const correct =
+    getText(first.word) ===
+      getText(word) &&
+    first.word.russian ===
+      word.russian;
+
+
+  if (correct) {
+
+    handleCorrect(
+      first.tile,
+      tile
+    );
+
+  } else {
+
+    handleWrong(
+      first.tile,
+      tile
+    );
+
+  }
+
+}
+
+
+function handleCorrect(
+  firstTile,
+  secondTile
+) {
+
+  firstTile.classList.remove(
+    "selected"
+  );
+
+  secondTile.classList.remove(
+    "selected"
+  );
+
+  firstTile.classList.add(
+    "correct"
+  );
+
+  secondTile.classList.add(
+    "correct"
+  );
+
+  knownCount++;
+
+  selectedTile = null;
+
+
+  setTimeout(() => {
+
+    firstTile.classList.add(
+      "hidden"
+    );
+
+    secondTile.classList.add(
+      "hidden"
+    );
+
+    updateProgress();
+
+    if (
+      knownCount ===
+      roundWords.length
+    ) {
+
+      setTimeout(
+        completeRound,
+        220
+      );
+
+    }
+
+  }, 280);
+
+}
+
+
+function handleWrong(
+  firstTile,
+  secondTile
+) {
+
+  errors++;
+
+  errorsInfo.textContent =
+    `Ошибки: ${errors}`;
+
+  firstTile.classList.remove(
+    "selected"
+  );
+
+  secondTile.classList.remove(
+    "selected"
+  );
+
+  firstTile.classList.add(
+    "wrong"
+  );
+
+  secondTile.classList.add(
+    "wrong"
+  );
+
+  selectedTile = null;
+
+
+  setTimeout(() => {
+
+    firstTile.classList.remove(
+      "wrong"
+    );
+
+    secondTile.classList.remove(
+      "wrong"
+    );
+
+  }, 350);
+
+}
+
+
+function updateProgress() {
+
+  const total =
+    allWords.length;
+
+  const completedBeforeRound =
+    total -
+    remainingWords.length -
+    roundWords.length;
+
+  const done =
+    completedBeforeRound +
+    knownCount;
+
+
+  progressText.textContent =
+    `Слово ${Math.min(
+      done,
+      total
+    )} из ${total}`;
+
+
+  progressFill.style.width =
+    total
+      ? `${Math.min(
+          100,
+          (done / total) * 100
+        )}%`
+      : "0%";
+
+
+  scoreText.textContent =
+    `Знаю: ${knownCount}`;
+
+}
+
+
+function completeRound() {
+
+  if (!running) {
+    return;
+  }
+
+
+  if (remainingWords.length > 0) {
+
+    startRound();
+
+  } else {
+
+    finishGame(false);
+
+  }
+
+}
+
+
+function finishGame(timeUp) {
+
+  running = false;
+
+  clearInterval(
+    stopwatchId
+  );
+
+  clearInterval(
+    timerId
+  );
+
+
+  finishBox.classList.add(
+    "active"
+  );
+
+
+  if (timeUp) {
+
+    finishTitle.textContent =
+      "Время вышло";
+
+    finishText.textContent =
+      `Ты успел пройти ${
+        knownCount
+      } пар. Ошибок: ${
+        errors
+      }.`;
+
+  } else {
+
+    finishTitle.textContent =
+      "Всё пройдено!";
+
+    finishText.textContent =
+      `Все ${
+        allWords.length
+      } слов пройдены. Ошибок: ${
+        errors
+      }.`;
+
+  }
+
+
+  leftColumn.innerHTML = "";
+
+  rightColumn.innerHTML = "";
+
+}
+
+
+function restartPractice() {
+
+  remainingWords =
+    shuffle(allWords);
+
+  roundWords = [];
+
+  knownCount = 0;
+
+  errors = 0;
+
+  roundNumber = 0;
+
+  errorsInfo.textContent =
+    "Ошибки: 0";
+
+  finishBox.classList.remove(
+    "active"
+  );
+
+  resetClocks();
+
+
+  if (mode === "timer") {
+
+    running = false;
+
+    timerStart.disabled = false;
+
+    timerStart.textContent =
+      "Начать";
+
+  } else {
+
+    running = true;
+
+    startStopwatch();
+
+    startRound();
+
+  }
+
+}
+
+
+function goHome() {
+
+  running = false;
+
+  clearInterval(
+    stopwatchId
+  );
+
+  clearInterval(
+    timerId
+  );
+
+  practiceScreen.classList.remove(
+    "active"
+  );
+
+  homeScreen.classList.remove(
+    "hidden"
+  );
+
+  finishBox.classList.remove(
+    "active"
+  );
+
+  leftColumn.innerHTML = "";
+
+  rightColumn.innerHTML = "";
+
+}
+
+
+/* МЕНЮ */
+
+document
+  .getElementById("menuButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      menuOverlay.classList.add(
+        "open"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("closeMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      menuOverlay.classList.remove(
+        "open"
+      );
+
+    }
+  );
+
+
+menuOverlay.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target ===
+      menuOverlay
+    ) {
+
+      menuOverlay.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+document
+  .querySelectorAll(
+    ".language-option"
+  )
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        language =
+          button.dataset.language;
+
+        updateLanguageUI();
+
+        menuOverlay.classList.remove(
+          "open"
+        );
+
+      }
+    );
+
+  });
+
+
+/* РЕЖИМЫ */
+
+document
+  .getElementById("normalMode")
+  .addEventListener(
+    "click",
+    () => openPractice("normal")
+  );
+
+
+document
+  .getElementById("timerMode")
+  .addEventListener(
+    "click",
+    () => openPractice("timer")
+  );
+
+
+document
+  .getElementById("backButton")
+  .addEventListener(
+    "click",
+    goHome
+  );
+
+
+document
+  .getElementById("restartButton")
+  .addEventListener(
+    "click",
+    restartPractice
+  );
+
+
+/* ТАЙМЕР */
+
+timerSelect.addEventListener(
+  "change",
+  updateTimerSelect
+);
+
+
+timerStart.addEventListener(
+  "click",
+  () => {
+
+    if (mode !== "timer") {
+      return;
+    }
+
+    if (!allWords.length) {
+      return;
+    }
+
+
+    if (!roundWords.length) {
+
+      remainingWords =
+        shuffle(allWords);
+
+      knownCount = 0;
+
+      errors = 0;
+
+      roundNumber = 0;
+
+      errorsInfo.textContent =
+        "Ошибки: 0";
+
+      startRound();
 
     }
 
 
-    /* =========================
-       ЗАВЕРШЕНИЕ
-    ========================= */
+    running = true;
 
-    function finishPractice() {
+    timerStart.disabled = true;
 
-      clearInterval(timerInterval);
-      clearInterval(normalTimerInterval);
+    timerStart.textContent =
+      "Идёт практика";
 
-      timerRunning = false;
+    startTimer();
 
-      document.getElementById("wordCard").style.display = "none";
+  }
+);
 
-      document.querySelector(".practice-buttons").style.display = "none";
-      nextButton.style.display = "none";
 
-      progressFill.style.width = "100%";
+/* СТАРТ */
 
-      finishBox.classList.add("active");
+updateLanguageUI();
 
-      if (practiceMode === "timer") {
+updateTimerSelect();
 
-        finishText.textContent =
-          "За это время ты прошёл " +
-          currentIndex +
-          " слов. Правильных: " +
-          score +
-          ".";
+loadWords();
 
-      } else {
-
-        const seconds =
-          Math.floor(
-            (Date.now() - normalStartTime) / 1000
-          );
-
-        const minutes =
-          Math.floor(seconds / 60);
-
-        const remainingSeconds =
-          seconds % 60;
-
-        const timeText =
-          minutes > 0
-            ? minutes + " мин " + remainingSeconds + " сек"
-            : remainingSeconds + " сек";
-
-        finishText.textContent =
-          "Ты прошёл " +
-          Math.min(currentIndex, practiceWords.length) +
-          " слов за " +
-          timeText +
-          ". Знаю: " +
-          score +
-          ".";
-
-      }
-
-    }
-
-
-    /* =========================
-       НАЧАТЬ СНОВА
-    ========================= */
-
-    restartButton.addEventListener("click", () => {
-
-      document.querySelector(".practice-buttons").style.display = "grid";
-      nextButton.style.display = "block";
-
-      timerSelect.disabled = false;
-
-      if (practiceMode === "timer") {
-
-        timerSeconds =
-          Number(timerSelect.value);
-
-        timerStart.textContent =
-          "▶ Начать таймер";
-
-        updateTimerDisplay();
-
-      }
-
-      startPractice(practiceMode);
-
-    });
-
-
-    /* =========================
-       НАЗАД
-    ========================= */
-
-    backButton.addEventListener("click", () => {
-
-      clearInterval(timerInterval);
-      clearInterval(normalTimerInterval);
-
-      timerRunning = false;
-
-      practiceScreen.classList.remove("active");
-      homeScreen.classList.remove("hidden");
-
-    });
-
-
-    /* =========================
-       МЕНЮ
-    ========================= */
-
-    menuButton.addEventListener("click", () => {
-
-      menuOverlay.classList.add("open");
-
-    });
-
-
-    closeMenu.addEventListener("click", () => {
-
-      menuOverlay.classList.remove("open");
-
-    });
-
-
-    menuOverlay.addEventListener("click", (event) => {
-
-      if (event.target === menuOverlay) {
-
-        menuOverlay.classList.remove("open");
-
-      }
-
-    });
-
-
-    /* =========================
-       ВЫБОР ЯЗЫКОВОЙ ПАРЫ
-    ========================= */
-
-    document.querySelectorAll(".language-option")
-      .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-          currentPair =
-            button.dataset.pair;
-
-          document
-            .querySelectorAll(".language-option")
-            .forEach(item => {
-
-              item.classList.remove("active");
-
-            });
-
-          button.classList.add("active");
-
-          menuOverlay.classList.remove("open");
-
-        });
-
-      });
-
-
-    /* =========================
-       КНОПКИ РЕЖИМОВ
-    ========================= */
-
-    normalMode.addEventListener("click", () => {
-
-      startPractice("normal");
-
-    });
-
-
-    timerMode.addEventListener("click", () => {
-
-      startPractice("timer");
-
-    });
-
-
-    /* =========================
-       ЗАГРУЗКА ПРИ ОТКРЫТИИ
-    ========================= */
-
-    loadWords();
-
-  </script>
+</script>
 
 </body>
 </html>
