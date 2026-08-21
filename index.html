@@ -29,7 +29,6 @@
       overflow: hidden;
     }
 
-    /* Мягкие декоративные круги */
     .decoration {
       position: fixed;
       width: 220px;
@@ -60,7 +59,6 @@
       margin: 0 auto;
     }
 
-    /* Верхняя панель */
     .topbar {
       display: flex;
       justify-content: flex-end;
@@ -84,7 +82,6 @@
       transform: scale(0.96);
     }
 
-    /* Заголовок */
     .hero {
       text-align: center;
       padding: 28px 10px 30px;
@@ -111,7 +108,6 @@
       color: #827680;
     }
 
-    /* Карточки режимов */
     .section-title {
       margin: 8px 4px 14px;
       font-size: 17px;
@@ -158,7 +154,8 @@
       color: #8a7d86;
     }
 
-    /* Меню */
+    /* МЕНЮ */
+
     .menu-overlay {
       position: fixed;
       inset: 0;
@@ -217,8 +214,252 @@
       cursor: pointer;
     }
 
+    .language-option.active {
+      background: #f3dce7;
+      font-weight: 600;
+    }
+
     .language-option:active {
       transform: scale(0.985);
+    }
+
+    /* ЭКРАН ПРАКТИКИ */
+
+    .practice-screen {
+      display: none;
+    }
+
+    .practice-screen.active {
+      display: block;
+    }
+
+    .home-screen.hidden {
+      display: none;
+    }
+
+    .practice-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .back-button {
+      border: none;
+      background: white;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(80, 55, 70, 0.08);
+      cursor: pointer;
+      font-size: 22px;
+      color: #594d57;
+    }
+
+    .practice-title {
+      text-align: center;
+      flex: 1;
+      margin: 0 12px;
+    }
+
+    .practice-title h2 {
+      margin: 0;
+      font-size: 21px;
+      color: #443a43;
+    }
+
+    .practice-title p {
+      margin: 4px 0 0;
+      color: #8a7d86;
+      font-size: 13px;
+    }
+
+    .progress-area {
+      margin-bottom: 18px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      color: #7d7079;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #f0e6eb;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #d79ab6;
+      border-radius: 20px;
+      transition: width 0.25s ease;
+    }
+
+    .word-card {
+      background: white;
+      border: 1px solid #f0e4ea;
+      border-radius: 26px;
+      padding: 32px 22px;
+      text-align: center;
+      box-shadow: 0 10px 35px rgba(80, 55, 70, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .word-language {
+      font-size: 13px;
+      color: #9a8b94;
+      margin-bottom: 14px;
+    }
+
+    .word-main {
+      font-size: clamp(29px, 8vw, 42px);
+      font-weight: 700;
+      color: #403741;
+      margin-bottom: 22px;
+      line-height: 1.25;
+      word-break: break-word;
+    }
+
+    .answer-box {
+      min-height: 60px;
+      border-radius: 17px;
+      background: #faf6f8;
+      padding: 15px;
+      color: #665a64;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .answer-box.hidden {
+      color: #a99ba3;
+      font-size: 15px;
+    }
+
+    .show-answer {
+      margin-top: 14px;
+      border: none;
+      background: #f3e1e9;
+      color: #594d57;
+      padding: 13px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .practice-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .practice-button {
+      border: none;
+      border-radius: 17px;
+      padding: 15px 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .repeat-button {
+      background: #f3edf0;
+      color: #655963;
+    }
+
+    .know-button {
+      background: #e8f2eb;
+      color: #4f6757;
+    }
+
+    .next-button {
+      width: 100%;
+      border: none;
+      border-radius: 17px;
+      padding: 15px;
+      background: #403741;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .timer-box {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .timer-value {
+      font-size: 30px;
+      font-weight: 700;
+      color: #403741;
+    }
+
+    .timer-select {
+      margin-top: 10px;
+      border: 1px solid #eadde4;
+      background: white;
+      border-radius: 14px;
+      padding: 12px;
+      width: 100%;
+      color: #594d57;
+    }
+
+    .timer-start {
+      width: 100%;
+      margin-top: 10px;
+      border: none;
+      border-radius: 15px;
+      padding: 13px;
+      background: #f3dce7;
+      color: #594d57;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .finish-box {
+      display: none;
+      text-align: center;
+      background: white;
+      border: 1px solid #f0e4ea;
+      border-radius: 25px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 35px rgba(80, 55, 70, 0.08);
+    }
+
+    .finish-box.active {
+      display: block;
+    }
+
+    .finish-box .big {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .finish-box h2 {
+      margin: 0 0 8px;
+    }
+
+    .finish-box p {
+      color: #81747d;
+      line-height: 1.5;
+    }
+
+    .restart-button {
+      border: none;
+      border-radius: 16px;
+      background: #403741;
+      color: white;
+      padding: 14px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
     }
 
     @media (min-width: 600px) {
@@ -242,87 +483,218 @@
 
     <div class="content">
 
-      <header class="topbar">
-        <button class="menu-button" id="menuButton" aria-label="Открыть меню">
-          ☰
+      <!-- ГЛАВНЫЙ ЭКРАН -->
+
+      <div class="home-screen" id="homeScreen">
+
+        <header class="topbar">
+          <button class="menu-button" id="menuButton" aria-label="Открыть меню">
+            ☰
+          </button>
+        </header>
+
+        <main>
+
+          <section class="hero">
+            <div class="flower">🌸</div>
+
+            <h1>Language Practice</h1>
+
+            <p>
+              Уютное место для практики английского
+              и корейского языка.
+            </p>
+          </section>
+
+          <section>
+
+            <div class="section-title">
+              Выбери режим практики
+            </div>
+
+            <div class="modes">
+
+              <button class="mode-card" id="normalMode">
+                <div class="mode-icon">🌿</div>
+
+                <h2>Обычная практика</h2>
+
+                <p>
+                  Проходи слова спокойно.
+                  Секундомер покажет, сколько времени
+                  заняла тренировка.
+                </p>
+              </button>
+
+              <button class="mode-card" id="timerMode">
+                <div class="mode-icon">⏱️</div>
+
+                <h2>Практика с таймером</h2>
+
+                <p>
+                  Выбери время и попробуй пройти
+                  как можно больше слов до окончания таймера.
+                </p>
+              </button>
+
+            </div>
+
+          </section>
+
+        </main>
+
+      </div>
+
+
+      <!-- ЭКРАН ПРАКТИКИ -->
+
+      <div class="practice-screen" id="practiceScreen">
+
+        <div class="practice-top">
+
+          <button class="back-button" id="backButton">
+            ←
+          </button>
+
+          <div class="practice-title">
+            <h2 id="practiceHeading">Практика</h2>
+            <p id="pairHeading">Корейский — Русский</p>
+          </div>
+
+          <div style="width:46px;"></div>
+
+        </div>
+
+
+        <!-- Таймер -->
+
+        <div class="timer-box" id="timerBox" style="display:none;">
+
+          <div class="timer-value" id="timerValue">
+            05:00
+          </div>
+
+          <select class="timer-select" id="timerSelect">
+            <option value="60">1 минута</option>
+            <option value="180">3 минуты</option>
+            <option value="300" selected>5 минут</option>
+            <option value="600">10 минут</option>
+          </select>
+
+          <button class="timer-start" id="timerStart">
+            ▶ Начать таймер
+          </button>
+
+        </div>
+
+
+        <!-- Прогресс -->
+
+        <div class="progress-area">
+
+          <div class="progress-info">
+            <span id="progressText">Слово 1 из 1</span>
+            <span id="scoreText">Знаю: 0</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+        </div>
+
+
+        <!-- Карточка слова -->
+
+        <div class="word-card" id="wordCard">
+
+          <div class="word-language" id="wordLanguage">
+            КОРЕЙСКИЙ
+          </div>
+
+          <div class="word-main" id="wordMain">
+            Загрузка...
+          </div>
+
+          <div class="answer-box hidden" id="answerBox">
+            Нажми «Показать перевод»
+          </div>
+
+          <button class="show-answer" id="showAnswer">
+            Показать перевод
+          </button>
+
+        </div>
+
+
+        <!-- Кнопки -->
+
+        <div class="practice-buttons">
+
+          <button class="practice-button repeat-button" id="repeatButton">
+            🔁 Повторить
+          </button>
+
+          <button class="practice-button know-button" id="knowButton">
+            ✅ Знаю
+          </button>
+
+        </div>
+
+        <button class="next-button" id="nextButton">
+          Следующее слово →
         </button>
-      </header>
 
-      <main>
 
-        <section class="hero">
-          <div class="flower">🌸</div>
+        <!-- Завершение -->
 
-          <h1>Language Practice</h1>
+        <div class="finish-box" id="finishBox">
 
-          <p>
-            Уютное место для практики английского
-            и корейского языка.
+          <div class="big">🎉</div>
+
+          <h2>Тренировка закончена!</h2>
+
+          <p id="finishText">
+            Отличная работа!
           </p>
-        </section>
 
-        <section>
+          <button class="restart-button" id="restartButton">
+            🔄 Начать снова
+          </button>
 
-          <div class="section-title">
-            Выбери режим практики
-          </div>
+        </div>
 
-          <div class="modes">
-
-            <button class="mode-card">
-              <div class="mode-icon">🌿</div>
-
-              <h2>Обычная практика</h2>
-
-              <p>
-                Проходи слова спокойно.
-                Секундомер покажет, сколько времени
-                заняла тренировка.
-              </p>
-            </button>
-
-            <button class="mode-card">
-              <div class="mode-icon">⏱️</div>
-
-              <h2>Практика с таймером</h2>
-
-              <p>
-                Выбери время и попробуй пройти
-                все слова до окончания таймера.
-              </p>
-            </button>
-
-          </div>
-
-        </section>
-
-      </main>
+      </div>
 
     </div>
   </div>
 
-  <!-- Меню -->
+
+  <!-- МЕНЮ -->
+
   <div class="menu-overlay" id="menuOverlay">
 
     <div class="menu-panel">
 
       <div class="menu-header">
+
         <h2>Языковая пара</h2>
 
         <button class="close-menu" id="closeMenu">
           ✕
         </button>
+
       </div>
 
-      <button class="language-option">
+      <button class="language-option active" data-pair="kr-ru">
         🇰🇷 Корейский — Русский
       </button>
 
-      <button class="language-option">
+      <button class="language-option" data-pair="en-ru">
         🇬🇧 Английский — Русский
       </button>
 
-      <button class="language-option">
+      <button class="language-option" data-pair="kr-en">
         🇰🇷 Корейский — Английский
       </button>
 
@@ -330,24 +702,636 @@
 
   </div>
 
+
   <script>
+
+    /* =========================
+       ОСНОВНЫЕ ПЕРЕМЕННЫЕ
+    ========================= */
+
+    let words = [];
+    let practiceWords = [];
+    let currentIndex = 0;
+    let score = 0;
+    let currentPair = "kr-ru";
+    let practiceMode = "normal";
+
+    let timerInterval = null;
+    let timerSeconds = 300;
+    let timerRunning = false;
+
+    let normalStartTime = null;
+    let normalTimerInterval = null;
+
+
+    /* =========================
+       ЭЛЕМЕНТЫ
+    ========================= */
+
+    const homeScreen = document.getElementById("homeScreen");
+    const practiceScreen = document.getElementById("practiceScreen");
+
     const menuButton = document.getElementById("menuButton");
     const closeMenu = document.getElementById("closeMenu");
     const menuOverlay = document.getElementById("menuOverlay");
 
-    menuButton.addEventListener("click", () => {
-      menuOverlay.classList.add("open");
+    const normalMode = document.getElementById("normalMode");
+    const timerMode = document.getElementById("timerMode");
+
+    const backButton = document.getElementById("backButton");
+
+    const practiceHeading = document.getElementById("practiceHeading");
+    const pairHeading = document.getElementById("pairHeading");
+
+    const wordLanguage = document.getElementById("wordLanguage");
+    const wordMain = document.getElementById("wordMain");
+    const answerBox = document.getElementById("answerBox");
+
+    const showAnswer = document.getElementById("showAnswer");
+
+    const repeatButton = document.getElementById("repeatButton");
+    const knowButton = document.getElementById("knowButton");
+    const nextButton = document.getElementById("nextButton");
+
+    const progressText = document.getElementById("progressText");
+    const scoreText = document.getElementById("scoreText");
+    const progressFill = document.getElementById("progressFill");
+
+    const finishBox = document.getElementById("finishBox");
+    const finishText = document.getElementById("finishText");
+    const restartButton = document.getElementById("restartButton");
+
+    const timerBox = document.getElementById("timerBox");
+    const timerValue = document.getElementById("timerValue");
+    const timerSelect = document.getElementById("timerSelect");
+    const timerStart = document.getElementById("timerStart");
+
+
+    /* =========================
+       ЗАГРУЗКА СЛОВ
+    ========================= */
+
+    async function loadWords() {
+
+      try {
+
+        const response = await fetch("data/words.json");
+
+        if (!response.ok) {
+          throw new Error("Не удалось загрузить слова");
+        }
+
+        words = await response.json();
+
+        console.log("Загружено слов:", words.length);
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "Не удалось загрузить слова. Проверь, что файл data/words.json существует."
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       ПЕРЕМЕШИВАНИЕ
+    ========================= */
+
+    function shuffle(array) {
+
+      const result = [...array];
+
+      for (let i = result.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [result[i], result[j]] = [result[j], result[i]];
+
+      }
+
+      return result;
+
+    }
+
+
+    /* =========================
+       ЯЗЫКОВАЯ ПАРА
+    ========================= */
+
+    function getPairInfo() {
+
+      if (currentPair === "kr-ru") {
+
+        return {
+          source: "korean",
+          answer: "russian",
+          sourceName: "КОРЕЙСКИЙ",
+          pairName: "Корейский — Русский"
+        };
+
+      }
+
+      if (currentPair === "en-ru") {
+
+        return {
+          source: "english",
+          answer: "russian",
+          sourceName: "АНГЛИЙСКИЙ",
+          pairName: "Английский — Русский"
+        };
+
+      }
+
+      return {
+        source: "korean",
+        answer: "english",
+        sourceName: "КОРЕЙСКИЙ",
+        pairName: "Корейский — Английский"
+      };
+
+    }
+
+
+    /* =========================
+       ОТКРЫТИЕ ПРАКТИКИ
+    ========================= */
+
+    async function startPractice(mode) {
+
+      if (words.length === 0) {
+        await loadWords();
+      }
+
+      if (words.length === 0) {
+        return;
+      }
+
+      practiceMode = mode;
+
+      practiceWords = shuffle(words);
+
+      currentIndex = 0;
+      score = 0;
+
+      finishBox.classList.remove("active");
+      document.getElementById("wordCard").style.display = "block";
+
+      homeScreen.classList.add("hidden");
+      practiceScreen.classList.add("active");
+
+      const pair = getPairInfo();
+
+      pairHeading.textContent = pair.pairName;
+
+      if (mode === "normal") {
+
+        practiceHeading.textContent = "Обычная практика";
+
+        timerBox.style.display = "none";
+
+        startNormalTimer();
+
+      } else {
+
+        practiceHeading.textContent = "Практика с таймером";
+
+        timerBox.style.display = "block";
+
+        timerRunning = false;
+
+        timerSeconds = Number(timerSelect.value);
+
+        updateTimerDisplay();
+
+      }
+
+      showWord();
+
+    }
+
+
+    /* =========================
+       ПОКАЗ СЛОВА
+    ========================= */
+
+    function showWord() {
+
+      if (currentIndex >= practiceWords.length) {
+
+        finishPractice();
+
+        return;
+
+      }
+
+      const word = practiceWords[currentIndex];
+      const pair = getPairInfo();
+
+      wordLanguage.textContent = pair.sourceName;
+
+      wordMain.textContent = word[pair.source];
+
+      answerBox.textContent = "Нажми «Показать перевод»";
+      answerBox.classList.add("hidden");
+
+      showAnswer.textContent = "Показать перевод";
+
+      updateProgress();
+
+    }
+
+
+    /* =========================
+       ПОКАЗ ПЕРЕВОДА
+    ========================= */
+
+    showAnswer.addEventListener("click", () => {
+
+      const word = practiceWords[currentIndex];
+
+      if (!word) return;
+
+      const pair = getPairInfo();
+
+      answerBox.textContent = word[pair.answer];
+
+      answerBox.classList.remove("hidden");
+
+      showAnswer.textContent = "Перевод показан ✓";
+
     });
+
+
+    /* =========================
+       ПРОГРЕСС
+    ========================= */
+
+    function updateProgress() {
+
+      const total = practiceWords.length;
+
+      const current = Math.min(currentIndex + 1, total);
+
+      progressText.textContent =
+        "Слово " + current + " из " + total;
+
+      scoreText.textContent =
+        "Знаю: " + score;
+
+      const percentage =
+        total > 0 ? (currentIndex / total) * 100 : 0;
+
+      progressFill.style.width =
+        Math.min(percentage, 100) + "%";
+
+    }
+
+
+    /* =========================
+       ЗНАЮ
+    ========================= */
+
+    knowButton.addEventListener("click", () => {
+
+      score++;
+
+      nextWord();
+
+    });
+
+
+    /* =========================
+       ПОВТОРИТЬ
+    ========================= */
+
+    repeatButton.addEventListener("click", () => {
+
+      if (practiceWords.length > 1) {
+
+        const currentWord = practiceWords[currentIndex];
+
+        practiceWords.splice(currentIndex, 1);
+
+        const randomPosition =
+          Math.min(
+            currentIndex + 2,
+            practiceWords.length
+          );
+
+        practiceWords.splice(
+          randomPosition,
+          0,
+          currentWord
+        );
+
+      }
+
+      nextWord();
+
+    });
+
+
+    /* =========================
+       СЛЕДУЮЩЕЕ
+    ========================= */
+
+    nextButton.addEventListener("click", () => {
+
+      nextWord();
+
+    });
+
+
+    function nextWord() {
+
+      currentIndex++;
+
+      showWord();
+
+    }
+
+
+    /* =========================
+       ОБЫЧНЫЙ ТАЙМЕР
+    ========================= */
+
+    function startNormalTimer() {
+
+      clearInterval(normalTimerInterval);
+
+      normalStartTime = Date.now();
+
+      normalTimerInterval = setInterval(() => {
+
+        if (practiceMode !== "normal") {
+          clearInterval(normalTimerInterval);
+        }
+
+      }, 1000);
+
+    }
+
+
+    /* =========================
+       ТАЙМЕР
+    ========================= */
+
+    timerSelect.addEventListener("change", () => {
+
+      if (!timerRunning) {
+
+        timerSeconds =
+          Number(timerSelect.value);
+
+        updateTimerDisplay();
+
+      }
+
+    });
+
+
+    timerStart.addEventListener("click", () => {
+
+      if (timerRunning) return;
+
+      timerRunning = true;
+
+      timerSelect.disabled = true;
+
+      timerStart.textContent = "⏱️ Таймер запущен";
+
+      timerInterval = setInterval(() => {
+
+        timerSeconds--;
+
+        updateTimerDisplay();
+
+        if (timerSeconds <= 0) {
+
+          clearInterval(timerInterval);
+
+          timerRunning = false;
+
+          finishPractice();
+
+        }
+
+      }, 1000);
+
+    });
+
+
+    function updateTimerDisplay() {
+
+      const minutes =
+        Math.floor(timerSeconds / 60)
+          .toString()
+          .padStart(2, "0");
+
+      const seconds =
+        (timerSeconds % 60)
+          .toString()
+          .padStart(2, "0");
+
+      timerValue.textContent =
+        minutes + ":" + seconds;
+
+    }
+
+
+    /* =========================
+       ЗАВЕРШЕНИЕ
+    ========================= */
+
+    function finishPractice() {
+
+      clearInterval(timerInterval);
+      clearInterval(normalTimerInterval);
+
+      timerRunning = false;
+
+      document.getElementById("wordCard").style.display = "none";
+
+      document.querySelector(".practice-buttons").style.display = "none";
+      nextButton.style.display = "none";
+
+      progressFill.style.width = "100%";
+
+      finishBox.classList.add("active");
+
+      if (practiceMode === "timer") {
+
+        finishText.textContent =
+          "За это время ты прошёл " +
+          currentIndex +
+          " слов. Правильных: " +
+          score +
+          ".";
+
+      } else {
+
+        const seconds =
+          Math.floor(
+            (Date.now() - normalStartTime) / 1000
+          );
+
+        const minutes =
+          Math.floor(seconds / 60);
+
+        const remainingSeconds =
+          seconds % 60;
+
+        const timeText =
+          minutes > 0
+            ? minutes + " мин " + remainingSeconds + " сек"
+            : remainingSeconds + " сек";
+
+        finishText.textContent =
+          "Ты прошёл " +
+          Math.min(currentIndex, practiceWords.length) +
+          " слов за " +
+          timeText +
+          ". Знаю: " +
+          score +
+          ".";
+
+      }
+
+    }
+
+
+    /* =========================
+       НАЧАТЬ СНОВА
+    ========================= */
+
+    restartButton.addEventListener("click", () => {
+
+      document.querySelector(".practice-buttons").style.display = "grid";
+      nextButton.style.display = "block";
+
+      timerSelect.disabled = false;
+
+      if (practiceMode === "timer") {
+
+        timerSeconds =
+          Number(timerSelect.value);
+
+        timerStart.textContent =
+          "▶ Начать таймер";
+
+        updateTimerDisplay();
+
+      }
+
+      startPractice(practiceMode);
+
+    });
+
+
+    /* =========================
+       НАЗАД
+    ========================= */
+
+    backButton.addEventListener("click", () => {
+
+      clearInterval(timerInterval);
+      clearInterval(normalTimerInterval);
+
+      timerRunning = false;
+
+      practiceScreen.classList.remove("active");
+      homeScreen.classList.remove("hidden");
+
+    });
+
+
+    /* =========================
+       МЕНЮ
+    ========================= */
+
+    menuButton.addEventListener("click", () => {
+
+      menuOverlay.classList.add("open");
+
+    });
+
 
     closeMenu.addEventListener("click", () => {
+
       menuOverlay.classList.remove("open");
+
     });
 
+
     menuOverlay.addEventListener("click", (event) => {
+
       if (event.target === menuOverlay) {
+
         menuOverlay.classList.remove("open");
+
       }
+
     });
+
+
+    /* =========================
+       ВЫБОР ЯЗЫКОВОЙ ПАРЫ
+    ========================= */
+
+    document.querySelectorAll(".language-option")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          currentPair =
+            button.dataset.pair;
+
+          document
+            .querySelectorAll(".language-option")
+            .forEach(item => {
+
+              item.classList.remove("active");
+
+            });
+
+          button.classList.add("active");
+
+          menuOverlay.classList.remove("open");
+
+        });
+
+      });
+
+
+    /* =========================
+       КНОПКИ РЕЖИМОВ
+    ========================= */
+
+    normalMode.addEventListener("click", () => {
+
+      startPractice("normal");
+
+    });
+
+
+    timerMode.addEventListener("click", () => {
+
+      startPractice("timer");
+
+    });
+
+
+    /* =========================
+       ЗАГРУЗКА ПРИ ОТКРЫТИИ
+    ========================= */
+
+    loadWords();
+
   </script>
 
 </body>
