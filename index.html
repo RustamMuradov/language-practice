@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Practice</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fffafc;
+      color: #3d3540;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      padding: 24px 18px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Мягкие декоративные круги */
+    .decoration {
+      position: fixed;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .decoration.one {
+      top: -100px;
+      right: -80px;
+      background: #f8dce8;
+      opacity: 0.45;
+    }
+
+    .decoration.two {
+      bottom: -120px;
+      left: -100px;
+      background: #dfeaf8;
+      opacity: 0.4;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Верхняя панель */
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .menu-button {
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 5px 20px rgba(80, 55, 70, 0.09);
+      cursor: pointer;
+      color: #594d57;
+      font-size: 24px;
+    }
+
+    .menu-button:active {
+      transform: scale(0.96);
+    }
+
+    /* Заголовок */
+    .hero {
+      text-align: center;
+      padding: 28px 10px 30px;
+    }
+
+    .flower {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(32px, 8vw, 48px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #403741;
+    }
+
+    .hero p {
+      margin: 12px auto 0;
+      max-width: 420px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #827680;
+    }
+
+    /* Карточки режимов */
+    .section-title {
+      margin: 8px 4px 14px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #665a64;
+    }
+
+    .modes {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mode-card {
+      width: 100%;
+      border: 1px solid #f0e4ea;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 8px 30px rgba(80, 55, 70, 0.07);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .mode-card:active {
+      transform: scale(0.985);
+    }
+
+    .mode-icon {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .mode-card h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      color: #443a43;
+    }
+
+    .mode-card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #8a7d86;
+    }
+
+    /* Меню */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(45, 35, 42, 0.25);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 78px 18px 20px;
+      z-index: 10;
+    }
+
+    .menu-overlay.open {
+      display: flex;
+    }
+
+    .menu-panel {
+      width: min(340px, 100%);
+      background: #fff;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(40, 30, 40, 0.2);
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .menu-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .close-menu {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 12px;
+      background: #f7f1f4;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .language-option {
+      width: 100%;
+      border: none;
+      background: #faf6f8;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 9px;
+      text-align: left;
+      color: #51464f;
+      cursor: pointer;
+    }
+
+    .language-option:active {
+      transform: scale(0.985);
+    }
+
+    @media (min-width: 600px) {
+      .app {
+        padding-top: 40px;
+      }
+
+      .modes {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="decoration one"></div>
+    <div class="decoration two"></div>
+
+    <div class="content">
+
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Открыть меню">
+          ☰
+        </button>
+      </header>
+
+      <main>
+
+        <section class="hero">
+          <div class="flower">🌸</div>
+
+          <h1>Language Practice</h1>
+
+          <p>
+            Уютное место для практики английского
+            и корейского языка.
+          </p>
+        </section>
+
+        <section>
+
+          <div class="section-title">
+            Выбери режим практики
+          </div>
+
+          <div class="modes">
+
+            <button class="mode-card">
+              <div class="mode-icon">🌿</div>
+
+              <h2>Обычная практика</h2>
+
+              <p>
+                Проходи слова спокойно.
+                Секундомер покажет, сколько времени
+                заняла тренировка.
+              </p>
+            </button>
+
+            <button class="mode-card">
+              <div class="mode-icon">⏱️</div>
+
+              <h2>Практика с таймером</h2>
+
+              <p>
+                Выбери время и попробуй пройти
+                все слова до окончания таймера.
+              </p>
+            </button>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Меню -->
+  <div class="menu-overlay" id="menuOverlay">
+
+    <div class="menu-panel">
+
+      <div class="menu-header">
+        <h2>Языковая пара</h2>
+
+        <button class="close-menu" id="closeMenu">
+          ✕
+        </button>
+      </div>
+
+      <button class="language-option">
+        🇰🇷 Корейский — Русский
+      </button>
+
+      <button class="language-option">
+        🇬🇧 Английский — Русский
+      </button>
+
+      <button class="language-option">
+        🇰🇷 Корейский — Английский
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const closeMenu = document.getElementById("closeMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+    menuButton.addEventListener("click", () => {
+      menuOverlay.classList.add("open");
+    });
+
+    closeMenu.addEventListener("click", () => {
+      menuOverlay.classList.remove("open");
+    });
+
+    menuOverlay.addEventListener("click", (event) => {
+      if (event.target === menuOverlay) {
+        menuOverlay.classList.remove("open");
+      }
+    });
+  </script>
+
+</body>
+</html>
