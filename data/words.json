@@ -1,0 +1,817 @@
+[
+  {
+    "russian": "покупать, приобретать",
+    "english": "purchase",
+    "korean": "구매하다"
+  },
+  {
+    "russian": "повышать цены",
+    "english": "to raise prices",
+    "korean": "가격을 올리다"
+  },
+  {
+    "russian": "снижать цены",
+    "english": "to cut prices",
+    "korean": "가격을 내리다"
+  },
+  {
+    "russian": "доставлять посылку",
+    "english": "to deliver a package",
+    "korean": "소포를 배달하다"
+  },
+  {
+    "russian": "высокая прибыль, высокая маржа",
+    "english": "high margin",
+    "korean": "높은 이윤"
+  },
+  {
+    "russian": "цена со скидкой, сниженная цена",
+    "english": "cut-price",
+    "korean": "할인가"
+  },
+  {
+    "russian": "быть подверженным чему-либо, восприимчивый к чему-либо",
+    "english": "susceptible to",
+    "korean": "~에 취약하다"
+  },
+  {
+    "russian": "делать запасы, запасать",
+    "english": "stockpile",
+    "korean": "비축하다"
+  },
+  {
+    "russian": "влезть в долги",
+    "english": "to get into debt",
+    "korean": "빚을 지다"
+  },
+  {
+    "russian": "обманывать, провести",
+    "english": "to trick",
+    "korean": "속이다"
+  },
+  {
+    "russian": "возможность, шанс",
+    "english": "opportunity",
+    "korean": "기회"
+  },
+  {
+    "russian": "ответственность",
+    "english": "responsibility",
+    "korean": "책임"
+  },
+  {
+    "russian": "окружающая среда, окружение",
+    "english": "environment",
+    "korean": "환경"
+  },
+  {
+    "russian": "улучшать, совершенствовать",
+    "english": "improve",
+    "korean": "향상시키다"
+  },
+  {
+    "russian": "влиять, оказывать влияние",
+    "english": "influence",
+    "korean": "영향을 미치다"
+  },
+  {
+    "russian": "беспокойство, обеспокоенность",
+    "english": "concern",
+    "korean": "우려"
+  },
+  {
+    "russian": "преимущество, сильная сторона",
+    "english": "advantage",
+    "korean": "장점"
+  },
+  {
+    "russian": "недостаток, слабая сторона",
+    "english": "disadvantage",
+    "korean": "단점"
+  },
+  {
+    "russian": "требовать",
+    "english": "require",
+    "korean": "요구하다"
+  },
+  {
+    "russian": "подход, способ",
+    "english": "approach",
+    "korean": "접근 방식"
+  },
+  {
+    "russian": "отменять",
+    "english": "abolish",
+    "korean": "폐지하다"
+  },
+  {
+    "russian": "зависимость",
+    "english": "addiction",
+    "korean": "중독"
+  },
+  {
+    "russian": "сельское хозяйство",
+    "english": "agriculture",
+    "korean": "농업"
+  },
+  {
+    "russian": "любитель",
+    "english": "amateur",
+    "korean": "아마추어"
+  },
+  {
+    "russian": "посол",
+    "english": "ambassador",
+    "korean": "대사"
+  },
+  {
+    "russian": "скорая помощь",
+    "english": "ambulance",
+    "korean": "구급차"
+  },
+  {
+    "russian": "злость",
+    "english": "anger",
+    "korean": "분노"
+  },
+  {
+    "russian": "одобрять",
+    "english": "approve",
+    "korean": "승인하다 / 찬성하다"
+  },
+  {
+    "russian": "фартук",
+    "english": "apron",
+    "korean": "앞치마"
+  },
+  {
+    "russian": "организовывать, устраивать; упорядочивать",
+    "english": "arrange",
+    "korean": "마련하다 / 정리하다"
+  },
+  {
+    "russian": "высокомерный",
+    "english": "arrogant",
+    "korean": "거만하다 / 오만하다"
+  },
+  {
+    "russian": "хвастаться",
+    "english": "boast",
+    "korean": "자랑하다"
+  },
+  {
+    "russian": "телохранитель",
+    "english": "bodyguard",
+    "korean": "경호원"
+  },
+  {
+    "russian": "столовая",
+    "english": "canteen",
+    "korean": "식당 / 구내식당"
+  },
+  {
+    "russian": "знаменитость",
+    "english": "celebrity",
+    "korean": "유명인 / 유명인사"
+  },
+  {
+    "russian": "сожалеть",
+    "english": "to regret",
+    "korean": "후회하다"
+  },
+  {
+    "russian": "гордиться",
+    "english": "to be proud",
+    "korean": "자랑스럽다"
+  },
+  {
+    "russian": "тревожиться",
+    "english": "to feel anxious",
+    "korean": "불안하다"
+  },
+  {
+    "russian": "ожидать с надеждой; ожидать",
+    "english": "to look forward to / to expect",
+    "korean": "기대하다"
+  },
+  {
+    "russian": "растеряться",
+    "english": "to be confused / flustered",
+    "korean": "당황하다"
+  },
+  {
+    "russian": "быть взволнованным, радостным",
+    "english": "to be excited",
+    "korean": "신나다"
+  },
+  {
+    "russian": "тревожный, вызывающий беспокойство",
+    "english": "to be worrying / concerning",
+    "korean": "걱정스럽다"
+  },
+  {
+    "russian": "разочароваться",
+    "english": "to be disappointed",
+    "korean": "실망하다"
+  },
+  {
+    "russian": "заставлять волноваться",
+    "english": "to worry someone",
+    "korean": "걱정시키다"
+  },
+  {
+    "russian": "раздражаться",
+    "english": "to be annoyed / irritated",
+    "korean": "짜증나다"
+  },
+  {
+    "russian": "удивляться",
+    "english": "to be surprised",
+    "korean": "놀라다"
+  },
+  {
+    "russian": "устать, вымотаться",
+    "english": "to be exhausted",
+    "korean": "지치다"
+  },
+  {
+    "russian": "быть растерянным, смущённым",
+    "english": "to feel embarrassed / confused",
+    "korean": "당황스럽다"
+  },
+  {
+    "russian": "обращать внимание, переживать о чём-то",
+    "english": "to care about / to pay attention to",
+    "korean": "신경 쓰다"
+  },
+  {
+    "russian": "появиться силы, набраться энергии",
+    "english": "to gain energy / to feel energized",
+    "korean": "기운이 나다"
+  },
+  {
+    "russian": "вымещать злость на ком-то",
+    "english": "to take out one's anger on someone",
+    "korean": "화풀이하다"
+  },
+  {
+    "russian": "испытывать гордость, чувство удовлетворения",
+    "english": "to feel proud / to feel fulfilled",
+    "korean": "뿌듯하다"
+  },
+  {
+    "russian": "захватывающий, волнующий, острый по ощущениям",
+    "english": "thrilling / exciting",
+    "korean": "짜릿하다"
+  },
+  {
+    "russian": "быть довольным, быть удовлетворённым",
+    "english": "to be satisfied / to be content",
+    "korean": "만족하다"
+  },
+  {
+    "russian": "быть тронутым, растрогаться",
+    "english": "to be moved / to be touched",
+    "korean": "감동하다"
+  },
+  {
+    "russian": "чувствовать облегчение, испытывать лёгкость",
+    "english": "to feel relieved / refreshed",
+    "korean": "후련하다"
+  },
+  {
+    "russian": "любить, дорожить, испытывать привязанность",
+    "english": "to love / to cherish / to care for",
+    "korean": "애정하다"
+  },
+  {
+    "russian": "испытывать сострадание, сочувствовать",
+    "english": "to feel compassion / sympathy",
+    "korean": "연민을 느끼다"
+  },
+  {
+    "russian": "беспокоиться, волноваться",
+    "english": "to be worried / concerned",
+    "korean": "걱정되다"
+  },
+  {
+    "russian": "получать комплименты по поводу чего-либо",
+    "english": "to get compliments on something",
+    "korean": "~에 대해 칭찬을 받다"
+  },
+  {
+    "russian": "несовершенство, недостаток",
+    "english": "imperfection",
+    "korean": "불완전함"
+  },
+  {
+    "russian": "гордиться чем-либо",
+    "english": "to be proud of something",
+    "korean": "~을/를 자랑스러워하다"
+  },
+  {
+    "russian": "родимое пятно",
+    "english": "birthmark",
+    "korean": "모반"
+  },
+  {
+    "russian": "кожа",
+    "english": "skin",
+    "korean": "피부"
+  },
+  {
+    "russian": "осознавать, понимать что-либо",
+    "english": "to be aware of something",
+    "korean": "~을/를 인식하다"
+  },
+  {
+    "russian": "веснушки",
+    "english": "freckles",
+    "korean": "주근깨"
+  },
+  {
+    "russian": "выделяться, бросаться в глаза",
+    "english": "to stand out",
+    "korean": "눈에 띄다"
+  },
+  {
+    "russian": "бледный цвет лица",
+    "english": "pale complexion",
+    "korean": "창백한 안색"
+  },
+  {
+    "russian": "травить, издеваться над кем-либо",
+    "english": "to bully someone",
+    "korean": "누군가를 괴롭히다"
+  },
+  {
+    "russian": "сделать перерыв",
+    "english": "take a break",
+    "korean": "휴식을 취하다"
+  },
+  {
+    "russian": "листать, пролистывать",
+    "english": "to scroll through",
+    "korean": "스크롤하다 / 넘겨보다"
+  },
+  {
+    "russian": "зависимый",
+    "english": "addicted",
+    "korean": "중독된"
+  },
+  {
+    "russian": "устаревший",
+    "english": "outdated",
+    "korean": "구식의 / 시대에 뒤떨어진"
+  },
+  {
+    "russian": "сработать, помочь, решить проблему",
+    "english": "to do the trick",
+    "korean": "효과가 있다 / 해결하다"
+  },
+  {
+    "russian": "составлять, собирать",
+    "english": "to compile",
+    "korean": "모아서 정리하다"
+  },
+  {
+    "russian": "неподходящий, неуместный",
+    "english": "inappropriate",
+    "korean": "부적절한"
+  },
+  {
+    "russian": "вредить, причинять вред",
+    "english": "to harm",
+    "korean": "해를 끼치다"
+  },
+  {
+    "russian": "внимательный, осознанный",
+    "english": "mindful",
+    "korean": "주의 깊은 / 의식적인"
+  },
+  {
+    "russian": "убедиться, обеспечить",
+    "english": "to ensure",
+    "korean": "확실히 하다 / 보장하다"
+  },
+  {
+    "russian": "навсегда, постоянно",
+    "english": "permanently",
+    "korean": "영구적으로"
+  },
+  {
+    "russian": "внешность",
+    "english": "appearance",
+    "korean": "외모"
+  },
+  {
+    "russian": "шрам",
+    "english": "scar",
+    "korean": "흉터"
+  },
+  {
+    "russian": "пристально смотреть на кого-либо/что-либо",
+    "english": "to stare at someone/something",
+    "korean": "누군가/무언가를 빤히 쳐다보다"
+  },
+  {
+    "russian": "привыкать к чему-либо",
+    "english": "to get used to something",
+    "korean": "~에 익숙해지다"
+  },
+  {
+    "russian": "актуальная, обсуждаемая тема",
+    "english": "hot topic",
+    "korean": "화제"
+  },
+  {
+    "russian": "худой, худощавый",
+    "english": "skinny",
+    "korean": "마른"
+  },
+  {
+    "russian": "морщины",
+    "english": "wrinkles",
+    "korean": "주름"
+  },
+  {
+    "russian": "так называемый",
+    "english": "so-called",
+    "korean": "소위"
+  },
+  {
+    "russian": "находиться под давлением",
+    "english": "to be under pressure",
+    "korean": "압박을 받다"
+  },
+  {
+    "russian": "казаться, выглядеть; появляться",
+    "english": "to appear",
+    "korean": "나타나다"
+  },
+  {
+    "russian": "рассматривать, обдумывать",
+    "english": "to consider",
+    "korean": "고려하다"
+  },
+  {
+    "russian": "возражать, быть против",
+    "english": "to mind",
+    "korean": "꺼리다"
+  },
+  {
+    "russian": "доказательство, свидетельство",
+    "english": "evidence",
+    "korean": "증거"
+  },
+  {
+    "russian": "доказывать",
+    "english": "to prove",
+    "korean": "증명하다"
+  },
+  {
+    "russian": "стремиться к чему-либо; нацеливаться",
+    "english": "to aim",
+    "korean": "목표로 하다"
+  },
+  {
+    "russian": "призыв к действию",
+    "english": "call to action",
+    "korean": "행동 촉구"
+  },
+  {
+    "russian": "воспринимать, понимать определённым образом",
+    "english": "to perceive",
+    "korean": "인식하다"
+  },
+  {
+    "russian": "крайне важный, решающий",
+    "english": "crucial",
+    "korean": "결정적인"
+  },
+  {
+    "russian": "поучительный, разъясняющий",
+    "english": "enlightening",
+    "korean": "유익한"
+  },
+  {
+    "russian": "убеждать, уговаривать",
+    "english": "to persuade",
+    "korean": "설득하다"
+  },
+  {
+    "russian": "публиковать",
+    "english": "to post",
+    "korean": "게시하다"
+  },
+  {
+    "russian": "снимать",
+    "english": "to film",
+    "korean": "촬영하다"
+  },
+  {
+    "russian": "загружать",
+    "english": "to upload",
+    "korean": "업로드하다"
+  },
+  {
+    "russian": "продвигать",
+    "english": "to promote",
+    "korean": "홍보하다"
+  },
+  {
+    "russian": "лидер мнений, инфлюенсер",
+    "english": "influencer",
+    "korean": "인플루언서"
+  },
+  {
+    "russian": "подписчик",
+    "english": "follower",
+    "korean": "팔로워"
+  },
+  {
+    "russian": "изучать",
+    "english": "to study",
+    "korean": "공부하다"
+  },
+  {
+    "russian": "видеоблог",
+    "english": "vlog",
+    "korean": "브이로그"
+  },
+  {
+    "russian": "спрос и предложение",
+    "english": "supply and demand",
+    "korean": "수요와 공급"
+  },
+  {
+    "russian": "социальные сети",
+    "english": "social media",
+    "korean": "소셜 미디어"
+  },
+  {
+    "russian": "вовлечённость",
+    "english": "engagement",
+    "korean": "참여도"
+  },
+  {
+    "russian": "успокоиться, почувствовать облегчение",
+    "english": "to feel relieved",
+    "korean": "안심하다"
+  },
+  {
+    "russian": "волноваться, возбуждаться",
+    "english": "to get excited",
+    "korean": "흥분하다"
+  },
+  {
+    "russian": "смелый, дерзкий",
+    "english": "bold / daring",
+    "korean": "대담하다"
+  },
+  {
+    "russian": "храбрый, отважный",
+    "english": "brave / courageous",
+    "korean": "용감하다"
+  },
+  {
+    "russian": "дух соперничества",
+    "english": "competitive spirit",
+    "korean": "경쟁심"
+  },
+  {
+    "russian": "сдаваться, отказываться",
+    "english": "to give up",
+    "korean": "포기하다"
+  },
+  {
+    "russian": "преданность, верность",
+    "english": "loyalty",
+    "korean": "충성심"
+  },
+  {
+    "russian": "привязаться эмоционально",
+    "english": "to become emotionally attached",
+    "korean": "정이 들다"
+  },
+  {
+    "russian": "охотничья собака",
+    "english": "hunting dog",
+    "korean": "사냥개"
+  },
+  {
+    "russian": "проявлять, демонстрировать способности",
+    "english": "to demonstrate / display one's abilities",
+    "korean": "발휘하다"
+  },
+  {
+    "russian": "выдающийся, превосходный",
+    "english": "outstanding / excellent",
+    "korean": "뛰어나다"
+  },
+  {
+    "russian": "сильный, быть сильным",
+    "english": "strong",
+    "korean": "강하다"
+  },
+  {
+    "russian": "точный",
+    "english": "accurate, exact",
+    "korean": "정확하다"
+  },
+  {
+    "russian": "простой; короткий, без лишнего",
+    "english": "simple, brief, concise",
+    "korean": "간단하다"
+  },
+  {
+    "russian": "проблема",
+    "english": "problem, issue",
+    "korean": "문제"
+  },
+  {
+    "russian": "решать, разрешать",
+    "english": "to solve, resolve",
+    "korean": "해결하다"
+  },
+  {
+    "russian": "причина",
+    "english": "cause, reason",
+    "korean": "원인"
+  },
+  {
+    "russian": "результат",
+    "english": "result, outcome",
+    "korean": "결과"
+  },
+  {
+    "russian": "влияние",
+    "english": "influence, effect, impact",
+    "korean": "영향"
+  },
+  {
+    "russian": "экономика",
+    "english": "economy, economics",
+    "korean": "경제"
+  },
+  {
+    "russian": "расходы, стоимость",
+    "english": "cost, expense",
+    "korean": "비용"
+  },
+  {
+    "russian": "доход, прибыль",
+    "english": "profit, revenue",
+    "korean": "수익"
+  },
+  {
+    "russian": "производство",
+    "english": "production",
+    "korean": "생산"
+  },
+  {
+    "russian": "поведение",
+    "english": "attitude / behavior",
+    "korean": "태도"
+  },
+  {
+    "russian": "характер",
+    "english": "personality",
+    "korean": "성격"
+  },
+  {
+    "russian": "усилие",
+    "english": "effort",
+    "korean": "노력"
+  },
+  {
+    "russian": "привычка",
+    "english": "habit",
+    "korean": "습관"
+  },
+  {
+    "russian": "утверждать",
+    "english": "to claim",
+    "korean": "주장하다"
+  },
+  {
+    "russian": "быть против",
+    "english": "to oppose",
+    "korean": "반대하다"
+  },
+  {
+    "russian": "поддерживать",
+    "english": "to support",
+    "korean": "찬성하다"
+  },
+  {
+    "russian": "падать",
+    "english": "to decline / fall",
+    "korean": "하락하다"
+  },
+  {
+    "russian": "снижаться",
+    "english": "to decrease / drop",
+    "korean": "떨어지다"
+  },
+  {
+    "russian": "меняться",
+    "english": "to change",
+    "korean": "변하다"
+  },
+  {
+    "russian": "изменение",
+    "english": "change",
+    "korean": "변화"
+  },
+  {
+    "russian": "сохраняться",
+    "english": "to remain / be maintained",
+    "korean": "유지되다"
+  },
+  {
+    "russian": "быть стабильным",
+    "english": "to be constant / stable",
+    "korean": "일정하다"
+  },
+  {
+    "russian": "процент, доля",
+    "english": "proportion / ratio",
+    "korean": "비율"
+  },
+  {
+    "russian": "составлять",
+    "english": "to constitute / make up",
+    "korean": "구성하다"
+  },
+  {
+    "russian": "превью, обложка",
+    "english": "thumbnail",
+    "korean": "썸네일"
+  },
+  {
+    "russian": "первая серия",
+    "english": "first episode",
+    "korean": "첫화"
+  },
+  {
+    "russian": "просто, лишь",
+    "english": "simply / just",
+    "korean": "단순히"
+  },
+  {
+    "russian": "быть вежливым",
+    "english": "to be polite",
+    "korean": "공손하다"
+  },
+  {
+    "russian": "кстати, для справки",
+    "english": "by the way / for reference",
+    "korean": "참고로"
+  },
+  {
+    "russian": "слегка, немного",
+    "english": "slightly / a little",
+    "korean": "살짝"
+  },
+  {
+    "russian": "наклонять, опускать",
+    "english": "to lower / bow",
+    "korean": "숙이다"
+  },
+  {
+    "russian": "учтивый, официально-вежливый",
+    "english": "polite / courteous",
+    "korean": "정중한"
+  },
+  {
+    "russian": "колено",
+    "english": "knee",
+    "korean": "무릎"
+  },
+  {
+    "russian": "традиционный",
+    "english": "traditional",
+    "korean": "전통적(인)"
+  },
+  {
+    "russian": "становиться на колени",
+    "english": "to kneel",
+    "korean": "꿇다"
+  },
+  {
+    "russian": "убирать пыль",
+    "english": "to wipe dust",
+    "korean": "먼지를 닦다"
+  },
+  {
+    "russian": "делиться",
+    "english": "to share",
+    "korean": "공유하다"
+  },
+  {
+    "russian": "расти, развиваться",
+    "english": "to grow / develop",
+    "korean": "성장하다"
+  }
+]
