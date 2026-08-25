@@ -4,24 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+<meta name="theme-color" content="#fff8fc" id="themeColor">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+
 <title>Language Practice</title>
 
-<!-- Шрифты -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&family=Exo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
 html,
 body{
   margin:0;
   min-height:100%;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  padding:0;
+  -webkit-text-size-adjust:100%;
+  overscroll-behavior:none;
+}
+
+html{
+  background:#fff8fc;
 }
 
 body{
@@ -30,20 +42,28 @@ body{
     radial-gradient(circle at 8% 80%,rgba(205,195,255,.24),transparent 30%),
     linear-gradient(145deg,#fffaff 0%,#fff6fa 48%,#faf7ff 100%);
   color:#403744;
+  overflow-x:hidden;
+}
+
+body.games-open{
+  background:#0d0c14;
+  color:#fff;
+  overflow:hidden;
 }
 
 button,
 select{
   font:inherit;
-  -webkit-tap-highlight-color:transparent;
 }
 
 button{
   appearance:none;
+  border:0;
 }
 
 .app{
   min-height:100vh;
+  min-height:100dvh;
   padding:18px 16px 45px;
   position:relative;
   overflow:hidden;
@@ -56,9 +76,9 @@ button{
   margin:auto;
 }
 
-/* =========================================
-   ДЕКОРАТИВНЫЙ ФОН
-========================================= */
+/* =========================
+   ФОН
+========================= */
 
 .decoration{
   position:fixed;
@@ -74,7 +94,12 @@ button{
   top:-135px;
   border-radius:50%;
   background:
-    radial-gradient(circle,#ffd8e8 0%,rgba(255,216,232,.2) 55%,transparent 70%);
+    radial-gradient(
+      circle,
+      #ffd8e8 0%,
+      rgba(255,216,232,.2) 55%,
+      transparent 70%
+    );
   opacity:.75;
 }
 
@@ -85,7 +110,12 @@ button{
   bottom:-155px;
   border-radius:50%;
   background:
-    radial-gradient(circle,#e2dcff 0%,rgba(226,220,255,.2) 55%,transparent 70%);
+    radial-gradient(
+      circle,
+      #e2dcff 0%,
+      rgba(226,220,255,.2) 55%,
+      transparent 70%
+    );
   opacity:.7;
 }
 
@@ -95,7 +125,6 @@ button{
   z-index:0;
   opacity:.075;
   user-select:none;
-  filter:blur(.15px);
 }
 
 .flag.uk{
@@ -117,7 +146,6 @@ button{
   pointer-events:none;
   z-index:0;
   opacity:.16;
-  user-select:none;
 }
 
 .flower-a{
@@ -140,7 +168,6 @@ button{
   z-index:0;
   opacity:.35;
   font-size:22px;
-  user-select:none;
 }
 
 .petal-a{
@@ -185,9 +212,9 @@ button{
   right:20%;
 }
 
-/* =========================================
+/* =========================
    ГЛАВНЫЙ ЭКРАН
-========================================= */
+========================= */
 
 .home-screen{
   font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -216,7 +243,6 @@ button{
   backdrop-filter:blur(15px);
   cursor:pointer;
   font-size:25px;
-  transition:transform .2s,box-shadow .2s;
 }
 
 .menu-button:active{
@@ -240,7 +266,6 @@ button{
   font-size:13px;
   font-weight:700;
   margin-bottom:15px;
-  box-shadow:0 8px 22px rgba(214,137,174,.09);
 }
 
 .hero h1{
@@ -276,9 +301,9 @@ button{
   color:#e879ae;
 }
 
-/* =========================================
+/* =========================
    СТАТИСТИКА
-========================================= */
+========================= */
 
 .stats-card{
   position:relative;
@@ -292,18 +317,6 @@ button{
     0 18px 45px rgba(88,58,78,.10),
     inset 0 1px 0 rgba(255,255,255,.9);
   backdrop-filter:blur(16px);
-  animation:cardAppear .55s ease both;
-}
-
-.stats-card::after{
-  content:"";
-  position:absolute;
-  width:130px;
-  height:130px;
-  right:-50px;
-  top:-55px;
-  border-radius:50%;
-  background:rgba(229,216,255,.32);
 }
 
 .stats-header{
@@ -331,9 +344,6 @@ button{
   background:linear-gradient(145deg,#9a83f3,#6c6be8);
   color:white;
   font-size:20px;
-  box-shadow:
-    0 8px 20px rgba(111,103,225,.25),
-    0 0 0 5px rgba(167,149,249,.12);
 }
 
 .stats-title strong{
@@ -350,8 +360,6 @@ button{
 .stats-wave{
   color:#8d7bf1;
   font-size:35px;
-  line-height:1;
-  transform:rotate(-5deg);
 }
 
 .stats-values{
@@ -374,7 +382,6 @@ button{
 .stat-number{
   font-size:28px;
   font-weight:800;
-  line-height:1.1;
 }
 
 .stat:nth-child(1) .stat-number{
@@ -396,9 +403,9 @@ button{
   font-weight:600;
 }
 
-/* =========================================
-   ЗАГОЛОВКИ
-========================================= */
+/* =========================
+   ЗАГОЛОВОК
+========================= */
 
 .section-title{
   margin:0 4px 14px;
@@ -418,73 +425,68 @@ button{
   background:linear-gradient(90deg,#ed76aa,#b99be9);
 }
 
-/* =========================================
-   КАРТОЧКИ РЕЖИМОВ
-========================================= */
+/* =========================
+   РЕЖИМЫ
+========================= */
 
 .modes{
   display:grid;
   gap:16px;
 }
 
-.mode-card{
+.mode-card,
+.games-card{
   position:relative;
   overflow:hidden;
   width:100%;
   min-height:174px;
   display:grid;
-  grid-template-columns:118px 1fr 48px;
+  grid-template-columns:118px minmax(0,1fr) 48px;
   align-items:center;
   gap:16px;
-  border:1px solid rgba(240,205,224,.9);
   border-radius:28px;
   padding:16px;
   text-align:left;
   cursor:pointer;
+}
+
+.mode-card{
+  border:1px solid rgba(240,205,224,.9);
   box-shadow:
     0 15px 35px rgba(80,55,75,.075),
     inset 0 1px 0 rgba(255,255,255,.85);
-  transition:
-    transform .22s,
-    box-shadow .22s;
 }
 
 .mode-card.normal{
   background:
-    linear-gradient(135deg,rgba(255,239,247,.94),rgba(255,255,255,.88));
+    linear-gradient(
+      135deg,
+      rgba(255,239,247,.94),
+      rgba(255,255,255,.88)
+    );
 }
 
 .mode-card.timer{
   background:
-    linear-gradient(135deg,rgba(243,240,255,.96),rgba(255,255,255,.9));
-  border-color:#ddd8f4;
+    linear-gradient(
+      135deg,
+      rgba(243,240,255,.96),
+      rgba(255,255,255,.9)
+    );
 }
 
-.mode-card::before{
-  content:"";
-  position:absolute;
-  width:160px;
-  height:160px;
-  border-radius:50%;
-  right:-100px;
-  bottom:-100px;
-  background:rgba(255,255,255,.4);
-}
-
-.mode-card:active{
+.mode-card:active,
+.games-card:active{
   transform:scale(.975);
 }
 
 .mode-illustration{
-  position:relative;
-  z-index:1;
   height:120px;
   display:flex;
   align-items:center;
   justify-content:center;
   border-radius:25px;
   font-size:67px;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
 }
 
 .normal .mode-illustration{
@@ -496,8 +498,7 @@ button{
 }
 
 .mode-content{
-  position:relative;
-  z-index:1;
+  min-width:0;
 }
 
 .mode-card h2{
@@ -513,12 +514,9 @@ button{
   line-height:1.55;
   font-size:13.5px;
   color:#817685;
-  font-weight:500;
 }
 
 .mode-arrow{
-  position:relative;
-  z-index:1;
   width:48px;
   height:48px;
   display:flex;
@@ -526,7 +524,6 @@ button{
   justify-content:center;
   border-radius:50%;
   font-size:27px;
-  font-weight:500;
 }
 
 .normal .mode-arrow{
@@ -539,68 +536,35 @@ button{
   background:rgba(221,217,255,.8);
 }
 
-/* =========================================
-   КАРТОЧКА ИГР
-   Отдельный стиль — уютный главный экран
-   не меняем.
-========================================= */
+/* =========================
+   КНОПКА GAME ZONE
+========================= */
 
 .games-card{
-  position:relative;
-  overflow:hidden;
-  width:100%;
-  min-height:174px;
-  display:grid;
-  grid-template-columns:118px 1fr 48px;
-  align-items:center;
-  gap:16px;
   margin-top:16px;
   border:1px solid rgba(211,194,245,.95);
-  border-radius:28px;
-  padding:16px;
-  text-align:left;
-  cursor:pointer;
   background:
-    radial-gradient(circle at 18% 20%,rgba(244,183,224,.55),transparent 28%),
-    radial-gradient(circle at 85% 85%,rgba(154,125,237,.30),transparent 38%),
-    linear-gradient(135deg,rgba(249,244,255,.98),rgba(255,246,252,.94));
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(244,183,224,.55),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(154,125,237,.30),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(249,244,255,.98),
+      rgba(255,246,252,.94)
+    );
   box-shadow:
     0 17px 40px rgba(88,65,116,.11),
     inset 0 1px 0 rgba(255,255,255,.92);
-  transition:
-    transform .22s,
-    box-shadow .22s;
-}
-
-.games-card::before{
-  content:"";
-  position:absolute;
-  width:210px;
-  height:210px;
-  right:-125px;
-  bottom:-135px;
-  border-radius:50%;
-  background:rgba(174,150,245,.18);
-}
-
-.games-card::after{
-  content:"";
-  position:absolute;
-  width:90px;
-  height:90px;
-  left:-35px;
-  top:-40px;
-  border-radius:50%;
-  background:rgba(255,190,224,.24);
-}
-
-.games-card:active{
-  transform:scale(.975);
 }
 
 .games-illustration{
-  position:relative;
-  z-index:1;
   height:120px;
   display:flex;
   align-items:center;
@@ -608,32 +572,18 @@ button{
   border-radius:25px;
   font-size:61px;
   background:
-    linear-gradient(145deg,rgba(111,75,155,.95),rgba(75,53,118,.98));
+    linear-gradient(
+      145deg,
+      rgba(111,75,155,.95),
+      rgba(75,53,118,.98)
+    );
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.22),
     0 12px 25px rgba(81,57,120,.22);
 }
 
 .games-content{
-  position:relative;
-  z-index:1;
-}
-
-.games-card h2{
-  margin:0 0 8px;
-  font-family:"Orbitron","Comfortaa",sans-serif;
-  font-size:18px;
-  line-height:1.25;
-  color:#302541;
-  letter-spacing:-.3px;
-}
-
-.games-card p{
-  margin:0;
-  line-height:1.5;
-  font-size:13.2px;
-  color:#817489;
-  font-weight:600;
+  min-width:0;
 }
 
 .games-kicker{
@@ -644,12 +594,24 @@ button{
   font-size:9px;
   font-weight:800;
   letter-spacing:1.7px;
-  text-transform:uppercase;
+}
+
+.games-card h2{
+  margin:0 0 8px;
+  font-family:"Orbitron","Comfortaa",sans-serif;
+  font-size:18px;
+  color:#302541;
+}
+
+.games-card p{
+  margin:0;
+  line-height:1.5;
+  font-size:13.2px;
+  color:#817489;
+  font-weight:600;
 }
 
 .games-arrow{
-  position:relative;
-  z-index:1;
   width:48px;
   height:48px;
   display:flex;
@@ -657,15 +619,18 @@ button{
   justify-content:center;
   border-radius:50%;
   color:#7256d9;
-  background:linear-gradient(145deg,rgba(231,220,255,.92),rgba(246,226,246,.92));
-  box-shadow:0 7px 18px rgba(120,90,205,.13);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(231,220,255,.92),
+      rgba(246,226,246,.92)
+    );
   font-size:27px;
-  font-weight:500;
 }
 
-/* =========================================
+/* =========================
    МЕНЮ
-========================================= */
+========================= */
 
 .menu-overlay{
   position:fixed;
@@ -676,7 +641,7 @@ button{
   padding:72px 15px 20px;
   background:rgba(55,43,53,.18);
   backdrop-filter:blur(10px);
-  z-index:30;
+  z-index:100;
 }
 
 .menu-overlay.open{
@@ -690,32 +655,27 @@ button{
   border-radius:29px;
   background:rgba(255,250,253,.96);
   box-shadow:0 25px 70px rgba(55,40,55,.20);
-  animation:panelIn .22s ease;
 }
 
 .menu-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:14px;
 }
 
 .menu-header h2{
   margin:0;
   font-family:"Comfortaa",sans-serif;
   font-size:19px;
-  color:#2d2935;
 }
 
 .close-menu{
   width:40px;
   height:40px;
-  border:0;
   border-radius:14px;
   background:#f9eaf1;
   color:#655967;
   font-size:23px;
-  cursor:pointer;
 }
 
 .language-option{
@@ -731,19 +691,15 @@ button{
   margin-top:10px;
   text-align:left;
   color:#4f4651;
-  cursor:pointer;
-  transition:.2s;
 }
 
 .language-flag{
   font-size:28px;
-  flex:none;
 }
 
 .language-text{
   flex:1;
   font-weight:600;
-  line-height:1.35;
 }
 
 .language-check{
@@ -755,13 +711,11 @@ button{
   border-radius:50%;
   background:#f4e9ef;
   color:transparent;
-  font-size:14px;
 }
 
 .language-option.active{
   border-color:#ec8bb7;
   background:linear-gradient(135deg,#fff0f7,#fff8fb);
-  box-shadow:0 8px 25px rgba(225,116,166,.12);
 }
 
 .language-option.active .language-check{
@@ -769,9 +723,9 @@ button{
   color:white;
 }
 
-/* =========================================
-   ЭКРАН ПРАКТИКИ
-========================================= */
+/* =========================
+   ПРАКТИКА
+========================= */
 
 .practice-screen{
   display:none;
@@ -794,10 +748,7 @@ button{
   border-radius:16px;
   background:rgba(255,255,255,.82);
   color:#5b515b;
-  box-shadow:0 8px 25px rgba(78,56,72,.09);
-  cursor:pointer;
   font-size:23px;
-  flex:none;
 }
 
 .practice-title{
@@ -810,13 +761,58 @@ button{
   margin:0;
   font-family:"Comfortaa",sans-serif;
   font-size:19px;
-  color:#443a44;
 }
 
 .practice-title p{
   margin:5px 0 0;
   color:#8a7d87;
   font-size:13px;
+}
+
+.timer-box{
+  text-align:center;
+  margin-bottom:14px;
+  padding:18px;
+  border-radius:24px;
+  background:rgba(255,255,255,.72);
+  border:1px solid #eee0eb;
+}
+
+.timer-value{
+  font-size:30px;
+  font-weight:750;
+}
+
+.timer-select{
+  margin-top:9px;
+  border:1px solid #eadde5;
+  background:#fff;
+  border-radius:15px;
+  padding:12px;
+  width:100%;
+  color:#594d57;
+}
+
+.timer-start{
+  width:100%;
+  margin-top:9px;
+  border-radius:16px;
+  padding:13px;
+  background:linear-gradient(90deg,#eeb4cf,#d2c5f5);
+  color:#594d57;
+  font-weight:700;
+}
+
+.stopwatch{
+  text-align:center;
+  margin-bottom:11px;
+  color:#7d7079;
+  font-size:13px;
+}
+
+.stopwatch strong{
+  font-size:18px;
+  color:#403741;
 }
 
 .progress-area{
@@ -826,7 +822,6 @@ button{
 .progress-info{
   display:flex;
   justify-content:space-between;
-  gap:10px;
   color:#7d7079;
   font-size:13px;
   margin-bottom:7px;
@@ -873,17 +868,14 @@ button{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:11px;
-  margin-bottom:16px;
 }
 
 .match-column{
   display:grid;
   gap:10px;
-  align-content:start;
 }
 
 .word-tile{
-  position:relative;
   width:100%;
   min-height:68px;
   border:1px solid rgba(239,215,228,.85);
@@ -892,52 +884,33 @@ button{
   background:linear-gradient(145deg,#fffdfd,#fff5f9);
   color:#443a44;
   box-shadow:0 8px 23px rgba(82,55,73,.075);
-  cursor:pointer;
-  transition:
-    transform .18s,
-    box-shadow .18s,
-    border-color .18s,
-    background .18s,
-    opacity .18s;
-}
-
-.match-column:first-child .word-tile{
-  background:linear-gradient(145deg,#fffdfd,#fff1f6);
 }
 
 .match-column:last-child .word-tile{
   background:linear-gradient(145deg,#fffdfd,#f5efff);
 }
 
-.word-tile:active{
-  transform:scale(.975);
-}
-
 .word-tile.selected{
   border:2px solid #7db78d;
   background:#f5fff7;
-  box-shadow:
-    0 0 0 3px rgba(125,183,141,.12),
-    0 10px 25px rgba(90,150,105,.10);
-  transform:translateY(-1px);
 }
 
 .word-tile.wrong{
   border:2px solid #dc8c91;
   background:#fff5f5;
-  animation:wrong .30s ease;
 }
 
 .word-tile.correct{
   border:2px solid #9dceaa;
   background:#effaf1;
-  animation:correct .42s cubic-bezier(.2,.8,.2,1) forwards;
+  opacity:0;
+  transform:scale(.72);
+  transition:.42s;
   pointer-events:none;
 }
 
 .word-tile.hidden{
   visibility:hidden;
-  pointer-events:none;
 }
 
 .tile-main{
@@ -948,79 +921,23 @@ button{
   word-break:break-word;
 }
 
-/* =========================================
-   ТАЙМЕР
-========================================= */
-
-.stopwatch{
-  text-align:center;
-  margin-bottom:11px;
-  color:#7d7079;
-  font-size:13px;
-}
-
-.stopwatch strong{
-  font-size:18px;
-  color:#403741;
-}
-
-.timer-box{
-  text-align:center;
-  margin-bottom:14px;
-  padding:18px;
-  border-radius:24px;
-  background:rgba(255,255,255,.72);
-  border:1px solid #eee0eb;
-  box-shadow:0 10px 30px rgba(80,55,70,.06);
-}
-
-.timer-value{
-  font-size:30px;
-  font-weight:750;
-  color:#403741;
-}
-
-.timer-select{
-  margin-top:9px;
-  border:1px solid #eadde5;
-  background:#fff;
-  border-radius:15px;
-  padding:12px;
-  width:100%;
-  color:#594d57;
-}
-
-.timer-start{
-  width:100%;
-  margin-top:9px;
-  border:0;
-  border-radius:16px;
-  padding:13px;
-  background:linear-gradient(90deg,#eeb4cf,#d2c5f5);
-  color:#594d57;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.timer-start:disabled{
-  opacity:.62;
-}
-
-/* =========================================
+/* =========================
    РЕЗУЛЬТАТ
-========================================= */
+========================= */
 
 .finish-box{
   display:none;
   text-align:center;
   background:
-    radial-gradient(circle at 20% 10%,rgba(255,218,235,.55),transparent 30%),
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(255,218,235,.55),
+      transparent 30%
+    ),
     rgba(255,255,255,.94);
   border:1px solid #f0dfe8;
   border-radius:30px;
   padding:27px 18px 23px;
-  box-shadow:0 18px 45px rgba(80,55,70,.10);
-  animation:finishIn .32s ease;
 }
 
 .finish-box.active{
@@ -1029,18 +946,15 @@ button{
 
 .finish-decoration{
   font-size:42px;
-  margin-bottom:5px;
 }
 
 .finish-box h2{
   margin:0 0 7px;
   font-family:"Comfortaa",sans-serif;
   font-size:23px;
-  color:#2d2935;
 }
 
 .finish-subtitle{
-  margin:0 0 20px;
   color:#877b87;
   font-size:13px;
 }
@@ -1049,7 +963,6 @@ button{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
-  margin-bottom:18px;
 }
 
 .result-item{
@@ -1059,38 +972,11 @@ button{
   border:1px solid #f4e2eb;
 }
 
-.result-item:nth-child(2){
-  background:#f7f4ff;
-  border-color:#e9e2f6;
-}
-
-.result-item:nth-child(3){
-  background:#f5fff7;
-  border-color:#e1f0e5;
-}
-
-.result-item:nth-child(4){
-  background:#fffaf1;
-  border-color:#f4ead8;
-}
-
 .result-number{
   display:block;
   font-size:22px;
   font-weight:800;
   color:#6f60dc;
-}
-
-.result-item:nth-child(2) .result-number{
-  color:#df649e;
-}
-
-.result-item:nth-child(3) .result-number{
-  color:#68a77a;
-}
-
-.result-item:nth-child(4) .result-number{
-  color:#c78d51;
 }
 
 .result-label{
@@ -1101,57 +987,76 @@ button{
 }
 
 .result-message{
-  margin:5px 0 12px;
+  margin:15px 0;
   padding:13px 15px;
   border-radius:17px;
   background:linear-gradient(90deg,#fff0f7,#f8f3ff);
   color:#665866;
-  line-height:1.45;
-  font-size:13px;
-  font-weight:600;
 }
 
 .restart-button{
-  border:0;
   border-radius:17px;
   background:#403741;
   color:#fff;
   padding:14px 25px;
-  cursor:pointer;
-  font-weight:700;
-  margin-top:4px;
-  box-shadow:0 9px 22px rgba(60,50,60,.16);
 }
 
-/* =========================================
-   ИГРОВАЯ ЗОНА
-========================================= */
+/* ==================================================
+   GAME ZONE
+================================================== */
 
 .game-screen{
   position:fixed;
   inset:0;
-  z-index:20;
+  z-index:200;
   display:none;
+
+  width:100%;
+  height:100%;
+  height:100dvh;
+  min-height:100dvh;
+
   overflow-x:hidden;
   overflow-y:auto;
-  min-height:100dvh;
+
   padding:
     calc(18px + env(safe-area-inset-top))
-    16px
-    calc(35px + env(safe-area-inset-bottom));
+    max(16px,env(safe-area-inset-right))
+    calc(35px + env(safe-area-inset-bottom))
+    max(16px,env(safe-area-inset-left));
+
   background:
-    radial-gradient(circle at 88% 8%,rgba(145,83,255,.26),transparent 25%),
-    radial-gradient(circle at 5% 72%,rgba(0,210,176,.15),transparent 28%),
-    radial-gradient(circle at 52% 45%,rgba(118,55,188,.10),transparent 35%),
-    linear-gradient(145deg,#0d0c14 0%,#171323 46%,#0d1118 100%);
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(145,83,255,.26),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 5% 72%,
+      rgba(0,210,176,.15),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 52% 45%,
+      rgba(118,55,188,.10),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #0d0c14 0%,
+      #171323 46%,
+      #0d1118 100%
+    );
+
   color:#fff;
-  font-family:"Exo 2",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Exo 2",sans-serif;
   isolation:isolate;
+
+  -webkit-overflow-scrolling:touch;
 }
 
 .game-screen.active{
   display:block;
-  animation:gameScreenIn .28s ease both;
 }
 
 .game-screen::before{
@@ -1209,16 +1114,7 @@ button{
   align-items:center;
   justify-content:center;
   font-size:23px;
-  cursor:pointer;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.08);
   backdrop-filter:blur(12px);
-  transition:.2s;
-}
-
-.game-back:active{
-  transform:scale(.92);
 }
 
 .game-brand{
@@ -1259,7 +1155,11 @@ button{
   justify-content:center;
   border-radius:21px;
   background:
-    linear-gradient(145deg,rgba(115,67,170,.36),rgba(46,31,78,.72));
+    linear-gradient(
+      145deg,
+      rgba(115,67,170,.36),
+      rgba(46,31,78,.72)
+    );
   border:1px solid rgba(184,139,255,.26);
   box-shadow:
     0 0 35px rgba(129,72,231,.16),
@@ -1275,7 +1175,6 @@ button{
   letter-spacing:-1.7px;
   font-weight:800;
   color:#fff;
-  text-shadow:0 5px 30px rgba(139,87,255,.12);
 }
 
 .game-hero h1 span{
@@ -1288,7 +1187,6 @@ button{
   color:#9e99aa;
   font-size:15px;
   line-height:1.7;
-  font-weight:500;
 }
 
 .game-section-label{
@@ -1300,14 +1198,12 @@ button{
   font-family:"Orbitron",sans-serif;
   font-size:14px;
   font-weight:700;
-  letter-spacing:.2px;
 }
 
 .game-section-label::before{
   content:"";
   width:9px;
   height:9px;
-  flex:none;
   border-radius:50%;
   background:#a66dff;
   box-shadow:0 0 16px rgba(166,109,255,.85);
@@ -1326,12 +1222,32 @@ button{
   border-radius:30px;
   padding:28px 28px 25px;
   background:
-    radial-gradient(circle at 90% 16%,rgba(174,102,255,.15),transparent 23%),
-    linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.035));
+    radial-gradient(
+      circle at 90% 16%,
+      rgba(174,102,255,.15),
+      transparent 23%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.085),
+      rgba(255,255,255,.035)
+    );
   box-shadow:
     0 18px 50px rgba(0,0,0,.20),
     inset 0 1px 0 rgba(255,255,255,.08);
   backdrop-filter:blur(16px);
+}
+
+.game-card:nth-child(2)::before{
+  background:rgba(56,210,173,.11);
+}
+
+.game-card:nth-child(3)::before{
+  background:rgba(224,93,178,.11);
+}
+
+.game-card:nth-child(4)::before{
+  background:rgba(76,130,255,.12);
 }
 
 .game-card::before{
@@ -1356,18 +1272,6 @@ button{
   border-radius:50%;
   background:rgba(0,211,171,.06);
   filter:blur(8px);
-}
-
-.game-card:nth-child(2)::before{
-  background:rgba(56,210,173,.11);
-}
-
-.game-card:nth-child(3)::before{
-  background:rgba(224,93,178,.11);
-}
-
-.game-card:nth-child(4)::before{
-  background:rgba(76,130,255,.12);
 }
 
 .game-card-content{
@@ -1403,7 +1307,6 @@ button{
   font-family:"Orbitron","Exo 2",sans-serif;
   font-size:22px;
   line-height:1.18;
-  letter-spacing:-.5px;
   color:#fff;
   font-weight:700;
 }
@@ -1414,12 +1317,11 @@ button{
   color:#a7a2af;
   font-size:15px;
   line-height:1.55;
-  font-weight:500;
 }
 
 .game-icon{
   position:absolute;
-  z-index:1;
+  z-index:2;
   top:25px;
   right:25px;
   width:54px;
@@ -1428,7 +1330,6 @@ button{
   align-items:center;
   justify-content:center;
   font-size:34px;
-  filter:drop-shadow(0 7px 13px rgba(0,0,0,.22));
 }
 
 .game-status{
@@ -1446,7 +1347,6 @@ button{
   font-weight:700;
   letter-spacing:1px;
   text-transform:uppercase;
-  backdrop-filter:blur(8px);
 }
 
 .game-footer{
@@ -1455,121 +1355,13 @@ button{
   color:#5d5966;
   font-family:"Orbitron",sans-serif;
   font-size:10px;
-  font-weight:500;
   letter-spacing:1.5px;
   text-transform:uppercase;
 }
 
-.game-footer::after{
-  content:"";
-  display:block;
-  width:70px;
-  height:1px;
-  margin:13px auto 0;
-  background:linear-gradient(90deg,transparent,rgba(166,109,255,.45),transparent);
-}
-
-/* =========================================
-   АНИМАЦИИ
-========================================= */
-
-@keyframes panelIn{
-  from{
-    opacity:0;
-    transform:translateY(-8px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@keyframes cardAppear{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@keyframes finishIn{
-  from{
-    opacity:0;
-    transform:translateY(8px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@keyframes gameScreenIn{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@keyframes wrong{
-  0%,100%{
-    transform:translateX(0);
-  }
-
-  25%{
-    transform:translateX(-5px);
-  }
-
-  50%{
-    transform:translateX(5px);
-  }
-
-  75%{
-    transform:translateX(-3px);
-  }
-}
-
-@keyframes correct{
-  0%{
-    opacity:1;
-    transform:scale(1);
-  }
-
-  35%{
-    opacity:1;
-    transform:scale(1.035);
-  }
-
-  100%{
-    opacity:0;
-    transform:scale(.72) translateY(-4px);
-  }
-}
-
-/* =========================================
+/* =========================
    АДАПТАЦИЯ
-========================================= */
-
-@media(min-width:600px){
-
-  .app{
-    padding-top:30px;
-  }
-
-  .modes{
-    grid-template-columns:1fr;
-  }
-
-  .hero{
-    padding-top:20px;
-  }
-}
+========================= */
 
 @media(max-width:520px){
 
@@ -1584,11 +1376,6 @@ button{
   .mode-illustration,
   .games-illustration{
     height:110px;
-    font-size:58px;
-  }
-
-  .games-illustration{
-    font-size:52px;
   }
 
   .mode-card h2,
@@ -1608,22 +1395,9 @@ button{
     font-size:23px;
   }
 
-  .games-kicker{
-    font-size:8px;
-    letter-spacing:1.3px;
-  }
-
-  .hero h1{
-    font-size:clamp(39px,11vw,58px);
-  }
-
   .game-card{
     min-height:175px;
     padding:25px 23px 24px;
-  }
-
-  .game-card-content{
-    padding-right:55px;
   }
 
   .game-card h2{
@@ -1648,14 +1422,6 @@ button{
     padding:7px 11px;
     font-size:9px;
   }
-
-  .game-hero{
-    padding-bottom:24px;
-  }
-
-  .game-hero p{
-    font-size:14px;
-  }
 }
 
 @media(max-width:420px){
@@ -1663,35 +1429,6 @@ button{
   .app{
     padding-left:12px;
     padding-right:12px;
-  }
-
-  .columns{
-    gap:8px;
-  }
-
-  .word-tile{
-    min-height:62px;
-    padding:10px 6px;
-  }
-
-  .tile-main{
-    font-size:14px;
-  }
-
-  .flag.uk{
-    font-size:135px;
-  }
-
-  .flag.kr{
-    font-size:130px;
-  }
-
-  .flower-a{
-    font-size:55px;
-  }
-
-  .flower-b{
-    font-size:42px;
   }
 
   .stats-card{
@@ -1723,13 +1460,6 @@ button{
 
   .games-card p{
     font-size:11.7px;
-    line-height:1.45;
-  }
-
-  .games-arrow{
-    width:38px;
-    height:38px;
-    font-size:21px;
   }
 
   .game-screen{
@@ -1741,86 +1471,39 @@ button{
     border-radius:26px;
     min-height:180px;
   }
-
-  .game-card h2{
-    font-size:18px;
-  }
-
-  .game-card p{
-    font-size:13.5px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    scroll-behavior:auto!important;
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-  }
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="app">
 
-  <!-- Фон -->
-
   <div class="decoration one"></div>
   <div class="decoration two"></div>
 
-  <div class="flag uk" aria-hidden="true">🇬🇧</div>
-  <div class="flag kr" aria-hidden="true">🇰🇷</div>
+  <div class="flag uk">🇬🇧</div>
+  <div class="flag kr">🇰🇷</div>
 
-  <div class="background-flower flower-a" aria-hidden="true">
-    🌸
-  </div>
+  <div class="background-flower flower-a">🌸</div>
+  <div class="background-flower flower-b">🌸</div>
 
-  <div class="background-flower flower-b" aria-hidden="true">
-    🌸
-  </div>
+  <div class="petal petal-a">🌸</div>
+  <div class="petal petal-b">🌸</div>
+  <div class="petal petal-c">🌸</div>
 
-  <div class="petal petal-a" aria-hidden="true">
-    🌸
-  </div>
-
-  <div class="petal petal-b" aria-hidden="true">
-    🌸
-  </div>
-
-  <div class="petal petal-c" aria-hidden="true">
-    🌸
-  </div>
-
-  <div class="sparkle sparkle-a" aria-hidden="true">
-    ✦
-  </div>
-
-  <div class="sparkle sparkle-b" aria-hidden="true">
-    ✧
-  </div>
-
-  <div class="sparkle sparkle-c" aria-hidden="true">
-    ✦
-  </div>
-
+  <div class="sparkle sparkle-a">✦</div>
+  <div class="sparkle sparkle-b">✧</div>
+  <div class="sparkle sparkle-c">✦</div>
 
   <div class="content">
 
-
-    <!-- =====================================
+    <!-- =========================
          ГЛАВНЫЙ ЭКРАН
-    ====================================== -->
+    ========================== -->
 
-    <div
-      class="home-screen"
-      id="homeScreen">
+    <div class="home-screen" id="homeScreen">
 
       <header class="topbar">
 
@@ -1832,7 +1515,6 @@ button{
         </button>
 
       </header>
-
 
       <main>
 
@@ -1858,7 +1540,6 @@ button{
           </p>
 
         </section>
-
 
         <!-- СТАТИСТИКА -->
 
@@ -1894,7 +1575,6 @@ button{
 
           </div>
 
-
           <div class="stats-values">
 
             <div class="stat">
@@ -1911,7 +1591,6 @@ button{
 
             </div>
 
-
             <div class="stat">
 
               <div
@@ -1925,7 +1604,6 @@ button{
               </div>
 
             </div>
-
 
             <div class="stat">
 
@@ -1945,7 +1623,6 @@ button{
 
         </section>
 
-
         <!-- РЕЖИМЫ -->
 
         <section>
@@ -1954,11 +1631,7 @@ button{
             Выбери режим практики
           </div>
 
-
           <div class="modes">
-
-
-            <!-- Обычная практика -->
 
             <button
               class="mode-card normal"
@@ -1989,9 +1662,6 @@ button{
 
             </button>
 
-
-            <!-- Таймер -->
-
             <button
               class="mode-card timer"
               id="timerMode">
@@ -2020,8 +1690,7 @@ button{
 
             </button>
 
-
-            <!-- ИГРЫ -->
+            <!-- GAME ZONE -->
 
             <button
               class="games-card"
@@ -2066,24 +1735,21 @@ button{
     </div>
 
 
-    <!-- =====================================
+    <!-- =========================
          ЭКРАН ПРАКТИКИ
-    ====================================== -->
+    ========================== -->
 
     <div
       class="practice-screen"
       id="practiceScreen">
 
-
       <div class="practice-top">
 
         <button
           class="back-button"
-          id="backButton"
-          aria-label="Назад">
+          id="backButton">
           ←
         </button>
-
 
         <div class="practice-title">
 
@@ -2096,7 +1762,6 @@ button{
           </p>
 
         </div>
-
 
         <div style="width:46px"></div>
 
@@ -2115,14 +1780,11 @@ button{
           05:00
         </div>
 
-
         <select
           class="timer-select"
           id="timerSelect">
 
-          <option
-            value="300"
-            selected>
+          <option value="300" selected>
             5 минут
           </option>
 
@@ -2146,40 +1808,8 @@ button{
             10 минут
           </option>
 
-          <option value="660">
-            11 минут
-          </option>
-
-          <option value="720">
-            12 минут
-          </option>
-
-          <option value="780">
-            13 минут
-          </option>
-
-          <option value="840">
-            14 минут
-          </option>
-
           <option value="900">
             15 минут
-          </option>
-
-          <option value="960">
-            16 минут
-          </option>
-
-          <option value="1020">
-            17 минут
-          </option>
-
-          <option value="1080">
-            18 минут
-          </option>
-
-          <option value="1140">
-            19 минут
           </option>
 
           <option value="1200">
@@ -2187,7 +1817,6 @@ button{
           </option>
 
         </select>
-
 
         <button
           class="timer-start"
@@ -2198,8 +1827,6 @@ button{
       </div>
 
 
-      <!-- СЕКУНДОМЕР -->
-
       <div
         class="stopwatch"
         id="stopwatch">
@@ -2209,8 +1836,6 @@ button{
 
       </div>
 
-
-      <!-- ПРОГРЕСС -->
 
       <div class="progress-area">
 
@@ -2225,7 +1850,6 @@ button{
           </span>
 
         </div>
-
 
         <div class="progress-bar">
 
@@ -2256,11 +1880,7 @@ button{
       </div>
 
 
-      <!-- СЛОВА -->
-
-      <div
-        class="columns"
-        id="columns">
+      <div class="columns">
 
         <div
           class="match-column"
@@ -2275,9 +1895,7 @@ button{
       </div>
 
 
-      <!-- =====================================
-           РЕЗУЛЬТАТ
-      ====================================== -->
+      <!-- РЕЗУЛЬТАТ -->
 
       <div
         class="finish-box"
@@ -2287,11 +1905,9 @@ button{
           🌸
         </div>
 
-
         <h2 id="finishTitle">
           Всё пройдено!
         </h2>
-
 
         <p
           class="finish-subtitle"
@@ -2299,9 +1915,7 @@ button{
           Отличная работа!
         </p>
 
-
         <div class="result-grid">
-
 
           <div class="result-item">
 
@@ -2317,7 +1931,6 @@ button{
 
           </div>
 
-
           <div class="result-item">
 
             <span
@@ -2332,7 +1945,6 @@ button{
 
           </div>
 
-
           <div class="result-item">
 
             <span
@@ -2346,7 +1958,6 @@ button{
             </span>
 
           </div>
-
 
           <div class="result-item">
 
@@ -2364,13 +1975,11 @@ button{
 
         </div>
 
-
         <div
           class="result-message"
           id="resultMessage">
           Отличная работа! ❤️
         </div>
-
 
         <button
           class="restart-button"
@@ -2387,9 +1996,9 @@ button{
 </div>
 
 
-<!-- =====================================
-     ИГРОВАЯ ЗОНА
-====================================== -->
+<!-- ==================================================
+     GAME ZONE
+================================================== -->
 
 <div
   class="game-screen"
@@ -2407,8 +2016,11 @@ button{
       </button>
 
       <div class="game-brand">
+
         <span class="game-brand-dot"></span>
+
         Language Practice
+
       </div>
 
       <div style="width:46px"></div>
@@ -2439,7 +2051,6 @@ button{
       <div class="game-section-label">
         Выбери игру
       </div>
-
 
       <div class="game-list">
 
@@ -2586,9 +2197,9 @@ button{
 </div>
 
 
-<!-- =====================================
+<!-- ==================================================
      МЕНЮ ЯЗЫКОВ
-====================================== -->
+================================================== -->
 
 <div
   class="menu-overlay"
@@ -2604,8 +2215,7 @@ button{
 
       <button
         class="close-menu"
-        id="closeMenu"
-        aria-label="Закрыть">
+        id="closeMenu">
         ×
       </button>
 
@@ -2675,13 +2285,12 @@ button{
 
 <script>
 
-/* =========================================
-   ОСНОВНЫЕ ЭЛЕМЕНТЫ
-========================================= */
+/* ==================================================
+   ЭЛЕМЕНТЫ
+================================================== */
 
-const $ =
-  id => document.getElementById(id);
-
+const $ = id =>
+  document.getElementById(id);
 
 const homeScreen =
   $("homeScreen");
@@ -2762,9 +2371,9 @@ const pairHeading =
   $("pairHeading");
 
 
-/* =========================================
+/* ==================================================
    ПЕРЕМЕННЫЕ
-========================================= */
+================================================== */
 
 let allWords = [];
 
@@ -2801,36 +2410,36 @@ let lockedUntil = 0;
 let sessionSaved = false;
 
 
-/* =========================================
-   НАСТРОЙКИ ЯЗЫКОВ
-========================================= */
+/* ==================================================
+   ЯЗЫКИ
+================================================== */
 
 const languageSettings = {
 
-  "en-ru": {
-    name: "Английский — Русский",
-    leftKey: "english",
-    rightKey: "russian"
+  "en-ru":{
+    name:"Английский — Русский",
+    leftKey:"english",
+    rightKey:"russian"
   },
 
-  "ko-ru": {
-    name: "Корейский — Русский",
-    leftKey: "korean",
-    rightKey: "russian"
+  "ko-ru":{
+    name:"Корейский — Русский",
+    leftKey:"korean",
+    rightKey:"russian"
   },
 
-  "ko-en": {
-    name: "Корейский — Английский",
-    leftKey: "korean",
-    rightKey: "english"
+  "ko-en":{
+    name:"Корейский — Английский",
+    leftKey:"korean",
+    rightKey:"english"
   }
 
 };
 
 
-/* =========================================
-   LOCAL STORAGE — СТАТИСТИКА
-========================================= */
+/* ==================================================
+   СТАТИСТИКА
+================================================== */
 
 const STATS_KEY =
   "languagePracticeStats";
@@ -2866,17 +2475,19 @@ function getStats(){
     const data =
       JSON.parse(saved);
 
-    if(!data || typeof data !== "object"){
-
-      return getDefaultStats();
-
-    }
-
     return {
+
       date:data.date || "",
-      pairs:Number(data.pairs) || 0,
-      errors:Number(data.errors) || 0,
-      seconds:Number(data.seconds) || 0
+
+      pairs:
+        Number(data.pairs) || 0,
+
+      errors:
+        Number(data.errors) || 0,
+
+      seconds:
+        Number(data.seconds) || 0
+
     };
 
   }catch(error){
@@ -2940,7 +2551,6 @@ function updateHomeStats(){
   const today =
     getTodayKey();
 
-
   if(stats.date !== today){
 
     stats =
@@ -2953,7 +2563,6 @@ function updateHomeStats(){
 
   }
 
-
   $("todayPairs").textContent =
     stats.pairs;
 
@@ -2964,9 +2573,6 @@ function updateHomeStats(){
     formatTime(
       stats.seconds
     );
-
-  $("statsSubtitle").textContent =
-    "Сегодня";
 
 }
 
@@ -2985,13 +2591,11 @@ function saveSessionStats(
 
   sessionSaved = true;
 
-
   let stats =
     getStats();
 
   const today =
     getTodayKey();
-
 
   if(stats.date !== today){
 
@@ -3003,7 +2607,6 @@ function saveSessionStats(
 
   }
 
-
   stats.pairs +=
     pairs;
 
@@ -3013,7 +2616,6 @@ function saveSessionStats(
   stats.seconds +=
     seconds;
 
-
   saveStats(stats);
 
   updateHomeStats();
@@ -3021,9 +2623,9 @@ function saveSessionStats(
 }
 
 
-/* =========================================
-   ЗАГРУЗКА СЛОВ
-========================================= */
+/* ==================================================
+   СЛОВА
+================================================== */
 
 function normalizeWords(data){
 
@@ -3036,7 +2638,6 @@ function normalizeWords(data){
           ? data.words
           : []
       );
-
 
   return words.filter(
     word =>
@@ -3061,7 +2662,6 @@ async function loadWords(){
         }
       );
 
-
     if(!response.ok){
 
       throw new Error(
@@ -3070,17 +2670,15 @@ async function loadWords(){
 
     }
 
-
     allWords =
       normalizeWords(
         await response.json()
       );
 
-
     if(!allWords.length){
 
       throw new Error(
-        "В words.json нет слов с english, korean и russian"
+        "В words.json нет слов"
       );
 
     }
@@ -3100,15 +2698,14 @@ async function loadWords(){
 }
 
 
-/* =========================================
+/* ==================================================
    ПЕРЕМЕШИВАНИЕ
-========================================= */
+================================================== */
 
 function shuffle(array){
 
   const result =
     [...array];
-
 
   for(
     let i=result.length-1;
@@ -3121,7 +2718,6 @@ function shuffle(array){
         Math.random()*(i+1)
       );
 
-
     [
       result[i],
       result[j]
@@ -3133,15 +2729,14 @@ function shuffle(array){
 
   }
 
-
   return result;
 
 }
 
 
-/* =========================================
-   ТЕКСТ СЛОВА
-========================================= */
+/* ==================================================
+   ЯЗЫКОВОЙ UI
+================================================== */
 
 function getWordText(
   word,
@@ -3149,8 +2744,9 @@ function getWordText(
 ){
 
   const settings =
-    languageSettings[language];
-
+    languageSettings[
+      language
+    ];
 
   return word[
     side === "left"
@@ -3161,17 +2757,12 @@ function getWordText(
 }
 
 
-/* =========================================
-   ЯЗЫКОВОЙ UI
-========================================= */
-
 function updateLanguageUI(){
 
   pairHeading.textContent =
     languageSettings[
       language
     ].name;
-
 
   document
     .querySelectorAll(
@@ -3191,9 +2782,9 @@ function updateLanguageUI(){
 }
 
 
-/* =========================================
+/* ==================================================
    ВРЕМЯ
-========================================= */
+================================================== */
 
 function formatTime(seconds){
 
@@ -3207,7 +2798,6 @@ function formatTime(seconds){
     .toString()
     .padStart(2,"0");
 
-
   const secs =
     (
       Math.max(
@@ -3218,15 +2808,10 @@ function formatTime(seconds){
     .toString()
     .padStart(2,"0");
 
-
   return `${minutes}:${secs}`;
 
 }
 
-
-/* =========================================
-   ТАЙМЕР
-========================================= */
 
 function updateTimerSelect(){
 
@@ -3234,7 +2819,6 @@ function updateTimerSelect(){
     Number(
       timerSelect.value
     );
-
 
   timerValue.textContent =
     formatTime(
@@ -3254,27 +2838,22 @@ function resetClocks(){
     timerId
   );
 
-
   stopwatchId =
     null;
 
   timerId =
     null;
 
-
   stopwatchSeconds =
     0;
 
-
   stopwatch.innerHTML =
     'Время: <strong>00:00</strong>';
-
 
   timerSeconds =
     Number(
       timerSelect.value
     );
-
 
   timerValue.textContent =
     formatTime(
@@ -3290,7 +2869,6 @@ function startStopwatch(){
     stopwatchId
   );
 
-
   stopwatchId =
     setInterval(
       () => {
@@ -3301,9 +2879,7 @@ function startStopwatch(){
 
         }
 
-
         stopwatchSeconds++;
-
 
         stopwatch.innerHTML =
           `Время: <strong>${
@@ -3325,18 +2901,15 @@ function startTimer(){
     timerId
   );
 
-
   timerSeconds =
     Number(
       timerSelect.value
     );
 
-
   timerValue.textContent =
     formatTime(
       timerSeconds
     );
-
 
   timerId =
     setInterval(
@@ -3348,15 +2921,12 @@ function startTimer(){
 
         }
 
-
         timerSeconds--;
-
 
         timerValue.textContent =
           formatTime(
             timerSeconds
           );
-
 
         if(
           timerSeconds <= 0
@@ -3385,9 +2955,9 @@ function startTimer(){
 }
 
 
-/* =========================================
-   ОТКРЫТИЕ ПРАКТИКИ
-========================================= */
+/* ==================================================
+   ПРАКТИКА
+================================================== */
 
 function openPractice(
   selectedMode
@@ -3399,16 +2969,13 @@ function openPractice(
 
   }
 
-
   mode =
     selectedMode;
-
 
   remainingWords =
     shuffle(
       allWords
     );
-
 
   roundWords = [];
 
@@ -3424,49 +2991,37 @@ function openPractice(
 
   sessionSaved = false;
 
-
   errorsInfo.textContent =
     "Ошибки: 0";
-
 
   homeScreen.classList.add(
     "hidden"
   );
 
-
   practiceScreen.classList.add(
     "active"
   );
-
 
   practiceHeading.textContent =
     mode === "normal"
       ? "Обычная практика"
       : "Практика с таймером";
 
-
-  updateLanguageUI();
-
-
   timerBox.style.display =
     mode === "timer"
       ? "block"
       : "none";
-
 
   stopwatch.style.display =
     mode === "normal"
       ? "block"
       : "none";
 
-
   finishBox.classList.remove(
     "active"
   );
 
-
   resetClocks();
-
 
   if(
     mode === "normal"
@@ -3495,10 +3050,6 @@ function openPractice(
 }
 
 
-/* =========================================
-   НОВЫЙ РАУНД
-========================================= */
-
 function startRound(){
 
   if(
@@ -3513,9 +3064,7 @@ function startRound(){
 
   }
 
-
   roundNumber++;
-
 
   roundWords =
     remainingWords.splice(
@@ -3526,19 +3075,13 @@ function startRound(){
       )
     );
 
-
   knownCount =
     0;
-
 
   renderRound();
 
 }
 
-
-/* =========================================
-   ОТРИСОВКА РАУНДА
-========================================= */
 
 function renderRound(){
 
@@ -3548,22 +3091,18 @@ function renderRound(){
   lockedUntil =
     0;
 
-
   leftColumn.innerHTML =
     "";
 
   rightColumn.innerHTML =
     "";
 
-
   finishBox.classList.remove(
     "active"
   );
 
-
   roundInfo.textContent =
     `Раунд ${roundNumber}`;
-
 
   shuffle(
     roundWords
@@ -3578,7 +3117,6 @@ function renderRound(){
       )
   );
 
-
   shuffle(
     roundWords
   )
@@ -3592,68 +3130,12 @@ function renderRound(){
       )
   );
 
-
   updateProgress();
 
 }
 
 
-/* =========================================
-   СОЗДАНИЕ КАРТОЧКИ СЛОВА
-========================================= */
-
-function createTile(
-  word,
-  side
-){
-
-  const tile =
-    document.createElement(
-      "button"
-    );
-
-
-  tile.className =
-    "word-tile";
-
-
-  tile.dataset.side =
-    side;
-
-
-  tile.innerHTML =
-    `<span class="tile-main">${
-      escapeHtml(
-        getWordText(
-          word,
-          side
-        )
-      )
-    }</span>`;
-
-
-  tile.addEventListener(
-    "click",
-    () =>
-      selectTile(
-        tile,
-        word
-      )
-  );
-
-
-  return tile;
-
-}
-
-
-/* =========================================
-   БЕЗОПАСНЫЙ HTML
-========================================= */
-
-function escapeHtml(
-  value
-){
+function escapeHtml(value){
 
   return String(
     value
@@ -3672,9 +3154,45 @@ function escapeHtml(
 }
 
 
-/* =========================================
-   ВЫБОР СЛОВА
-========================================= */
+function createTile(
+  word,
+  side
+){
+
+  const tile =
+    document.createElement(
+      "button"
+    );
+
+  tile.className =
+    "word-tile";
+
+  tile.dataset.side =
+    side;
+
+  tile.innerHTML =
+    `<span class="tile-main">${
+      escapeHtml(
+        getWordText(
+          word,
+          side
+        )
+      )
+    }</span>`;
+
+  tile.addEventListener(
+    "click",
+    () =>
+      selectTile(
+        tile,
+        word
+      )
+  );
+
+  return tile;
+
+}
+
 
 function selectTile(
   tile,
@@ -3693,10 +3211,8 @@ function selectTile(
 
   }
 
-
   const side =
     tile.dataset.side;
-
 
   if(
     selectedTile &&
@@ -3714,7 +3230,6 @@ function selectTile(
 
   }
 
-
   if(
     selectedTile &&
     selectedTile.tile.dataset.side === side
@@ -3724,22 +3239,18 @@ function selectTile(
       "selected"
     );
 
-
     tile.classList.add(
       "selected"
     );
-
 
     selectedTile = {
       tile,
       word
     };
 
-
     return;
 
   }
-
 
   if(!selectedTile){
 
@@ -3747,26 +3258,21 @@ function selectTile(
       "selected"
     );
 
-
     selectedTile = {
       tile,
       word
     };
 
-
     return;
 
   }
 
-
   const first =
     selectedTile;
-
 
   tile.classList.add(
     "selected"
   );
-
 
   if(
     first.word === word
@@ -3789,121 +3295,6 @@ function selectTile(
 }
 
 
-/* =========================================
-   ЗВУК ПРАВИЛЬНОЙ ПАРЫ
-========================================= */
-
-function playSuccessSound(){
-
-  try{
-
-    const AudioContext =
-      window.AudioContext ||
-      window.webkitAudioContext;
-
-
-    if(!AudioContext){
-
-      return;
-
-    }
-
-
-    const ctx =
-      new AudioContext();
-
-
-    const now =
-      ctx.currentTime;
-
-
-    const oscillator =
-      ctx.createOscillator();
-
-
-    const gain =
-      ctx.createGain();
-
-
-    oscillator.type =
-      "sine";
-
-
-    oscillator.frequency.setValueAtTime(
-      660,
-      now
-    );
-
-
-    oscillator.frequency.exponentialRampToValueAtTime(
-      990,
-      now + 0.12
-    );
-
-
-    gain.gain.setValueAtTime(
-      0.0001,
-      now
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.055,
-      now + 0.015
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.0001,
-      now + 0.18
-    );
-
-
-    oscillator.connect(
-      gain
-    );
-
-
-    gain.connect(
-      ctx.destination
-    );
-
-
-    oscillator.start(
-      now
-    );
-
-
-    oscillator.stop(
-      now + 0.19
-    );
-
-
-    setTimeout(
-      () =>
-        ctx.close().catch(
-          () => {}
-        ),
-      300
-    );
-
-
-  }catch(error){
-
-    console.debug(
-      "Звук недоступен",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   ПРАВИЛЬНАЯ ПАРА
-========================================= */
-
 function handleCorrect(
   firstTile,
   secondTile
@@ -3917,7 +3308,6 @@ function handleCorrect(
     "selected"
   );
 
-
   firstTile.classList.add(
     "correct"
   );
@@ -3926,7 +3316,6 @@ function handleCorrect(
     "correct"
   );
 
-
   knownCount++;
 
   totalKnownCount++;
@@ -3934,13 +3323,8 @@ function handleCorrect(
   selectedTile =
     null;
 
-
   lockedUntil =
     Date.now() + 430;
-
-
-  playSuccessSound();
-
 
   setTimeout(
     () => {
@@ -3953,9 +3337,7 @@ function handleCorrect(
         "hidden"
       );
 
-
       updateProgress();
-
 
       if(
         knownCount ===
@@ -3976,10 +3358,6 @@ function handleCorrect(
 }
 
 
-/* =========================================
-   НЕПРАВИЛЬНАЯ ПАРА
-========================================= */
-
 function handleWrong(
   firstTile,
   secondTile
@@ -3987,10 +3365,8 @@ function handleWrong(
 
   errors++;
 
-
   errorsInfo.textContent =
     `Ошибки: ${errors}`;
-
 
   firstTile.classList.remove(
     "selected"
@@ -4000,7 +3376,6 @@ function handleWrong(
     "selected"
   );
 
-
   firstTile.classList.add(
     "wrong"
   );
@@ -4009,14 +3384,11 @@ function handleWrong(
     "wrong"
   );
 
-
   selectedTile =
     null;
 
-
   lockedUntil =
     Date.now() + 330;
-
 
   setTimeout(
     () => {
@@ -4029,7 +3401,6 @@ function handleWrong(
         "wrong"
       );
 
-
       lockedUntil =
         0;
 
@@ -4040,26 +3411,23 @@ function handleWrong(
 }
 
 
-/* =========================================
+/* ==================================================
    ПРОГРЕСС
-========================================= */
+================================================== */
 
 function updateProgress(){
 
   const total =
     allWords.length;
 
-
   const completedBeforeRound =
     total -
     remainingWords.length -
     roundWords.length;
 
-
   const done =
     completedBeforeRound +
     knownCount;
-
 
   progressText.textContent =
     `Слово ${
@@ -4068,7 +3436,6 @@ function updateProgress(){
         total
       )
     } из ${total}`;
-
 
   progressFill.style.width =
     total
@@ -4080,16 +3447,11 @@ function updateProgress(){
         }%`
       : "0%";
 
-
   scoreText.textContent =
     `Знаю: ${totalKnownCount}`;
 
 }
 
-
-/* =========================================
-   ЗАВЕРШЕНИЕ РАУНДА
-========================================= */
 
 function completeRound(){
 
@@ -4098,7 +3460,6 @@ function completeRound(){
     return;
 
   }
-
 
   if(
     remainingWords.length > 0
@@ -4117,9 +3478,9 @@ function completeRound(){
 }
 
 
-/* =========================================
-   ТЕКСТ РЕЗУЛЬТАТА
-========================================= */
+/* ==================================================
+   РЕЗУЛЬТАТ
+================================================== */
 
 function getResultMessage(
   percent,
@@ -4144,13 +3505,11 @@ function getResultMessage(
 
   }
 
-
   if(percent >= 95){
 
     return "Идеально! Ты просто умница! 💖";
 
   }
-
 
   if(percent >= 85){
 
@@ -4158,22 +3517,16 @@ function getResultMessage(
 
   }
 
-
   if(percent >= 70){
 
     return "Очень хорошо! Ещё немного практики — и будет идеально. ✨";
 
   }
 
-
   return "Хорошее начало! Немного практики — и результат станет ещё лучше. 🌷";
 
 }
 
-
-/* =========================================
-   ЭКРАН РЕЗУЛЬТАТОВ
-========================================= */
 
 function finishGame(
   timeUp
@@ -4182,10 +3535,8 @@ function finishGame(
   const wasRunning =
     running;
 
-
   running =
     false;
-
 
   clearInterval(
     stopwatchId
@@ -4195,13 +3546,11 @@ function finishGame(
     timerId
   );
 
-
   stopwatchId =
     null;
 
   timerId =
     null;
-
 
   const elapsed =
     mode === "normal"
@@ -4211,49 +3560,43 @@ function finishGame(
         timerSeconds
       );
 
-
   const attempts =
     totalKnownCount +
     errors;
 
-
   const percent =
     attempts > 0
       ? Math.round(
-          (totalKnownCount / attempts) * 100
+          (
+            totalKnownCount /
+            attempts
+          ) * 100
         )
       : 0;
-
 
   resultPairs.textContent =
     totalKnownCount;
 
-
   resultErrors.textContent =
     errors;
-
 
   resultTime.textContent =
     formatTime(
       elapsed
     );
 
-
   resultPercent.textContent =
     `${percent}%`;
-
 
   finishTitle.textContent =
     timeUp
       ? "Время вышло"
       : "Всё пройдено!";
 
-
   finishSubtitle.textContent =
     timeUp
       ? "Посмотрим, какой результат получился?"
       : "Ты отлично справилась с тренировкой!";
-
 
   resultMessage.textContent =
     getResultMessage(
@@ -4261,18 +3604,15 @@ function finishGame(
       timeUp
     );
 
-
   finishBox.classList.add(
     "active"
   );
-
 
   leftColumn.innerHTML =
     "";
 
   rightColumn.innerHTML =
     "";
-
 
   if(wasRunning){
 
@@ -4287,17 +3627,12 @@ function finishGame(
 }
 
 
-/* =========================================
-   ПЕРЕЗАПУСК
-========================================= */
-
 function restartPractice(){
 
   remainingWords =
     shuffle(
       allWords
     );
-
 
   roundWords = [];
 
@@ -4319,18 +3654,14 @@ function restartPractice(){
   sessionSaved =
     false;
 
-
   errorsInfo.textContent =
     "Ошибки: 0";
-
 
   finishBox.classList.remove(
     "active"
   );
 
-
   resetClocks();
-
 
   if(
     mode === "timer"
@@ -4339,20 +3670,16 @@ function restartPractice(){
     running =
       false;
 
-
     timerStart.disabled =
       false;
 
-
     timerStart.textContent =
       "Начать";
-
 
   }else{
 
     running =
       true;
-
 
     startStopwatch();
 
@@ -4363,15 +3690,10 @@ function restartPractice(){
 }
 
 
-/* =========================================
-   ДОМОЙ
-========================================= */
-
 function goHome(){
 
   running =
     false;
-
 
   clearInterval(
     stopwatchId
@@ -4381,13 +3703,11 @@ function goHome(){
     timerId
   );
 
-
   stopwatchId =
     null;
 
   timerId =
     null;
-
 
   selectedTile =
     null;
@@ -4395,21 +3715,17 @@ function goHome(){
   lockedUntil =
     0;
 
-
   practiceScreen.classList.remove(
     "active"
   );
-
 
   homeScreen.classList.remove(
     "hidden"
   );
 
-
   finishBox.classList.remove(
     "active"
   );
-
 
   leftColumn.innerHTML =
     "";
@@ -4417,15 +3733,33 @@ function goHome(){
   rightColumn.innerHTML =
     "";
 
-
   updateHomeStats();
 
 }
 
 
-/* =========================================
-   ИГРЫ
-========================================= */
+/* ==================================================
+   GAME ZONE
+================================================== */
+
+function setThemeColor(color){
+
+  const meta =
+    document.getElementById(
+      "themeColor"
+    );
+
+  if(meta){
+
+    meta.setAttribute(
+      "content",
+      color
+    );
+
+  }
+
+}
+
 
 function openGames(){
 
@@ -4445,6 +3779,14 @@ function openGames(){
     "active"
   );
 
+  document.body.classList.add(
+    "games-open"
+  );
+
+  setThemeColor(
+    "#0d0c14"
+  );
+
   window.scrollTo(
     0,
     0
@@ -4459,6 +3801,14 @@ function closeGames(){
     "active"
   );
 
+  document.body.classList.remove(
+    "games-open"
+  );
+
+  setThemeColor(
+    "#fff8fc"
+  );
+
   homeScreen.classList.remove(
     "hidden"
   );
@@ -4471,9 +3821,9 @@ function closeGames(){
 }
 
 
-/* =========================================
+/* ==================================================
    МЕНЮ
-========================================= */
+================================================== */
 
 $("menuButton")
   .addEventListener(
@@ -4514,9 +3864,9 @@ menuOverlay.addEventListener(
 );
 
 
-/* =========================================
-   ВЫБОР ЯЗЫКА
-========================================= */
+/* ==================================================
+   ЯЗЫК
+================================================== */
 
 document
   .querySelectorAll(
@@ -4532,14 +3882,11 @@ document
           language =
             button.dataset.language;
 
-
           updateLanguageUI();
-
 
           menuOverlay.classList.remove(
             "open"
           );
-
 
           if(
             practiceScreen.classList.contains(
@@ -4558,9 +3905,9 @@ document
   );
 
 
-/* =========================================
+/* ==================================================
    РЕЖИМЫ
-========================================= */
+================================================== */
 
 $("normalMode")
   .addEventListener(
@@ -4581,10 +3928,6 @@ $("timerMode")
       )
   );
 
-
-/* =========================================
-   КНОПКА ИГР
-========================================= */
 
 $("gamesMode")
   .addEventListener(
@@ -4614,9 +3957,9 @@ $("restartButton")
   );
 
 
-/* =========================================
+/* ==================================================
    ТАЙМЕР
-========================================= */
+================================================== */
 
 timerSelect.addEventListener(
   "change",
@@ -4637,7 +3980,6 @@ timerStart.addEventListener(
 
     }
 
-
     if(
       !roundWords.length
     ){
@@ -4646,7 +3988,6 @@ timerStart.addEventListener(
         shuffle(
           allWords
         );
-
 
       knownCount =
         0;
@@ -4663,27 +4004,21 @@ timerStart.addEventListener(
       sessionSaved =
         false;
 
-
       errorsInfo.textContent =
         "Ошибки: 0";
-
 
       startRound();
 
     }
 
-
     running =
       true;
-
 
     timerStart.disabled =
       true;
 
-
     timerStart.textContent =
       "Идёт практика";
-
 
     startTimer();
 
@@ -4691,9 +4026,9 @@ timerStart.addEventListener(
 );
 
 
-/* =========================================
+/* ==================================================
    СТАРТ
-========================================= */
+================================================== */
 
 updateLanguageUI();
 
