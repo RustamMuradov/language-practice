@@ -1,2146 +1,3060 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-<!-- Полноэкранная/тёмная атмосфера для iPhone Safari и режима «На экран Домой» -->
-<meta name="theme-color" content="#0d0c14" id="themeColor">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="mobile-web-app-capable" content="yes">
-
-<title>Language Practice</title>
-
-<!-- Шрифты -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-  box-sizing:border-box;
-}
-
-html,
-body{
-  margin:0;
-  min-height:100%;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  -webkit-text-size-adjust:100%;
-}
-
-html{
-  background:#0d0c14;
-  overscroll-behavior:none;
-}
-
-body{
-  overscroll-behavior:none;
-}
-
-body{
-  background:
-    radial-gradient(circle at 85% 8%,rgba(255,190,220,.28),transparent 28%),
-    radial-gradient(circle at 8% 80%,rgba(205,195,255,.24),transparent 30%),
-    linear-gradient(145deg,#fffaff 0%,#fff6fa 48%,#faf7ff 100%);
-  color:#403744;
-}
-
-button,
-select{
-  font:inherit;
-  -webkit-tap-highlight-color:transparent;
-}
-
-button{
-  appearance:none;
-}
-
-.app{
-  min-height:100vh;
-  padding:18px 16px 45px;
-  position:relative;
-  overflow:hidden;
-}
-
-.content{
-  position:relative;
-  z-index:2;
-  max-width:700px;
-  margin:auto;
-}
-
-/* =========================================
-   ДЕКОРАТИВНЫЙ ФОН
-========================================= */
-
-.decoration{
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  user-select:none;
-}
-
-.decoration.one{
-  width:330px;
-  height:330px;
-  right:-150px;
-  top:-135px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#ffd8e8 0%,rgba(255,216,232,.2) 55%,transparent 70%);
-  opacity:.75;
-}
-
-.decoration.two{
-  width:330px;
-  height:330px;
-  left:-175px;
-  bottom:-155px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#e2dcff 0%,rgba(226,220,255,.2) 55%,transparent 70%);
-  opacity:.7;
-}
-
-.flag{
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  opacity:.075;
-  user-select:none;
-  filter:blur(.15px);
-}
-
-.flag.uk{
-  font-size:170px;
-  right:-25px;
-  top:125px;
-  transform:rotate(8deg);
-}
-
-.flag.kr{
-  font-size:160px;
-  left:-28px;
-  bottom:90px;
-  transform:rotate(-8deg);
-}
-
-.background-flower{
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  opacity:.16;
-  user-select:none;
-}
-
-.flower-a{
-  font-size:70px;
-  right:8px;
-  top:300px;
-  transform:rotate(12deg);
-}
-
-.flower-b{
-  font-size:50px;
-  left:12px;
-  top:470px;
-  transform:rotate(-15deg);
-}
-
-.petal{
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  opacity:.35;
-  font-size:22px;
-  user-select:none;
-}
-
-.petal-a{
-  top:110px;
-  left:18%;
-  transform:rotate(35deg);
-}
-
-.petal-b{
-  top:370px;
-  right:14%;
-  transform:rotate(-25deg);
-}
-
-.petal-c{
-  bottom:210px;
-  left:18%;
-  transform:rotate(50deg);
-}
-
-.sparkle{
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  color:#e9a8ca;
-  opacity:.45;
-  font-size:24px;
-}
-
-.sparkle-a{
-  top:180px;
-  left:8%;
-}
-
-.sparkle-b{
-  top:520px;
-  right:8%;
-}
-
-.sparkle-c{
-  bottom:120px;
-  right:20%;
-}
-
-/* =========================================
-   ГЛАВНЫЙ ЭКРАН
-========================================= */
-
-.home-screen{
-  font-family:"Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-.home-screen.hidden{
-  display:none;
-}
-
-.topbar{
-  display:flex;
-  justify-content:flex-end;
-  margin-bottom:4px;
-}
-
-.menu-button{
-  width:52px;
-  height:52px;
-  border:1px solid rgba(255,255,255,.9);
-  border-radius:19px;
-  background:rgba(255,255,255,.78);
-  color:#59505c;
-  box-shadow:
-    0 12px 35px rgba(90,55,80,.12),
-    inset 0 1px 0 rgba(255,255,255,.9);
-  backdrop-filter:blur(15px);
-  cursor:pointer;
-  font-size:25px;
-  transition:transform .2s,box-shadow .2s;
-}
-
-.menu-button:active{
-  transform:scale(.92);
-}
-
-.hero{
-  position:relative;
-  padding:10px 5px 27px;
-  text-align:left;
-}
-
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:8px 14px;
-  border-radius:30px;
-  background:rgba(255,225,239,.68);
-  color:#715568;
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:15px;
-  box-shadow:0 8px 22px rgba(214,137,174,.09);
-}
-
-.hero h1{
-  margin:0;
-  font-family:"Comfortaa",sans-serif;
-  font-size:clamp(42px,11vw,67px);
-  line-height:.98;
-  letter-spacing:-2.7px;
-  color:#20202e;
-  font-weight:700;
-}
-
-.hero h1 span{
-  display:block;
-  color:#eb78ad;
-  margin-top:4px;
-}
-
-.hero p{
-  margin:18px 0 0;
-  max-width:500px;
-  line-height:1.65;
-  font-size:16px;
-  color:#7c7281;
-  font-weight:500;
-}
-
-.hero p .en{
-  color:#647be5;
-}
-
-.hero p .ko{
-  color:#e879ae;
-}
-
-/* =========================================
-   СТАТИСТИКА
-========================================= */
-
-.stats-card{
-  background:rgba(255,255,255,.72);
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:27px;
-  padding:18px;
-  box-shadow:
-    0 16px 45px rgba(90,55,80,.10),
-    inset 0 1px 0 rgba(255,255,255,.9);
-  backdrop-filter:blur(18px);
-  margin-bottom:18px;
-}
-
-.stats-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-}
-
-.stats-title strong{
-  font-family:"Comfortaa",sans-serif;
-  color:#3f3540;
-  font-size:16px;
-}
-
-.stats-title span{
-  font-size:12px;
-  color:#9b909b;
-  font-weight:700;
-}
-
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.stat{
-  border-radius:19px;
-  background:rgba(255,247,251,.85);
-  padding:13px 8px;
-  text-align:center;
-}
-
-.stat-number{
-  font-family:"Orbitron",sans-serif;
-  font-size:20px;
-  color:#5c5260;
-  font-weight:700;
-}
-
-.stat-label{
-  margin-top:5px;
-  font-size:11px;
-  color:#968b96;
-  font-weight:700;
-}
-
-/* =========================================
-   ВЫБОР ЯЗЫКА
-========================================= */
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:22px 4px 10px;
-}
-
-.section-title h2{
-  margin:0;
-  font-family:"Comfortaa",sans-serif;
-  font-size:20px;
-  color:#403642;
-}
-
-.section-title span{
-  font-size:12px;
-  color:#9b909b;
-  font-weight:700;
-}
-
-.language-list{
-  display:grid;
-  gap:12px;
-}
-
-.language-card{
-  width:100%;
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:24px;
-  background:rgba(255,255,255,.75);
-  padding:17px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  text-align:left;
-  cursor:pointer;
-  box-shadow:
-    0 12px 32px rgba(90,55,80,.08),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  backdrop-filter:blur(15px);
-  transition:
-    transform .18s,
-    box-shadow .18s,
-    background .18s;
-}
-
-.language-card:active{
-  transform:scale(.975);
-}
-
-.language-icon{
-  width:56px;
-  height:56px;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:19px;
-  font-size:29px;
-  background:linear-gradient(145deg,#fff0f6,#f1ecff);
-  box-shadow:0 7px 18px rgba(130,90,120,.10);
-}
-
-.language-info{
-  flex:1;
-  min-width:0;
-}
-
-.language-name{
-  font-family:"Comfortaa",sans-serif;
-  color:#403742;
-  font-size:17px;
-  font-weight:700;
-}
-
-.language-sub{
-  margin-top:4px;
-  color:#9a8f9a;
-  font-size:12px;
-  font-weight:600;
-}
-
-.language-arrow{
-  color:#b8aeb8;
-  font-size:20px;
-}
-
-/* =========================================
-   НИЖНИЕ КАРТОЧКИ
-========================================= */
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:18px;
-}
-
-.quick-card{
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:24px;
-  background:rgba(255,255,255,.72);
-  padding:18px;
-  min-height:120px;
-  box-shadow:
-    0 12px 32px rgba(90,55,80,.08),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  backdrop-filter:blur(15px);
-}
-
-.quick-icon{
-  font-size:27px;
-  margin-bottom:11px;
-}
-
-.quick-card strong{
-  display:block;
-  font-family:"Comfortaa",sans-serif;
-  font-size:15px;
-  color:#453a46;
-}
-
-.quick-card span{
-  display:block;
-  margin-top:5px;
-  color:#9a8f9a;
-  font-size:11px;
-  line-height:1.45;
-  font-weight:600;
-}
-
-.game-zone-button{
-  width:100%;
-  margin-top:12px;
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:24px;
-  background:linear-gradient(135deg,rgba(255,226,239,.88),rgba(233,228,255,.88));
-  padding:18px;
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  cursor:pointer;
-  color:#453a46;
-  box-shadow:
-    0 12px 32px rgba(90,55,80,.08),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  backdrop-filter:blur(15px);
-  transition:transform .18s;
-}
-
-.game-zone-button:active{
-  transform:scale(.975);
-}
-
-.game-zone-icon{
-  width:47px;
-  height:47px;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.65);
-  font-size:24px;
-}
-
-.game-zone-text{
-  flex:1;
-  text-align:left;
-}
-
-.game-zone-text strong{
-  display:block;
-  font-family:"Comfortaa",sans-serif;
-  font-size:15px;
-}
-
-.game-zone-text span{
-  display:block;
-  margin-top:4px;
-  font-size:11px;
-  color:#8d828e;
-  font-weight:600;
-}
-
-.game-zone-arrow{
-  font-size:20px;
-  color:#a79ca7;
-}
-
-/* =========================================
-   ПАНЕЛЬ МЕНЮ
-========================================= */
-
-.menu-overlay{
-  position:fixed;
-  inset:0;
-  z-index:50;
-  background:rgba(50,40,52,.22);
-  backdrop-filter:blur(8px);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .22s;
-}
-
-.menu-overlay.open{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.side-menu{
-  position:absolute;
-  right:12px;
-  top:12px;
-  width:min(330px,calc(100% - 24px));
-  max-height:calc(100% - 24px);
-  overflow:auto;
-  border-radius:29px;
-  background:rgba(255,255,255,.94);
-  border:1px solid rgba(255,255,255,.98);
-  box-shadow:0 25px 70px rgba(60,40,60,.20);
-  padding:18px;
-  transform:translateY(-12px) scale(.98);
-  transition:transform .22s;
-}
-
-.menu-overlay.open .side-menu{
-  transform:translateY(0) scale(1);
-}
-
-.menu-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.menu-head strong{
-  font-family:"Comfortaa",sans-serif;
-  font-size:18px;
-  color:#403642;
-}
-
-.close-menu{
-  width:39px;
-  height:39px;
-  border:0;
-  border-radius:14px;
-  background:#f7eff5;
-  color:#736675;
-  cursor:pointer;
-  font-size:18px;
-}
-
-.menu-item{
-  width:100%;
-  border:0;
-  border-radius:18px;
-  background:#faf6fa;
-  margin-top:8px;
-  padding:14px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:#514653;
-  cursor:pointer;
-  text-align:left;
-}
-
-.menu-item-icon{
-  width:38px;
-  height:38px;
-  border-radius:13px;
-  background:#f1e9ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-}
-
-.menu-item-text{
-  flex:1;
-}
-
-.menu-item-text strong{
-  display:block;
-  font-size:14px;
-}
-
-.menu-item-text span{
-  display:block;
-  margin-top:3px;
-  color:#9b909b;
-  font-size:10px;
-}
-.menu-item-text span{
-  display:block;
-  margin-top:3px;
-  color:#9b909b;
-  font-size:10px;
-}
-
-.menu-item-arrow{
-  color:#b5aab5;
-  font-size:18px;
-}
-
-/* =========================================
-   ЭКРАН ВЫБОРА ЯЗЫКА
-========================================= */
-
-.language-screen{
-  display:none;
-}
-
-.language-screen.active{
-  display:block;
-}
-
-.back-button{
-  border:0;
-  background:rgba(255,255,255,.78);
-  width:48px;
-  height:48px;
-  border-radius:17px;
-  color:#625865;
-  font-size:23px;
-  cursor:pointer;
-  box-shadow:
-    0 10px 28px rgba(90,55,80,.09),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  margin-bottom:20px;
-}
-
-.screen-header{
-  padding:4px 4px 20px;
-}
-
-.screen-header h1{
-  margin:0;
-  font-family:"Comfortaa",sans-serif;
-  font-size:34px;
-  line-height:1.1;
-  color:#302b35;
-  letter-spacing:-1.3px;
-}
-
-.screen-header p{
-  margin:10px 0 0;
-  color:#8c818d;
-  font-size:14px;
-  line-height:1.55;
-}
-
-.mode-grid{
-  display:grid;
-  gap:13px;
-}
-
-.mode-card{
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:25px;
-  background:rgba(255,255,255,.76);
-  padding:19px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  cursor:pointer;
-  text-align:left;
-  box-shadow:
-    0 12px 32px rgba(90,55,80,.08),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  backdrop-filter:blur(15px);
-  transition:transform .18s;
-}
-
-.mode-card:active{
-  transform:scale(.975);
-}
-
-.mode-icon{
-  width:55px;
-  height:55px;
-  flex:none;
-  border-radius:18px;
-  background:linear-gradient(145deg,#fff0f6,#eeeaff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-}
-
-.mode-info{
-  flex:1;
-}
-
-.mode-info strong{
-  display:block;
-  font-family:"Comfortaa",sans-serif;
-  color:#433844;
-  font-size:16px;
-}
-
-.mode-info span{
-  display:block;
-  margin-top:5px;
-  color:#968b96;
-  font-size:11px;
-  line-height:1.4;
-}
-
-.mode-arrow{
-  color:#b5aab5;
-  font-size:20px;
-}
-
-/* =========================================
-   НАСТРОЙКИ
-========================================= */
-
-.settings-screen{
-  display:none;
-}
-
-.settings-screen.active{
-  display:block;
-}
-
-.settings-card{
-  background:rgba(255,255,255,.76);
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:25px;
-  padding:17px;
-  box-shadow:
-    0 12px 32px rgba(90,55,80,.08),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  backdrop-filter:blur(15px);
-}
-
-.setting-row{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:13px 2px;
-}
-
-.setting-row + .setting-row{
-  border-top:1px solid rgba(100,80,100,.08);
-}
-
-.setting-icon{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  background:#f4ecf7;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:19px;
-  flex:none;
-}
-
-.setting-info{
-  flex:1;
-}
-
-.setting-info strong{
-  display:block;
-  font-size:14px;
-  color:#493e4a;
-}
-
-.setting-info span{
-  display:block;
-  margin-top:3px;
-  font-size:10px;
-  color:#9a8f9a;
-}
-
-.setting-control{
-  border:0;
-  border-radius:12px;
-  background:#f3edf5;
-  color:#625665;
-  padding:8px 10px;
-  font-size:12px;
-}
-
-/* =========================================
-   ОБЩИЕ КНОПКИ
-========================================= */
-
-.primary-button{
-  width:100%;
-  border:0;
-  border-radius:20px;
-  padding:16px 18px;
-  background:linear-gradient(135deg,#ef9fc2,#c4b9f1);
-  color:white;
-  font-family:"Comfortaa",sans-serif;
-  font-weight:700;
-  font-size:14px;
-  box-shadow:0 10px 25px rgba(190,130,175,.18);
-  cursor:pointer;
-  transition:transform .18s,opacity .18s;
-}
-
-.primary-button:active{
-  transform:scale(.97);
-}
-
-.secondary-button{
-  width:100%;
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:20px;
-  padding:15px 18px;
-  background:rgba(255,255,255,.78);
-  color:#645766;
-  font-family:"Comfortaa",sans-serif;
-  font-weight:700;
-  font-size:13px;
-  cursor:pointer;
-  box-shadow:0 8px 22px rgba(90,55,80,.07);
-}
-
-.button-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-/* =========================================
-   УВЕДОМЛЕНИЕ
-========================================= */
-
-.toast{
-  position:fixed;
-  z-index:100;
-  left:50%;
-  bottom:24px;
-  transform:translate(-50%,20px);
-  width:calc(100% - 32px);
-  max-width:500px;
-  padding:14px 17px;
-  border-radius:17px;
-  background:rgba(48,41,52,.94);
-  color:white;
-  font-size:13px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(30,20,30,.22);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .2s,transform .2s;
-  backdrop-filter:blur(15px);
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-/* =========================================
-   АДАПТАЦИЯ
-========================================= */
-
-@media (min-width:600px){
-
-  .app{
-    padding-top:30px;
-  }
-
-  .hero{
-    padding-top:20px;
-  }
-
-  .language-list{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .quick-grid{
-    grid-template-columns:1fr 1fr;
-  }
-}
-
-@media (max-width:380px){
-
-  .app{
-    padding-left:12px;
-    padding-right:12px;
-  }
-
-  .hero h1{
-    font-size:39px;
-  }
-
-  .language-card{
-    padding:14px;
-  }
-
-  .language-icon{
-    width:51px;
-    height:51px;
-  }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный сайт</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #20242a;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid #e4e8ef;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 72px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 20px;
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: #2563eb;
+            color: white;
+            font-size: 20px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            border: 0;
+            background: transparent;
+            color: #475569;
+            padding: 10px 14px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        nav button:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        nav button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .container {
+            width: min(1400px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        main {
+            flex: 1;
+            padding: 32px 0 60px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 28px;
+            align-items: stretch;
+            margin-bottom: 28px;
+        }
+
+        .hero-card {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 22px;
+            padding: 34px;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .hero-card h1 {
+            margin: 0 0 14px;
+            font-size: clamp(30px, 4vw, 52px);
+            line-height: 1.05;
+            color: #0f172a;
+        }
+
+        .hero-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .hero-side {
+            background: #1e293b;
+            color: white;
+            border-radius: 22px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-side h2 {
+            margin: 0 0 12px;
+            font-size: 25px;
+        }
+
+        .hero-side p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .hero-side .hero-number {
+            font-size: 54px;
+            font-weight: 800;
+            line-height: 1;
+            margin-top: 28px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin: 34px 0 18px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #0f172a;
+        }
+
+        .card p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.55;
+        }
+
+        .card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: grid;
+            place-items: center;
+            margin-bottom: 15px;
+            font-size: 21px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 16px;
+            background: #2563eb;
+            color: white;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn.secondary:hover {
+            background: #cbd5e1;
+        }
+
+        .btn.danger {
+            background: #dc2626;
+        }
+
+        .btn.success {
+            background: #16a34a;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search {
+            flex: 1;
+            min-width: 240px;
+            border: 1px solid #d8dee8;
+            background: white;
+            border-radius: 10px;
+            padding: 12px 14px;
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .stat-label {
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .progress {
+            height: 9px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: #e2e8f0;
+            margin-top: 14px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            border-radius: inherit;
+            background: #2563eb;
+            transition: width 0.4s ease;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 14px 16px;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        th {
+            color: #475569;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: #f8fafc;
+        }
+
+        td {
+            color: #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 5px 9px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge.green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge.yellow {
+            background: #fef9c3;
+            color: #a16207;
+        }
+
+        .badge.red {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .lesson-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .lesson {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .lesson-main {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .lesson-number {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+            border-radius: 12px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+        }
+
+        .lesson h3 {
+            margin: 0 0 5px;
+            font-size: 17px;
+        }
+
+        .lesson p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .empty {
+            padding: 45px 20px;
+            text-align: center;
+            color: #64748b;
+            background: white;
+            border: 1px dashed #cbd5e1;
+            border-radius: 16px;
+        }
+
+        .form-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 20px;
+            padding: 26px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            border: 1px solid #d8dee8;
+            border-radius: 10px;
+            padding: 12px 14px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .note {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #eff6ff;
+            color: #1e40af;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .warning {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #fff7ed;
+            color: #9a3412;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .success-message {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #f0fdf4;
+            color: #166534;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 2000;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            width: min(700px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 26px;
+            box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close {
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 10px;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 20px;
+        }
+
+        .close:hover {
+            background: #e2e8f0;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .question-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .answers {
+            display: grid;
+            gap: 8px;
+        }
+
+        .answer {
+            width: 100%;
+            text-align: left;
+            padding: 11px 13px;
+            border: 1px solid #d8dee8;
+            background: white;
+            border-radius: 9px;
+            color: #334155;
+        }
+
+        .answer:hover {
+            border-color: #93c5fd;
+            background: #eff6ff;
+        }
+
+        .answer.selected {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .answer.correct {
+            border-color: #22c55e;
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .answer.incorrect {
+            border-color: #ef4444;
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .result-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: 16px;
+            background: #f8fafc;
+            margin-top: 18px;
+        }
+
+        .result-score {
+            font-size: 44px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .gap-10 {
+            gap: 10px;
+        }
+
+        .gap-16 {
+            gap: 16px;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        footer {
+            border-top: 1px solid #e4e8ef;
+            background: white;
+            padding: 24px 0;
+            color: #64748b;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            width: min(1400px, calc(100% - 48px));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .profile-card {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 24px;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto;
+            background: #dbeafe;
+            color: #2563eb;
+            display: grid;
+            place-items: center;
+            font-size: 60px;
+            font-weight: 800;
+        }
+
+        .profile-info h2 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .profile-info p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dbeafe;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -28px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #bfdbfe;
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 5px;
+        }
+
+        .timeline-item p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .calendar-day {
+            min-height: 85px;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        .calendar-day.muted {
+            opacity: 0.45;
+        }
+
+        .calendar-day.today {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        .calendar-number {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .calendar-event {
+            font-size: 11px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 4px 5px;
+            border-radius: 5px;
+            margin-top: 4px;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            padding: 8px;
+            font-weight: 700;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            border: 0;
+            background: transparent;
+            padding: 12px 15px;
+            color: #64748b;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .course-header {
+            background: #1e293b;
+            color: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .course-header h1 {
+            margin: 0 0 8px;
+        }
+
+        .course-header p {
+            margin: 0;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .accordion {
+            display: grid;
+            gap: 10px;
+        }
+
+        .accordion-item {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .accordion-head {
+            width: 100%;
+            border: 0;
+            background: white;
+            padding: 17px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            text-align: left;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .accordion-head:hover {
+            background: #f8fafc;
+        }
+
+        .accordion-body {
+            display: none;
+            padding: 0 18px 18px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .accordion-item.open .accordion-body {
+            display: block;
+        }
+
+        .code {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 12px;
+            padding: 18px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .flashcards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .flashcard {
+            min-height: 180px;
+            perspective: 1000px;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flash-front,
+        .flash-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: white;
+        }
+
+        .flash-back {
+            transform: rotateY(180deg);
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .chart {
+            width: 100%;
+            height: 260px;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+        }
+
+        .bar {
+            flex: 1;
+            min-width: 20px;
+            background: #60a5fa;
+            border-radius: 7px 7px 0 0;
+            position: relative;
+            transition: height 0.4s;
+        }
+
+        .bar span {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            white-space: nowrap;
+            color: #64748b;
+        }
+
+        .notification {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 3000;
+            min-width: 280px;
+            max-width: 400px;
+            padding: 14px 17px;
+            background: #0f172a;
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.25);
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.25s;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f1f5f9;
+        }
+
+        .login-card {
+            width: min(450px, 100%);
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        .login-card h1 {
+            margin: 0 0 8px;
+            text-align: center;
+        }
+
+        .login-card > p {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .login-logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: #2563eb;
+            color: white;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 18px;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .password-wrap {
+            position: relative;
+        }
+
+        .password-wrap input {
+            padding-right: 48px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: #64748b;
+            padding: 7px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 20px;
+        }
+
+        .page-btn {
+            min-width: 38px;
+            height: 38px;
+            border: 1px solid #d8dee8;
+            border-radius: 9px;
+            background: white;
+            color: #475569;
+        }
+
+        .page-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .task-card {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .task-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .task-head h3 {
+            margin: 0 0 6px;
+        }
+
+        .task-head p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .task-description {
+            color: #475569;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            border: 1px solid #d8dee8;
+            border-radius: 999px;
+            padding: 9px 14px;
+            background: white;
+            color: #475569;
+        }
+
+        .filter-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .message-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .message {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 14px;
+            padding: 15px;
+            display: flex;
+            gap: 13px;
+        }
+
+        .message-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            flex: 0 0 42px;
+            background: #dbeafe;
+            color: #2563eb;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+        }
+
+        .message-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .message-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .message-name {
+            font-weight: 700;
+        }
+
+        .message-time {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .message-text {
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+        }
+
+        .settings-menu {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 10px;
+            height: fit-content;
+        }
+
+        .settings-menu button {
+            width: 100%;
+            text-align: left;
+            border: 0;
+            background: transparent;
+            border-radius: 9px;
+            padding: 11px 12px;
+            color: #64748b;
+        }
+
+        .settings-menu button:hover,
+        .settings-menu button.active {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .settings-content {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .switch-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 15px 0;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .switch-row:last-child {
+            border-bottom: 0;
+        }
+
+        .switch-text strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .switch-text span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .switch {
+            width: 48px;
+            height: 27px;
+            border-radius: 999px;
+            background: #cbd5e1;
+            position: relative;
+            border: 0;
+            flex: 0 0 48px;
+        }
+
+        .switch::after {
+            content: "";
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            top: 3px;
+            left: 3px;
+            border-radius: 50%;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .switch.on {
+            background: #2563eb;
+        }
+
+        .switch.on::after {
+            transform: translateX(21px);
+        }
+
+        @media (max-width: 1050px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .flashcards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            nav {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 2px;
+            }
+
+            nav button {
+                white-space: nowrap;
+            }
+
+            .container {
+                width: min(100% - 28px, 1400px);
+            }
+
+            main {
+                padding-top: 20px;
+            }
+
+            .grid,
+            .stats,
+            .flashcards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card,
+            .hero-side {
+                padding: 24px;
+            }
+
+            .profile-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .lesson {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .lesson-main {
+                width: 100%;
+            }
+
+            .footer-inner {
+                width: min(100% - 28px, 1400px);
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .calendar {
+                gap: 4px;
+            }
+
+            .calendar-day {
+                min-height: 65px;
+                padding: 5px;
+            }
+
+            .calendar-event {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-card h1 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .form-card,
+            .settings-content {
+                padding: 18px;
+            }
+
+            .modal {
+                padding: 18px;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+
+            .stat {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
-
 <body>
+<div class="app" id="app">
+    <header>
+        <div class="header-inner">
+            <a href="#" class="logo" onclick="showPage('home'); return false;">
+                <span class="logo-icon">📚</span>
+                <span>Учебный портал</span>
+            </a>
 
-<!-- Декоративные элементы -->
-<div class="decoration one"></div>
-<div class="decoration two"></div>
-
-<div class="flag uk">🇬🇧</div>
-<div class="flag kr">🇰🇷</div>
-
-<div class="background-flower flower-a">🌸</div>
-<div class="background-flower flower-b">🌷</div>
-
-<div class="petal petal-a">🌸</div>
-<div class="petal petal-b">✿</div>
-<div class="petal petal-c">🌸</div>
-
-<div class="sparkle sparkle-a">✦</div>
-<div class="sparkle sparkle-b">✧</div>
-<div class="sparkle sparkle-c">✦</div>
-
-
-<!-- =========================================
-     ОСНОВНОЕ ПРИЛОЖЕНИЕ
-========================================= -->
-
-<div class="app">
-
-  <div class="content">
-
-    <!-- =====================================
-         ГЛАВНЫЙ ЭКРАН
-    ====================================== -->
-
-    <main class="home-screen" id="homeScreen">
-
-      <div class="topbar">
-        <button
-          class="menu-button"
-          id="menuButton"
-          aria-label="Открыть меню">
-          ☰
-        </button>
-      </div>
-
-
-      <section class="hero">
-
-        <div class="hero-badge">
-          ✨ Language Practice
+            <nav id="mainNav">
+                <button class="active" data-page="home" onclick="showPage('home')">Главная</button>
+                <button data-page="courses" onclick="showPage('courses')">Курсы</button>
+                <button data-page="lessons" onclick="showPage('lessons')">Уроки</button>
+                <button data-page="tasks" onclick="showPage('tasks')">Задания</button>
+                <button data-page="progress" onclick="showPage('progress')">Прогресс</button>
+                <button data-page="profile" onclick="showPage('profile')">Профиль</button>
+                <button data-page="settings" onclick="showPage('settings')">Настройки</button>
+            </nav>
         </div>
+    </header>
 
-        <h1>
-          Учись.
-          <span>Играй.</span>
-        </h1>
+    <main>
+        <div class="container">
 
-        <p>
-          Практикуй
-          <span class="en">English</span>
-          и
-          <span class="ko">한국어</span>
-          через короткие задания и игры.
-        </p>
+            <section id="home" class="page active">
+                <div class="hero">
+                    <div class="hero-card">
+                        <h1>Добро пожаловать!</h1>
+                        <p>
+                            Продолжай учиться, выполняй задания и отслеживай свой прогресс.
+                            Все необходимые материалы собраны в одном месте.
+                        </p>
 
-      </section>
+                        <div class="flex gap-10 mt-20">
+                            <button class="btn" onclick="showPage('courses')">Начать обучение</button>
+                            <button class="btn secondary" onclick="showPage('progress')">Мой прогресс</button>
+                        </div>
+                    </div>
 
+                    <div class="hero-side">
+                        <div>
+                            <h2>Текущий результат</h2>
+                            <p>Ты уже сделал большой шаг вперёд. Продолжай в том же духе!</p>
+                        </div>
+                        <div class="hero-number" id="homeProgress">0%</div>
+                    </div>
+                </div>
 
-      <!-- Статистика -->
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value" id="statCourses">0</div>
+                        <div class="stat-label">Курсов</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="statLessons">0</div>
+                        <div class="stat-label">Уроков</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="statTasks">0</div>
+                        <div class="stat-label">Заданий</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="statPoints">0</div>
+                        <div class="stat-label">Баллов</div>
+                    </div>
+                </div>
 
-      <section class="stats-card">
+                <div class="section-title">
+                    <div>
+                        <h2>Продолжить обучение</h2>
+                        <p>Вернись к последнему занятию</p>
+                    </div>
+                </div>
 
-        <div class="stats-title">
-          <strong>Твой прогресс</strong>
-          <span>сегодня</span>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">🧮</div>
+                        <h3>Математика</h3>
+                        <p>Уравнения, функции, графики и другие важные темы.</p>
+                        <div class="progress">
+                            <div class="progress-bar" data-progress="72"></div>
+                        </div>
+                        <div class="flex justify-between mt-10">
+                            <small>72% завершено</small>
+                            <button class="btn" onclick="openCourse('math')">Продолжить</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">⚛️</div>
+                        <h3>Физика</h3>
+                        <p>Механика, энергия, электричество и основные законы.</p>
+                        <div class="progress">
+                            <div class="progress-bar" data-progress="48"></div>
+                        </div>
+                        <div class="flex justify-between mt-10">
+                            <small>48% завершено</small>
+                            <button class="btn" onclick="openCourse('physics')">Продолжить</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🔬</div>
+                        <h3>Химия</h3>
+                        <p>Атомы, молекулы, реакции и свойства веществ.</p>
+                        <div class="progress">
+                            <div class="progress-bar" data-progress="35"></div>
+                        </div>
+                        <div class="flex justify-between mt-10">
+                            <small>35% завершено</small>
+                            <button class="btn" onclick="openCourse('chemistry')">Продолжить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <div>
+                        <h2>Последние задания</h2>
+                        <p>Задания, которые требуют твоего внимания</p>
+                    </div>
+                    <button class="btn secondary" onclick="showPage('tasks')">Все задания</button>
+                </div>
+
+                <div id="homeTasks" class="lesson-list"></div>
+            </section>
+
+            <section id="courses" class="page">
+                <div class="section-title">
+                    <div>
+                        <h2>Мои курсы</h2>
+                        <p>Выбери предмет, который хочешь изучать</p>
+                    </div>
+                </div>
+
+                <div class="toolbar">
+                    <input
+                        id="courseSearch"
+                        class="search"
+                        type="text"
+                        placeholder="Поиск по курсам..."
+                        oninput="filterCourses()"
+                    >
+                </div>
+
+                <div id="courseGrid" class="grid"></div>
+            </section>
+
+            <section id="lessons" class="page">
+                <div class="section-title">
+                    <div>
+                        <h2>Уроки</h2>
+                        <p>Все доступные учебные материалы</p>
+                    </div>
+                </div>
+
+                <div class="filter-row" id="lessonFilters">
+                    <button class="filter-btn active" onclick="filterLessons('all', this)">Все</button>
+                    <button class="filter-btn" onclick="filterLessons('math', this)">Математика</button>
+                    <button class="filter-btn" onclick="filterLessons('physics', this)">Физика</button>
+                    <button class="filter-btn" onclick="filterLessons('chemistry', this)">Химия</button>
+                </div>
+
+                <div id="lessonList" class="lesson-list"></div>
+            </section>
+
+            <section id="tasks" class="page">
+                <div class="section-title">
+                    <div>
+                        <h2>Задания</h2>
+                        <p>Проверь свои знания на практике</p>
+                    </div>
+                </div>
+
+                <div class="filter-row" id="taskFilters">
+                    <button class="filter-btn active" onclick="filterTasks('all', this)">Все</button>
+                    <button class="filter-btn" onclick="filterTasks('active', this)">Активные</button>
+                    <button class="filter-btn" onclick="filterTasks('completed', this)">Выполненные</button>
+                </div>
+
+                <div id="taskList"></div>
+            </section>
+
+            <section id="progress" class="page">
+                <div class="section-title">
+                    <div>
+                        <h2>Мой прогресс</h2>
+                        <p>Следи за своими результатами</p>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value" id="progressLessons">0</div>
+                        <div class="stat-label">Пройдено уроков</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="progressTasks">0</div>
+                        <div class="stat-label">Выполнено заданий</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="progressPoints">0</div>
+                        <div class="stat-label">Получено баллов</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="progressPercent">0%</div>
+                        <div class="stat-label">Общий прогресс</div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <div>
+                        <h2>Прогресс по предметам</h2>
+                        <p>Сравни свои результаты</p>
+                    </div>
+                </div>
+
+                <div id="subjectProgress" class="grid"></div>
+
+                <div class="section-title">
+                    <div>
+                        <h2>Активность</h2>
+                        <p>Количество выполненных заданий</p>
+                    </div>
+                </div>
+
+                <div id="activityChart" class="chart"></div>
+            </section>
+
+            <section id="profile" class="page">
+                <div class="section-title">
+                    <div>
+                        <h2>Профиль</h2>
+                        <p>Информация о твоём аккаунте</p>
+                    </div>
+                    <button class="btn" onclick="openEditProfile()">Редактировать</button>
+                </div>
+
+                <div class="profile-card">
+                    <div>
+                        <div class="avatar" id="profileAvatar">Р</div>
+                    </div>
+
+                    <div class="profile-info">
+                        <h2 id="profileName">Ученик</h2>
+                        <p id="profileEmail">student@example.com</p>
+
+                        <div class="stats mt-20">
+                            <div class="stat">
+                                <div class="stat-value" id="profilePoints">0</div>
+                                <div class="stat-label">Баллов</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="profileCompleted">0</div>
+                                <div class="stat-label">Заданий</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="profileStreak">0</div>
+                                <div class="stat-label">Дней подряд</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <div>
+                        <h2>История обучения</h2>
+                        <p>Твои последние достижения</p>
+                    </div>
+                </div>
+
+                <div id="profileTimeline" class="timeline"></div>
+            </section>
+
+            <section id="settings" class="page">
+                <div class="section-title">
+                    <div>
+                        <h2>Настройки</h2>
+                        <p>Настрой сайт под себя</p>
+                    </div>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-menu">
+                        <button class="active" onclick="openSettingsTab('general', this)">Общие</button>
+                        <button onclick="openSettingsTab('notifications', this)">Уведомления</button>
+                        <button onclick="openSettingsTab('appearance', this)">Внешний вид</button>
+                        <button onclick="openSettingsTab('account', this)">Аккаунт</button>
+                    </div>
+
+                    <div class="settings-content">
+                        <div id="settings-general" class="settings-section active">
+                            <h2>Общие настройки</h2>
+
+                            <div class="switch-row">
+                                <div class="switch-text">
+                                    <strong>Автосохранение</strong>
+                                    <span>Автоматически сохранять твой прогресс</span>
+                                </div>
+                                <button class="switch on" onclick="toggleSwitch(this)"></button>
+                            </div>
+
+                            <div class="switch-row">
+                                <div class="switch-text">
+                                    <strong>Напоминания</strong>
+                                    <span>Показывать напоминания о незавершённых заданиях</span>
+                                </div>
+                                <button class="switch on" onclick="toggleSwitch(this)"></button>
+                            </div>
+                        </div>
+
+                        <div id="settings-notifications" class="settings-section">
+                            <h2>Уведомления</h2>
+
+                            <div class="switch-row">
+                                <div class="switch-text">
+                                    <strong>Новые задания</strong>
+                                    <span>Получать уведомления о новых заданиях</span>
+                                </div>
+                                <button class="switch on" onclick="toggleSwitch(this)"></button>
+                            </div>
+
+                            <div class="switch-row">
+                                <div class="switch-text">
+                                    <strong>Результаты</strong>
+                                    <span>Получать уведомления о результатах проверки</span>
+                                </div>
+                                <button class="switch on" onclick="toggleSwitch(this)"></button>
+                            </div>
+                        </div>
+
+                        <div id="settings-appearance" class="settings-section">
+                            <h2>Внешний вид</h2>
+
+                            <div class="form-group">
+                                <label for="themeSelect">Тема</label>
+                                <select id="themeSelect" onchange="changeTheme(this.value)">
+                                    <option value="light">Светлая</option>
+                                    <option value="dark">Тёмная</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="settings-account" class="settings-section">
+                            <h2>Аккаунт</h2>
+
+                            <div class="warning">
+                                Изменение данных аккаунта повлияет на отображение профиля.
+                            </div>
+
+                            <button class="btn danger" onclick="logout()">Выйти из аккаунта</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="courseDetails" class="page">
+                <div id="courseDetailsContent"></div>
+            </section>
+
         </div>
-
-        <div class="stats-grid">
-
-          <div class="stat">
-            <div
-              class="stat-number"
-              id="wordsStat">
-              0
-            </div>
-
-            <div class="stat-label">
-              слов
-            </div>
-          </div>
-
-          <div class="stat">
-            <div
-              class="stat-number"
-              id="gamesStat">
-              0
-            </div>
-
-            <div class="stat-label">
-              игр
-            </div>
-          </div>
-
-          <div class="stat">
-            <div
-              class="stat-number"
-              id="streakStat">
-              0
-            </div>
-
-            <div class="stat-label">
-              дней
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- Языки -->
-
-      <div class="section-title">
-        <h2>Выбери язык</h2>
-        <span>2 языка</span>
-      </div>
-
-
-      <section class="language-list">
-
-        <button
-          class="language-card"
-          data-language="english">
-
-          <div class="language-icon">
-            🇬🇧
-          </div>
-
-          <div class="language-info">
-            <div class="language-name">
-              English
-            </div>
-
-            <div class="language-sub">
-              Английский язык
-            </div>
-          </div>
-
-          <div class="language-arrow">
-            ›
-          </div>
-
-        </button>
-
-
-        <button
-          class="language-card"
-          data-language="korean">
-
-          <div class="language-icon">
-            🇰🇷
-          </div>
-
-          <div class="language-info">
-            <div class="language-name">
-              한국어
-            </div>
-
-            <div class="language-sub">
-              Корейский язык
-            </div>
-          </div>
-
-          <div class="language-arrow">
-            ›
-          </div>
-
-        </button>
-
-      </section>
-
-
-      <!-- Быстрые разделы -->
-
-      <section class="quick-grid">
-
-        <div class="quick-card">
-          <div class="quick-icon">📚</div>
-
-          <strong>
-            Слова
-          </strong>
-
-          <span>
-            Запоминай новые слова
-            и повторяй изученное.
-          </span>
-        </div>
-
-
-        <div class="quick-card">
-          <div class="quick-icon">🎯</div>
-
-          <strong>
-            Практика
-          </strong>
-
-          <span>
-            Проверяй свои знания
-            короткими заданиями.
-          </span>
-        </div>
-
-      </section>
-
-
-      <!-- Игровая зона -->
-
-      <button
-        class="game-zone-button"
-        id="gameZoneButton">
-
-        <div class="game-zone-icon">
-          🎮
-        </div>
-
-        <div class="game-zone-text">
-
-          <strong>
-            Game Zone
-          </strong>
-
-          <span>
-            Изучай язык через игры
-          </span>
-
-        </div>
-
-        <div class="game-zone-arrow">
-          ›
-        </div>
-
-      </button>
-
     </main>
 
-
-    <!-- =====================================
-         ЭКРАН ВЫБОРА РАЗДЕЛА
-    ====================================== -->
-
-    <main
-      class="language-screen"
-      id="languageScreen">
-
-      <button
-        class="back-button"
-        id="languageBackButton"
-        aria-label="Назад">
-        ←
-      </button>
-
-
-      <section class="screen-header">
-
-        <h1 id="selectedLanguageTitle">
-          English
-        </h1>
-
-        <p id="selectedLanguageDescription">
-          Выбери, чем хочешь заняться.
-        </p>
-
-      </section>
-
-
-      <section class="mode-grid">
-
-        <button
-          class="mode-card"
-          id="wordsButton">
-
-          <div class="mode-icon">
-            📚
-          </div>
-
-          <div class="mode-info">
-
-            <strong>
-              Слова
-            </strong>
-
-            <span>
-              Изучай новые слова
-              и повторяй старые.
-            </span>
-
-          </div>
-
-          <div class="mode-arrow">
-            ›
-          </div>
-
-        </button>
-
-
-        <button
-          class="mode-card"
-          id="practiceButton">
-
-          <div class="mode-icon">
-            🧠
-          </div>
-
-          <div class="mode-info">
-
-            <strong>
-              Практика
-            </strong>
-
-            <span>
-              Проверь, насколько хорошо
-              ты запомнил материал.
-            </span>
-
-          </div>
-
-          <div class="mode-arrow">
-            ›
-          </div>
-
-        </button>
-
-
-        <button
-          class="mode-card"
-          id="gameButton">
-
-          <div class="mode-icon">
-            🎮
-          </div>
-
-          <div class="mode-info">
-
-            <strong>
-              Игры
-            </strong>
-
-            <span>
-              Учись, играя, и набирай очки.
-            </span>
-
-          </div>
-
-          <div class="mode-arrow">
-            ›
-          </div>
-
-        </button>
-
-      </section>
-
-    </main>
-
-
-    <!-- =====================================
-         НАСТРОЙКИ
-    ====================================== -->
-
-    <main
-      class="settings-screen"
-      id="settingsScreen">
-
-      <button
-        class="back-button"
-        id="settingsBackButton"
-        aria-label="Назад">
-        ←
-      </button>
-
-
-      <section class="screen-header">
-
-        <h1>
-          Настройки
-        </h1>
-
-        <p>
-          Настрой приложение под себя.
-        </p>
-
-      </section>
-
-
-      <section class="settings-card">
-
-        <div class="setting-row">
-
-          <div class="setting-icon">
-            🔊
-          </div>
-
-          <div class="setting-info">
-
-            <strong>
-              Звук
-            </strong>
-
-            <span>
-              Звуки приложения
-            </span>
-
-          </div>
-
-          <button
-            class="setting-control"
-            id="soundButton">
-            Вкл.
-          </button>
-
+    <footer>
+        <div class="footer-inner">
+            <div>© 2026 Учебный портал</div>
+            <div>Учись. Практикуйся. Развивайся.</div>
         </div>
-
-
-        <div class="setting-row">
-
-          <div class="setting-icon">
-            ✨
-          </div>
-
-          <div class="setting-info">
-
-            <strong>
-              Анимации
-            </strong>
-
-            <span>
-              Плавные эффекты интерфейса
-            </span>
-
-          </div>
-
-          <button
-            class="setting-control"
-            id="animationButton">
-            Вкл.
-          </button>
-
-        </div>
-
-
-        <div class="setting-row">
-
-          <div class="setting-icon">
-            📊
-          </div>
-
-          <div class="setting-info">
-
-            <strong>
-              Прогресс
-            </strong>
-
-            <span>
-              Локальная статистика
-            </span>
-
-          </div>
-
-          <button
-            class="setting-control"
-            id="resetProgressButton">
-            Сброс
-          </button>
-
-        </div>
-
-      </section>
-
-    </main>
-
-  </div>
-
+    </footer>
 </div>
 
-
-<!-- =========================================
-     БОКОВОЕ МЕНЮ
-========================================= -->
-
-<div
-  class="menu-overlay"
-  id="menuOverlay">
-
-  <div
-    class="side-menu"
-    role="dialog"
-    aria-modal="true">
-
-    <div class="menu-head">
-
-      <strong>
-        Меню
-      </strong>
-
-      <button
-        class="close-menu"
-        id="closeMenu"
-        aria-label="Закрыть">
-        ✕
-      </button>
-
-    </div>
-
-
-    <button
-      class="menu-item"
-      id="menuHome">
-
-      <div class="menu-item-icon">
-        🏠
-      </div>
-
-      <div class="menu-item-text">
-
-        <strong>
-          Главная
-        </strong>
-
-        <span>
-          Вернуться на главный экран
-        </span>
-
-      </div>
-
-      <div class="menu-item-arrow">
-        ›
-      </div>
-
-    </button>
-
-
-    <button
-      class="menu-item"
-      id="menuGames">
-
-      <div class="menu-item-icon">
-        🎮
-      </div>
-
-      <div class="menu-item-text">
-
-        <strong>
-          Game Zone
-        </strong>
-
-        <span>
-          Открыть игры
-        </span>
-
-      </div>
-
-      <div class="menu-item-arrow">
-        ›
-      </div>
-
-    </button>
-
-
-    <button
-      class="menu-item"
-      id="menuSettings">
-
-      <div class="menu-item-icon">
-        ⚙️
-      </div>
-
-      <div class="menu-item-text">
-
-        <strong>
-          Настройки
-        </strong>
-
-        <span>
-          Настройки приложения
-        </span>
-
-      </div>
-
-      <div class="menu-item-arrow">
-        ›
-      </div>
-
-    </button>
-
-  </div>
-
+<div id="modalBackdrop" class="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+    <div class="modal" id="modalContent"></div>
 </div>
 
-
-<!-- Уведомление -->
-
-<div
-  class="toast"
-  id="toast">
-</div>
-
+<div id="notification" class="notification"></div>
 
 <script>
-
-/* =========================================
-   LANGUAGE PRACTICE
-   Основная логика index.html
-========================================= */
-
-"use strict";
-
-
-/* -----------------------------------------
-   ЭЛЕМЕНТЫ
------------------------------------------ */
-
-const homeScreen =
-  document.getElementById("homeScreen");
-
-const languageScreen =
-  document.getElementById("languageScreen");
-
-const settingsScreen =
-  document.getElementById("settingsScreen");
-
-const menuButton =
-  document.getElementById("menuButton");
-
-const menuOverlay =
-  document.getElementById("menuOverlay");
-
-const closeMenu =
-  document.getElementById("closeMenu");
-
-const menuHome =
-  document.getElementById("menuHome");
-
-const menuGames =
-  document.getElementById("menuGames");
-
-const menuSettings =
-  document.getElementById("menuSettings");
-
-const languageBackButton =
-  document.getElementById("languageBackButton");
-
-const settingsBackButton =
-  document.getElementById("settingsBackButton");
-
-const gameZoneButton =
-  document.getElementById("gameZoneButton");
-
-const selectedLanguageTitle =
-  document.getElementById("selectedLanguageTitle");
-
-const selectedLanguageDescription =
-  document.getElementById(
-    "selectedLanguageDescription"
-  );
-
-const wordsButton =
-  document.getElementById("wordsButton");
-
-const practiceButton =
-  document.getElementById("practiceButton");
-
-const gameButton =
-  document.getElementById("gameButton");
-
-const soundButton =
-  document.getElementById("soundButton");
-
-const animationButton =
-  document.getElementById("animationButton");
-
-const resetProgressButton =
-  document.getElementById("resetProgressButton");
-
-const wordsStat =
-  document.getElementById("wordsStat");
-
-const gamesStat =
-  document.getElementById("gamesStat");
-
-const streakStat =
-  document.getElementById("streakStat");
-
-const toast =
-  document.getElementById("toast");
-
-
-/* -----------------------------------------
-   ДАННЫЕ
------------------------------------------ */
-
-let selectedLanguage = "english";
-
-const languageData = {
-
-  english:{
-    title:"English 🇬🇧",
-    description:
-      "Практикуй английский через слова, задания и игры."
-  },
-
-  korean:{
-    title:"한국어 🇰🇷",
-    description:
-      "Изучай корейский через слова, задания и игры."
-  }
-
-};
-
-
-/* -----------------------------------------
-   ПРОГРЕСС
------------------------------------------ */
-
-let progress = {
-  words:0,
-  games:0,
-  streak:0
-};
-
-
-function loadProgress(){
-
-  try{
-
-    const saved =
-      localStorage.getItem(
-        "languagePracticeProgress"
-      );
-
-    if(saved){
-
-      const parsed =
-        JSON.parse(saved);
-
-      progress = {
-        words:Number(parsed.words) || 0,
-        games:Number(parsed.games) || 0,
-        streak:Number(parsed.streak) || 0
-      };
-
-    }
-
-  }catch(error){
-
-    console.log(
-      "Не удалось загрузить прогресс."
-    );
-
-  }
-
-  updateStats();
-
-}
-
-
-function saveProgress(){
-
-  try{
-
-    localStorage.setItem(
-      "languagePracticeProgress",
-      JSON.stringify(progress)
-    );
-
-  }catch(error){
-
-    console.log(
-      "Не удалось сохранить прогресс."
-    );
-
-  }
-
-}
-
-
-function updateStats(){
-
-  wordsStat.textContent =
-    progress.words;
-
-  gamesStat.textContent =
-    progress.games;
-
-  streakStat.textContent =
-    progress.streak;
-
-}
-
-
-/* -----------------------------------------
-   ЭКРАНЫ
------------------------------------------ */
-
-function hideAllScreens(){
-
-  homeScreen.classList.add("hidden");
-
-  languageScreen.classList.remove("active");
-
-  settingsScreen.classList.remove("active");
-
-}
-
-
-function showHome(){
-
-  hideAllScreens();
-
-  homeScreen.classList.remove("hidden");
-
-  closeSideMenu();
-
-}
-
-
-function showLanguage(){
-
-  hideAllScreens();
-
-  languageScreen.classList.add("active");
-
-}
-
-
-function showSettings(){
-
-  hideAllScreens();
-
-  settingsScreen.classList.add("active");
-
-  closeSideMenu();
-
-}
-
-
-/* -----------------------------------------
-   ВЫБОР ЯЗЫКА
------------------------------------------ */
-
-function selectLanguage(language){
-
-  if(!languageData[language]){
-    return;
-  }
-
-  selectedLanguage =
-    language;
-
-  selectedLanguageTitle.textContent =
-    languageData[language].title;
-
-  selectedLanguageDescription.textContent =
-    languageData[language].description;
-
-  showLanguage();
-
-}
-
-
-/* -----------------------------------------
-   МЕНЮ
------------------------------------------ */
-
-function openSideMenu(){
-
-  menuOverlay.classList.add("open");
-
-}
-
-
-function closeSideMenu(){
-
-  menuOverlay.classList.remove("open");
-
-}
-
-
-menuButton.addEventListener(
-  "click",
-  openSideMenu
-);
-
-
-closeMenu.addEventListener(
-  "click",
-  closeSideMenu
-);
-
-
-menuOverlay.addEventListener(
-  "click",
-  function(event){
-
-    if(event.target === menuOverlay){
-      closeSideMenu();
-    }
-
-  }
-);
-
-
-menuHome.addEventListener(
-  "click",
-  showHome
-);
-
-
-menuSettings.addEventListener(
-  "click",
-  showSettings
-);
-
-
-/* -----------------------------------------
-   GAME ZONE
------------------------------------------ */
-
-function openGames(){
-
-  /*
-   * games.html уже существует в репозитории.
-   * Поэтому здесь ничего не дублируем —
-   * просто открываем существующую страницу.
-   */
-
-  window.location.href =
-    "games.html";
-
-}
-
-
-gameZoneButton.addEventListener(
-  "click",
-  openGames
-);
-
-
-menuGames.addEventListener(
-  "click",
-  openGames
-);
-
-
-gameButton.addEventListener(
-  "click",
-  openGames
-);
-
-
-/* -----------------------------------------
-   НАЗАД
------------------------------------------ */
-
-languageBackButton.addEventListener(
-  "click",
-  showHome
-);
-
-
-settingsBackButton.addEventListener(
-  "click",
-  showHome
-);
-
-
-/* -----------------------------------------
-   КАРТОЧКИ ЯЗЫКОВ
------------------------------------------ */
-
-document
-  .querySelectorAll(".language-card")
-  .forEach(function(card){
-
-    card.addEventListener(
-      "click",
-      function(){
-
-        selectLanguage(
-          card.dataset.language
-        );
-
-      }
-    );
-
-  });
-
-
-/* -----------------------------------------
-   РАЗДЕЛЫ
------------------------------------------ */
-
-wordsButton.addEventListener(
-  "click",
-  function(){
-
-    progress.words += 1;
-
-    saveProgress();
-    updateStats();
-
-    showToast(
-      "Раздел слов пока готовится 📚"
-    );
-
-  }
-);
-
-
-practiceButton.addEventListener(
-  "click",
-  function(){
-
-    showToast(
-      "Раздел практики пока готовится 🧠"
-    );
-
-  }
-);
-
-
-/* -----------------------------------------
-   НАСТРОЙКИ
------------------------------------------ */
-
-let soundEnabled = true;
-let animationsEnabled = true;
-
-
-soundButton.addEventListener(
-  "click",
-  function(){
-
-    soundEnabled =
-      !soundEnabled;
-
-    soundButton.textContent =
-      soundEnabled
-        ? "Вкл."
-        : "Выкл.";
-
-    showToast(
-      soundEnabled
-        ? "Звук включён 🔊"
-        : "Звук выключен 🔇"
-    );
-
-  }
-);
-
-
-animationButton.addEventListener(
-  "click",
-  function(){
-
-    animationsEnabled =
-      !animationsEnabled;
-
-    animationButton.textContent =
-      animationsEnabled
-        ? "Вкл."
-        : "Выкл.";
-
-    document.documentElement.style.setProperty(
-      "--animations",
-      animationsEnabled ? "1" : "0"
-    );
-
-    showToast(
-      animationsEnabled
-        ? "Анимации включены ✨"
-        : "Анимации выключены"
-    );
-
-  }
-);
-
-
-resetProgressButton.addEventListener(
-  "click",
-  function(){
-
-    const confirmed =
-      window.confirm(
-        "Сбросить весь прогресс?"
-      );
-
-    if(!confirmed){
-      return;
-    }
-
-    progress = {
-      words:0,
-      games:0,
-      streak:0
+    const courses = [
+        {
+            id: "math",
+            title: "Математика",
+            icon: "🧮",
+            description: "Изучай основные математические понятия, формулы и методы решения задач.",
+            progress: 72,
+            lessons: 18,
+            color: "blue"
+        },
+        {
+            id: "physics",
+            title: "Физика",
+            icon: "⚛️",
+            description: "Разберись в законах природы, движении, энергии и электричестве.",
+            progress: 48,
+            lessons: 16,
+            color: "green"
+        },
+        {
+            id: "chemistry",
+            title: "Химия",
+            icon: "🔬",
+            description: "Познакомься с атомами, молекулами, реакциями и веществами.",
+            progress: 35,
+            lessons: 14,
+            color: "purple"
+        }
+    ];
+
+    const lessons = [
+        {
+            id: 1,
+            course: "math",
+            title: "Линейные уравнения",
+            description: "Научимся решать уравнения первой степени.",
+            duration: "25 мин",
+            completed: true
+        },
+        {
+            id: 2,
+            course: "math",
+            title: "Квадратные уравнения",
+            description: "Дискриминант, корни и способы решения.",
+            duration: "35 мин",
+            completed: true
+        },
+        {
+            id: 3,
+            course: "math",
+            title: "Функции и графики",
+            description: "Что такое функция и как строить её график.",
+            duration: "40 мин",
+            completed: false
+        },
+        {
+            id: 4,
+            course: "math",
+            title: "Системы уравнений",
+            description: "Решение систем двух линейных уравнений.",
+            duration: "30 мин",
+            completed: false
+        },
+        {
+            id: 5,
+            course: "physics",
+            title: "Равномерное движение",
+            description: "Путь, скорость и время.",
+            duration: "25 мин",
+            completed: true
+        },
+        {
+            id: 6,
+            course: "physics",
+            title: "Сила и масса",
+            description: "Второй закон Ньютона и его применение.",
+            duration: "35 мин",
+            completed: false
+        },
+        {
+            id: 7,
+            course: "physics",
+            title: "Работа и энергия",
+            description: "Механическая работа, мощность и энергия.",
+            duration: "40 мин",
+            completed: false
+        },
+        {
+            id: 8,
+            course: "physics",
+            title: "Электрический ток",
+            description: "Основные понятия электричества.",
+            duration: "30 мин",
+            completed: false
+        },
+        {
+            id: 9,
+            course: "chemistry",
+            title: "Строение атома",
+            description: "Протоны, нейтроны, электроны и ядро.",
+            duration: "30 мин",
+            completed: true
+        },
+        {
+            id: 10,
+            course: "chemistry",
+            title: "Периодическая таблица",
+            description: "Как устроена периодическая система элементов.",
+            duration: "35 мин",
+            completed: false
+        },
+        {
+            id: 11,
+            course: "chemistry",
+            title: "Химические связи",
+            description: "Ионная, ковалентная и металлическая связи.",
+            duration: "40 мин",
+            completed: false
+        },
+        {
+            id: 12,
+            course: "chemistry",
+            title: "Химические реакции",
+            description: "Типы реакций и уравнивание.",
+            duration: "35 мин",
+            completed: false
+        }
+    ];
+
+    const tasks = [
+        {
+            id: 1,
+            course: "math",
+            title: "Решение уравнений",
+            description: "Реши 10 линейных уравнений и проверь ответы.",
+            points: 100,
+            status: "completed",
+            due: "Выполнено"
+        },
+        {
+            id: 2,
+            course: "math",
+            title: "Графики функций",
+            description: "Построй графики нескольких функций и определи их свойства.",
+            points: 120,
+            status: "active",
+            due: "Сегодня"
+        },
+        {
+            id: 3,
+            course: "physics",
+            title: "Законы Ньютона",
+            description: "Реши задачи на применение законов Ньютона.",
+            points: 150,
+            status: "active",
+            due: "Завтра"
+        },
+        {
+            id: 4,
+            course: "physics",
+            title: "Механическая энергия",
+            description: "Реши задачи на кинетическую и потенциальную энергию.",
+            points: 130,
+            status: "active",
+            due: "Через 3 дня"
+        },
+        {
+            id: 5,
+            course: "chemistry",
+            title: "Строение атома",
+            description: "Ответь на вопросы о строении атома.",
+            points: 100,
+            status: "completed",
+            due: "Выполнено"
+        },
+        {
+            id: 6,
+            course: "chemistry",
+            title: "Периодическая таблица",
+            description: "Определи свойства элементов по их положению в таблице.",
+            points: 140,
+            status: "active",
+            due: "Через 2 дня"
+        }
+    ];
+
+    const quizQuestions = {
+        math: [
+            {
+                question: "Чему равен корень уравнения 2x + 6 = 10?",
+                answers: ["1", "2", "3", "4"],
+                correct: 1
+            },
+            {
+                question: "Как называется график линейной функции?",
+                answers: ["Парабола", "Прямая", "Окружность", "Гипербола"],
+                correct: 1
+            },
+            {
+                question: "Чему равен дискриминант уравнения x² - 4x + 4 = 0?",
+                answers: ["0", "4", "8", "16"],
+                correct: 0
+            }
+        ],
+        physics: [
+            {
+                question: "Какая величина измеряется в ньютонах?",
+                answers: ["Масса", "Сила", "Энергия", "Скорость"],
+                correct: 1
+            },
+            {
+                question: "Какая формула соответствует второму закону Ньютона?",
+                answers: ["F = ma", "v = s/t", "P = mg", "A = Fs"],
+                correct: 0
+            },
+            {
+                question: "В каких единицах измеряется скорость в СИ?",
+                answers: ["км", "ч", "м/с", "Н"],
+                correct: 2
+            }
+        ],
+        chemistry: [
+            {
+                question: "Какая частица имеет отрицательный заряд?",
+                answers: ["Протон", "Нейтрон", "Электрон", "Атом"],
+                correct: 2
+            },
+            {
+                question: "Где находится основная масса атома?",
+                answers: ["В электронной оболочке", "В ядре", "В воздухе", "В орбитали"],
+                correct: 1
+            },
+            {
+                question: "Какой элемент имеет символ O?",
+                answers: ["Золото", "Кислород", "Осмий", "Олово"],
+                correct: 1
+            }
+        ]
     };
 
-    saveProgress();
-    updateStats();
+    let currentQuiz = null;
+    let currentQuizIndex = 0;
+    let currentQuizScore = 0;
+    let currentCourse = null;
 
-    showToast(
-      "Прогресс сброшен"
-    );
+    const state = {
+        points: 420,
+        completedTasks: 2,
+        completedLessons: 4,
+        streak: 7,
+        name: "Ученик",
+        email: "student@example.com",
+        activities: [2, 4, 3, 6, 5, 8, 7]
+    };
 
-  }
-);
+    function showPage(pageId) {
+        document.querySelectorAll(".page").forEach(page => {
+            page.classList.remove("active");
+        });
 
+        const page = document.getElementById(pageId);
+        if (page) {
+            page.classList.add("active");
+        }
 
-/* -----------------------------------------
-   TOAST
------------------------------------------ */
+        document.querySelectorAll("#mainNav button").forEach(button => {
+            button.classList.toggle("active", button.dataset.page === pageId);
+        });
 
-let toastTimer = null;
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
+        if (pageId === "progress") {
+            renderProgress();
+        }
 
-function showToast(message){
+        if (pageId === "profile") {
+            renderProfile();
+        }
 
-  toast.textContent =
-    message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(
-      function(){
-
-        toast.classList.remove("show");
-
-      },
-      2200
-    );
-
-}
-
-
-/* -----------------------------------------
-   ESCAPE
------------------------------------------ */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key === "Escape"){
-
-      closeSideMenu();
-
-      showHome();
-
+        if (pageId === "tasks") {
+            renderTasks();
+        }
     }
 
-  }
-);
+    function getCourseName(courseId) {
+        const course = courses.find(item => item.id === courseId);
+        return course ? course.title : courseId;
+    }
 
+    function renderCourses() {
+        const grid = document.getElementById("courseGrid");
 
-/* -----------------------------------------
-   ЗАПУСК
------------------------------------------ */
+        if (!grid) {
+            return;
+        }
 
-loadProgress();
+        grid.innerHTML = courses.map(course => `
+            <div class="card course-card" data-title="${course.title.toLowerCase()}">
+                <div class="card-icon">${course.icon}</div>
+                <h3>${course.title}</h3>
+                <p>${course.description}</p>
 
-showHome();
+                <div class="progress">
+                    <div class="progress-bar" data-progress="${course.progress}"></div>
+                </div>
 
+                <div class="flex justify-between mt-10">
+                    <small>${course.progress}% завершено</small>
+                    <small>${course.lessons} уроков</small>
+                </div>
+
+                <div class="mt-20">
+                    <button class="btn" onclick="openCourse('${course.id}')">
+                        Открыть курс
+                    </button>
+                </div>
+            </div>
+        `).join("");
+
+        animateProgressBars();
+    }
+
+    function filterCourses() {
+        const value = document.getElementById("courseSearch").value
+            .trim()
+            .toLowerCase();
+
+        document.querySelectorAll(".course-card").forEach(card => {
+            const title = card.dataset.title || "";
+            card.style.display = title.includes(value) ? "" : "none";
+        });
+    }
+
+    function renderLessons(filter = "all") {
+        const list = document.getElementById("lessonList");
+
+        if (!list) {
+            return;
+        }
+
+        const filtered = filter === "all"
+            ? lessons
+            : lessons.filter(lesson => lesson.course === filter);
+
+        if (!filtered.length) {
+            list.innerHTML = `
+                <div class="empty">
+                    Уроков пока нет.
+                </div>
+            `;
+            return;
+        }
+
+        list.innerHTML = filtered.map((lesson, index) => `
+            <div class="lesson">
+                <div class="lesson-main">
+                    <div class="lesson-number">${index + 1}</div>
+                    <div>
+                        <h3>${lesson.title}</h3>
+                        <p>
+                            ${getCourseName(lesson.course)} · ${lesson.duration}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-10">
+                    <span class="badge ${lesson.completed ? "green" : "yellow"}">
+                        ${lesson.completed ? "Пройден" : "Не пройден"}
+                    </span>
+                    <button
+                        class="btn"
+                        onclick="openLesson(${lesson.id})"
+                    >
+                        Открыть
+                    </button>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    function filterLessons(filter, button) {
+        document.querySelectorAll("#lessonFilters .filter-btn").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        renderLessons(filter);
+    }
+
+    function renderTasks(filter = "all") {
+        const list = document.getElementById("taskList");
+
+        if (!list) {
+            return;
+        }
+
+        let filtered = tasks;
+
+        if (filter !== "all") {
+            filtered = tasks.filter(task => task.status === filter);
+        }
+
+        if (!filtered.length) {
+            list.innerHTML = `
+                <div class="empty">
+                    Здесь пока нет заданий.
+                </div>
+            `;
+            return;
+        }
+
+        list.innerHTML = filtered.map(task => `
+            <div class="task-card">
+                <div class="task-head">
+                    <div>
+                        <h3>${task.title}</h3>
+                        <p>${getCourseName(task.course)} · ${task.due}</p>
+                    </div>
+
+                    <span class="badge ${task.status === "completed" ? "green" : "yellow"}">
+                        ${task.status === "completed" ? "Выполнено" : "Активно"}
+                    </span>
+                </div>
+
+                <div class="task-description">
+                    ${task.description}
+                </div>
+
+                <div class="task-actions">
+                    <span class="badge">${task.points} баллов</span>
+
+                    ${
+                        task.status === "completed"
+                        ? `<button class="btn secondary" onclick="showNotification('Это задание уже выполнено')">Просмотреть</button>`
+                        : `<button class="btn" onclick="startTask(${task.id})">Начать</button>`
+                    }
+                </div>
+            </div>
+        `).join("");
+    }
+
+    function filterTasks(filter, button) {
+        document.querySelectorAll("#taskFilters .filter-btn").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        renderTasks(filter);
+    }
+
+    function openCourse(courseId) {
+        const course = courses.find(item => item.id === courseId);
+
+        if (!course) {
+            return;
+        }
+
+        currentCourse = courseId;
+
+        const content = document.getElementById("courseDetailsContent");
+
+        const courseLessons = lessons.filter(
+            lesson => lesson.course === courseId
+        );
+
+        content.innerHTML = `
+            <div class="course-header">
+                <div class="flex items-center gap-16">
+                    <div class="card-icon">${course.icon}</div>
+                    <div>
+                        <h1>${course.title}</h1>
+                        <p>${course.description}</p>
+                    </div>
+                </div>
+
+                <div class="course-meta">
+                    <span>📖 ${course.lessons} уроков</span>
+                    <span>📊 ${course.progress}% завершено</span>
+                    <span>⭐ ${Math.round(course.progress * 4.2)} баллов</span>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <div>
+                    <h2>Программа курса</h2>
+                    <p>Выбери урок для изучения</p>
+                </div>
+            </div>
+
+            <div class="lesson-list">
+                ${courseLessons.map((lesson, index) => `
+                    <div class="lesson">
+                        <div class="lesson-main">
+                            <div class="lesson-number">${index + 1}</div>
+                            <div>
+                                <h3>${lesson.title}</h3>
+                                <p>${lesson.description}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-10">
+                            <span class="badge ${lesson.completed ? "green" : "yellow"}">
+                                ${lesson.completed ? "Пройден" : "Доступен"}
+                            </span>
+
+                            <button
+                                class="btn"
+                                onclick="openLesson(${lesson.id})"
+                            >
+                                ${lesson.completed ? "Повторить" : "Изучить"}
+                            </button>
+                        </div>
+                    </div>
+                `).join("")}
+            </div>
+
+            <div class="section-title">
+                <div>
+                    <h2>Проверка знаний</h2>
+                    <p>Небольшой тест после изучения материала</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Тест по предмету</h3>
+                <p>
+                    Ответь на несколько вопросов и узнай,
+                    насколько хорошо ты усвоил материал.
+                </p>
+
+                <div class="mt-20">
+                    <button class="btn" onclick="startQuiz('${courseId}')">
+                        Начать тест
+                    </button>
+                </div>
+            </div>
+        `;
+
+        showPage("courseDetails");
+    }
+
+    function openLesson(lessonId) {
+        const lesson = lessons.find(item => item.id === lessonId);
+
+        if (!lesson) {
+            return;
+        }
+
+        const modal = document.getElementById("modalContent");
+
+        modal.innerHTML = `
+            <div class="modal-header">
+                <h2>${lesson.title}</h2>
+                <button class="close" onclick="closeModal()">×</button>
+            </div>
+
+            <div class="note">
+                Предмет: ${getCourseName(lesson.course)} · ${lesson.duration}
+            </div>
+
+            <p>
+                ${lesson.description}
+            </p>
+
+            <div class="accordion mt-20">
+                <div class="accordion-item open">
+                    <button
+                        class="accordion-head"
+                        onclick="toggleAccordion(this)"
+                    >
+                        Основной материал
+                        <span>⌄</span>
+                    </button>
+
+                    <div class="accordion-body">
+                        <p>
+                            В этом уроке мы разберём основные понятия темы,
+                            рассмотрим примеры и научимся применять полученные
+                            знания при решении задач.
+                        </p>
+
+                        <p>
+                            Старайся не просто запоминать формулы, а понимать,
+                            почему они работают и когда их следует использовать.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button
+                        class="accordion-head"
+                        onclick="toggleAccordion(this)"
+                    >
+                        Пример
+                        <span>⌄</span>
+                    </button>
+
+                    <div class="accordion-body">
+                        <p>
+                            Рассмотрим типичную задачу по теме и последовательно
+                            разберём каждый шаг её решения.
+                        </p>
+
+                        <div class="code">
+                            Шаг 1: внимательно прочитай условие.<br>
+                            Шаг 2: выпиши известные величины.<br>
+                            Шаг 3: выбери подходящий способ решения.<br>
+                            Шаг 4: проверь полученный ответ.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button
+                        class="accordion-head"
+                        onclick="toggleAccordion(this)"
+                    >
+                        Практика
+                        <span>⌄</span>
+                    </button>
+
+                    <div class="accordion-body">
+                        <p>
+                            После изучения материала попробуй выполнить
+                            соответствующее задание самостоятельно.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions mt-20">
+                <button
+                    class="btn secondary"
+                    onclick="closeModal()"
+                >
+                    Закрыть
+                </button>
+
+                <button
+                    class="btn success"
+                    onclick="completeLesson(${lesson.id})"
+                >
+                    ${lesson.completed ? "Урок уже пройден" : "Отметить как пройденный"}
+                </button>
+            </div>
+        `;
+
+        openModal();
+    }
+
+    function completeLesson(lessonId) {
+        const lesson = lessons.find(item => item.id === lessonId);
+
+        if (!lesson) {
+            return;
+        }
+
+        if (!lesson.completed) {
+            lesson.completed = true;
+            state.completedLessons++;
+            state.points += 25;
+            showNotification("Урок отмечен как пройденный! +25 баллов");
+        } else {
+            showNotification("Этот урок уже был пройден");
+        }
+
+        closeModal();
+        updateStats();
+        renderLessons();
+
+        if (currentCourse) {
+            openCourse(currentCourse);
+        }
+    }
+
+    function startTask(taskId) {
+        const task = tasks.find(item => item.id === taskId);
+
+        if (!task) {
+            return;
+        }
+
+        if (task.status === "completed") {
+            showNotification("Это задание уже выполнено");
+            return;
+        }
+
+        const modal = document.getElementById("modalContent");
+
+        modal.innerHTML = `
+            <div class="modal-header">
+                <h2>${task.title}</h2>
+                <button class="close" onclick="closeModal()">×</button>
+            </div>
+
+            <div class="note">
+                ${getCourseName(task.course)} · ${task.points} баллов
+            </div>
+
+            <p>${task.description}</p>
+
+            <div class="form-group mt-20">
+                <label for="taskAnswer">
+                    Твой ответ
+                </label>
+
+                <textarea
+                    id="taskAnswer"
+                    placeholder="Напиши здесь своё решение..."
+                ></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn secondary" onclick="closeModal()">
+                    Отмена
+                </button>
+
+                <button class="btn" onclick="submitTask(${task.id})">
+                    Отправить
+                </button>
+            </div>
+        `;
+
+        openModal();
+    }
+
+    function submitTask(taskId) {
+        const task = tasks.find(item => item.id === taskId);
+        const answer = document.getElementById("taskAnswer");
+
+        if (!task || !answer) {
+            return;
+        }
+
+        if (!answer.value.trim()) {
+            showNotification("Сначала напиши ответ");
+            return;
+        }
+
+        task.status = "completed";
+        state.completedTasks++;
+        state.points += task.points;
+
+        closeModal();
+        updateStats();
+        renderTasks();
+
+        showNotification(`Задание выполнено! +${task.points} баллов`);
+    }
+
+    function startQuiz(courseId) {
+        const questions = quizQuestions[courseId];
+
+        if (!questions || !questions.length) {
+            showNotification("Для этого курса пока нет теста");
+            return;
+        }
+
+        currentQuiz = courseId;
+        currentQuizIndex = 0;
+        currentQuizScore = 0;
+
+        renderQuizQuestion();
+        openModal();
+    }
+
+    function renderQuizQuestion() {
+        const questions = quizQuestions[currentQuiz];
+        const question = questions[currentQuizIndex];
+        const modal = document.getElementById("modalContent");
+
+        modal.innerHTML = `
+            <div class="modal-header">
+                <h2>Тест: ${getCourseName(currentQuiz)}</h2>
+                <button class="close" onclick="closeModal()">×</button>
+            </div>
+
+            <div class="note">
+                Вопрос ${currentQuizIndex + 1} из ${questions.length}
+            </div>
+
+            <div class="question">
+                <div class="question-title">
+                    ${question.question}
+                </div>
+
+                <div class="answers">
+                    ${question.answers.map((answer, index) => `
+                        <button
+                            class="answer"
+                            onclick="answerQuiz(${index})"
+                        >
+                            ${answer}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+        `;
+    }
+
+    function answerQuiz(answerIndex) {
+        const questions = quizQuestions[currentQuiz];
+        const question = questions[currentQuizIndex];
+        const buttons = document.querySelectorAll(".answer");
+
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
+
+        if (answerIndex === question.correct) {
+            currentQuizScore++;
+            buttons[answerIndex].classList.add("correct");
+        } else {
+            buttons[answerIndex].classList.add("incorrect");
+            buttons[question.correct].classList.add("correct");
+        }
+
+        setTimeout(() => {
+            currentQuizIndex++;
+
+            if (currentQuizIndex >= questions.length) {
+                finishQuiz();
+            } else {
+                renderQuizQuestion();
+            }
+        }, 900);
+    }
+
+    function finishQuiz() {
+        const questions = quizQuestions[currentQuiz];
+        const percent = Math.round(
+            (currentQuizScore / questions.length) * 100
+        );
+
+        const earned = currentQuizScore * 50;
+
+        state.points += earned;
+
+        const modal = document.getElementById("modalContent");
+
+        modal.innerHTML = `
+            <div class="modal-header">
+                <h2>Тест завершён</h2>
+                <button class="close" onclick="closeModal()">×</button>
+            </div>
+
+            <div class="result-box">
+                <div class="result-score">${percent}%</div>
+                <p>
+                    Правильных ответов:
+                    <strong>${currentQuizScore}</strong>
+                    из
+                    <strong>${questions.length}</strong>
+                </p>
+
+                <p>
+                    Получено баллов:
+                    <strong>+${earned}</strong>
+                </p>
+            </div>
+
+            <div class="form-actions mt-20">
+                <button class="btn" onclick="closeModal()">
+                    Готово
+                </button>
+            </div>
+        `;
+
+        updateStats();
+    }
+
+    function openEditProfile() {
+        const modal = document.getElementById("modalContent");
+
+        modal.innerHTML = `
+            <div class="modal-header">
+                <h2>Редактирование профиля</h2>
+                <button class="close" onclick="closeModal()">×</button>
+            </div>
+
+            <div class="form-group">
+                <label for="editName">Имя</label>
+                <input
+                    id="editName"
+                    type="text"
+                    value="${state.name}"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="editEmail">Email</label>
+                <input
+                    id="editEmail"
+                    type="email"
+                    value="${state.email}"
+                >
+            </div>
+
+            <div class="form-actions">
+                <button class="btn secondary" onclick="closeModal()">
+                    Отмена
+                </button>
+
+                <button class="btn" onclick="saveProfile()">
+                    Сохранить
+                </button>
+            </div>
+        `;
+
+        openModal();
+    }
+
+    function saveProfile() {
+        const name = document.getElementById("editName");
+        const email = document.getElementById("editEmail");
+
+        if (!name.value.trim()) {
+            showNotification("Укажи имя");
+            return;
+        }
+
+        state.name = name.value.trim();
+        state.email = email.value.trim();
+
+        renderProfile();
+        closeModal();
+
+        showNotification("Профиль сохранён");
+    }
+
+    function renderProfile() {
+        const name = document.getElementById("profileName");
+        const email = document.getElementById("profileEmail");
+        const avatar = document.getElementById("profileAvatar");
+
+        if (!name) {
+            return;
+        }
+
+        name.textContent = state.name;
+        email.textContent = state.email;
+
+        avatar.textContent = state.name
+            .trim()
+            .charAt(0)
+            .toUpperCase();
+
+        document.getElementById("profilePoints").textContent = state.points;
+        document.getElementById("profileCompleted").textContent = state.completedTasks;
+        document.getElementById("profileStreak").textContent = state.streak;
+
+        const timeline = document.getElementById("profileTimeline");
+
+        timeline.innerHTML = `
+            <div class="timeline-item">
+                <h3>Начало обучения</h3>
+                <p>Ты присоединился к учебному порталу и начал обучение.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Первое задание</h3>
+                <p>Ты успешно выполнил своё первое задание.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Новая серия</h3>
+                <p>Ты занимаешься уже ${state.streak} дней подряд.</p>
+            </div>
+        `;
+    }
+
+    function renderProgress() {
+        document.getElementById("progressLessons").textContent =
+            state.completedLessons;
+
+        document.getElementById("progressTasks").textContent =
+            state.completedTasks;
+
+        document.getElementById("progressPoints").textContent =
+            state.points;
+
+        const totalLessons = lessons.length;
+        const completed = lessons.filter(lesson => lesson.completed).length;
+
+        const percent = Math.round(
+            (completed / totalLessons) * 100
+        );
+
+        document.getElementById("progressPercent").textContent =
+            percent + "%";
+
+        const subjectProgress = document.getElementById("subjectProgress");
+
+        subjectProgress.innerHTML = courses.map(course => `
+            <div class="card">
+                <div class="flex items-center gap-16">
+                    <div class="card-icon">${course.icon}</div>
+
+                    <div>
+                        <h3>${course.title}</h3>
+                        <p>${course.progress}% завершено</p>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar"
+                        data-progress="${course.progress}"
+                    ></div>
+                </div>
+            </div>
+        `).join("");
+
+        animateProgressBars();
+        renderActivityChart();
+    }
+
+    function renderActivityChart() {
+        const chart = document.getElementById("activityChart");
+
+        if (!chart) {
+            return;
+        }
+
+        const values = state.activities;
+        const max = Math.max(...values, 1);
+
+        chart.innerHTML = values.map((value, index) => {
+            const height = Math.max(
+                8,
+                Math.round((value / max) * 180)
+            );
+
+            return `
+                <div
+                    class="bar"
+                    style="height:${height}px"
+                >
+                    <span>${value}</span>
+                    <div class="bar-label">
+                        ${index + 1} день
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    function updateStats() {
+        document.getElementById("statCourses").textContent =
+            courses.length;
+
+        document.getElementById("statLessons").textContent =
+            state.completedLessons;
+
+        document.getElementById("statTasks").textContent =
+            state.completedTasks;
+
+        document.getElementById("statPoints").textContent =
+            state.points;
+
+        const progress =
+            Math.round(
+                (state.completedLessons / lessons.length) * 100
+            );
+
+        document.getElementById("homeProgress").textContent =
+            progress + "%";
+
+        if (document.getElementById("profilePoints")) {
+            document.getElementById("profilePoints").textContent =
+                state.points;
+        }
+
+        if (document.getElementById("profileCompleted")) {
+            document.getElementById("profileCompleted").textContent =
+                state.completedTasks;
+        }
+    }
+
+    function animateProgressBars() {
+        requestAnimationFrame(() => {
+            document.querySelectorAll(".progress-bar").forEach(bar => {
+                const value = bar.dataset.progress || "0";
+                bar.style.width = value + "%";
+            });
+        });
+    }
+
+    function openModal() {
+        document.getElementById("modalBackdrop")
+            .classList.add("open");
+    }
+
+    function closeModal() {
+        document.getElementById("modalBackdrop")
+            .classList.remove("open");
+    }
+
+    function closeModalOnBackdrop(event) {
+        if (event.target.id === "modalBackdrop") {
+            closeModal();
+        }
+    }
+
+    function toggleAccordion(button) {
+        const item = button.closest(".accordion-item");
+
+        if (item) {
+            item.classList.toggle("open");
+        }
+    }
+
+    function toggleSwitch(button) {
+        button.classList.toggle("on");
+    }
+
+    function openSettingsTab(tab, button) {
+        document.querySelectorAll(".settings-menu button")
+            .forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+
+        document.querySelectorAll(".settings-section")
+            .forEach(section => section.classList.remove("active"));
+
+        const section = document.getElementById(
+            "settings-" + tab
+        );
+
+        if (section) {
+            section.classList.add("active");
+        }
+    }
+
+    function changeTheme(theme) {
+        if (theme === "dark") {
+            document.body.style.background = "#0f172a";
+            document.body.style.color = "#e2e8f0";
+            showNotification("Тёмная тема включена");
+        } else {
+            document.body.style.background = "#f5f7fb";
+            document.body.style.color = "#20242a";
+            showNotification("Светлая тема включена");
+        }
+    }
+
+    function showNotification(message) {
+        const notification = document.getElementById("notification");
+
+        notification.textContent = message;
+        notification.classList.add("show");
+
+        clearTimeout(notification._timer);
+
+        notification._timer = setTimeout(() => {
+            notification.classList.remove("show");
+        }, 2500);
+    }
+
+    function logout() {
+        const confirmed = confirm(
+            "Ты действительно хочешь выйти из аккаунта?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        showNotification("Выход выполнен");
+    }
+
+    function renderHomeTasks() {
+        const container = document.getElementById("homeTasks");
+
+        if (!container) {
+            return;
+        }
+
+        const active = tasks
+            .filter(task => task.status === "active")
+            .slice(0, 3);
+
+        container.innerHTML = active.map(task => `
+            <div class="lesson">
+                <div class="lesson-main">
+                    <div class="lesson-number">!</div>
+
+                    <div>
+                        <h3>${task.title}</h3>
+                        <p>
+                            ${getCourseName(task.course)}
+                            · ${task.points} баллов
+                        </p>
+                    </div>
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="startTask(${task.id})"
+                >
+                    Начать
+                </button>
+            </div>
+        `).join("");
+    }
+
+    function init() {
+        renderCourses();
+        renderLessons();
+        renderTasks();
+        renderHomeTasks();
+        renderProfile();
+        updateStats();
+        animateProgressBars();
+
+        document.querySelectorAll(".page").forEach(page => {
+            if (page.id !== "home") {
+                page.classList.remove("active");
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
 </script>
-
 </body>
 </html>
