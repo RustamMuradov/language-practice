@@ -1,1 +1,959 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
 
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#0d0c14">
+
+<title>Game Zone · Language Practice</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Exo+2:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+  padding:0;
+  background:#0d0c14;
+}
+
+body{
+  overflow-x:hidden;
+  color:#fff;
+  font-family:"Exo 2",sans-serif;
+}
+
+button{
+  font:inherit;
+  appearance:none;
+  border:0;
+}
+
+
+/* =========================================
+   GAME SCREEN
+========================================= */
+
+.game-screen{
+
+  width:100%;
+  min-height:100vh;
+  min-height:100dvh;
+
+  overflow-x:hidden;
+
+  padding:
+    calc(18px + env(safe-area-inset-top))
+    max(16px,env(safe-area-inset-right))
+    calc(35px + env(safe-area-inset-bottom))
+    max(16px,env(safe-area-inset-left));
+
+  background:
+
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(145,83,255,.26),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at 5% 72%,
+      rgba(0,210,176,.15),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 52% 45%,
+      rgba(118,55,188,.10),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      145deg,
+      #0d0c14 0%,
+      #171323 46%,
+      #0d1118 100%
+    );
+
+  isolation:isolate;
+
+  position:relative;
+}
+
+.game-screen::before{
+
+  content:"";
+
+  position:fixed;
+
+  width:430px;
+  height:430px;
+
+  top:-220px;
+  right:-190px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(180,124,255,.20);
+
+  box-shadow:
+    0 0 80px rgba(139,74,255,.13),
+    inset 0 0 60px rgba(190,123,255,.06);
+
+  pointer-events:none;
+
+  z-index:-1;
+}
+
+.game-screen::after{
+
+  content:"";
+
+  position:fixed;
+
+  left:-180px;
+  bottom:-230px;
+
+  width:420px;
+  height:420px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(55,235,190,.12);
+
+  box-shadow:
+    0 0 90px rgba(0,220,185,.08);
+
+  pointer-events:none;
+
+  z-index:-1;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.game-content{
+
+  width:min(660px,100%);
+
+  margin:0 auto;
+
+  position:relative;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.game-topbar{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  min-height:48px;
+
+  margin-bottom:24px;
+}
+
+.game-back{
+
+  width:46px;
+  height:46px;
+
+  border:1px solid rgba(207,181,255,.22);
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,.06);
+
+  color:#e7ddff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:23px;
+
+  backdrop-filter:blur(12px);
+
+  cursor:pointer;
+
+  text-decoration:none;
+}
+
+.game-back:active{
+
+  transform:scale(.92);
+}
+
+.game-brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  padding:8px 13px;
+
+  border:1px solid rgba(181,141,255,.20);
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,.045);
+
+  color:#a88aff;
+
+  font-family:"Orbitron",sans-serif;
+
+  font-size:9px;
+
+  font-weight:700;
+
+  letter-spacing:1.6px;
+
+  text-transform:uppercase;
+}
+
+.game-brand-dot{
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#a66dff;
+
+  box-shadow:
+    0 0 12px rgba(166,109,255,.9);
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.game-hero{
+
+  text-align:center;
+
+  padding:
+    2px 5px 27px;
+}
+
+.game-hero-icon{
+
+  width:66px;
+  height:66px;
+
+  margin:0 auto 19px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:21px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(115,67,170,.36),
+      rgba(46,31,78,.72)
+    );
+
+  border:1px solid rgba(184,139,255,.26);
+
+  box-shadow:
+    0 0 35px rgba(129,72,231,.16),
+    inset 0 1px 0 rgba(255,255,255,.12);
+
+  font-size:32px;
+}
+
+.game-hero h1{
+
+  margin:0;
+
+  font-family:"Orbitron",sans-serif;
+
+  font-size:clamp(33px,9vw,56px);
+
+  line-height:1.06;
+
+  letter-spacing:-1.7px;
+
+  font-weight:800;
+
+  color:#fff;
+}
+
+.game-hero h1 span{
+
+  color:#a873ff;
+}
+
+.game-hero p{
+
+  max-width:570px;
+
+  margin:17px auto 0;
+
+  color:#9e99aa;
+
+  font-size:15px;
+
+  line-height:1.7;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.game-section-label{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+  margin:0 4px 16px;
+
+  color:#bbb5c5;
+
+  font-family:"Orbitron",sans-serif;
+
+  font-size:14px;
+
+  font-weight:700;
+}
+
+.game-section-label::before{
+
+  content:"";
+
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:#a66dff;
+
+  box-shadow:
+    0 0 16px rgba(166,109,255,.85);
+}
+
+
+/* =========================================
+   GAME LIST
+========================================= */
+
+.game-list{
+
+  display:grid;
+
+  gap:17px;
+}
+
+
+/* =========================================
+   GAME CARD
+========================================= */
+
+.game-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  width:100%;
+
+  min-height:181px;
+
+  border:1px solid rgba(255,255,255,.10);
+
+  border-radius:30px;
+
+  padding:28px 28px 25px;
+
+  background:
+
+    radial-gradient(
+      circle at 90% 16%,
+      rgba(174,102,255,.15),
+      transparent 23%
+    ),
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.085),
+      rgba(255,255,255,.035)
+    );
+
+  box-shadow:
+
+    0 18px 50px rgba(0,0,0,.20),
+
+    inset 0 1px 0 rgba(255,255,255,.08);
+
+  backdrop-filter:blur(16px);
+
+  cursor:pointer;
+
+  text-align:left;
+
+  color:#fff;
+}
+
+.game-card:active{
+
+  transform:scale(.975);
+}
+
+.game-card:nth-child(2)::before{
+
+  background:rgba(56,210,173,.11);
+}
+
+.game-card:nth-child(3)::before{
+
+  background:rgba(224,93,178,.11);
+}
+
+.game-card:nth-child(4)::before{
+
+  background:rgba(76,130,255,.12);
+}
+
+.game-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:190px;
+  height:190px;
+
+  right:-130px;
+  bottom:-130px;
+
+  border-radius:50%;
+
+  background:rgba(139,89,226,.13);
+
+  filter:blur(3px);
+}
+
+.game-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:-100px;
+  bottom:-145px;
+
+  width:230px;
+  height:230px;
+
+  border-radius:50%;
+
+  background:rgba(0,211,171,.06);
+
+  filter:blur(8px);
+}
+
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.game-card-content{
+
+  position:relative;
+
+  z-index:1;
+
+  padding-right:65px;
+}
+
+.game-number{
+
+  display:block;
+
+  margin-bottom:13px;
+
+  font-family:"Orbitron",sans-serif;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  letter-spacing:2px;
+
+  color:#a66dff;
+}
+
+.game-card:nth-child(2) .game-number{
+
+  color:#51d7ad;
+}
+
+.game-card:nth-child(3) .game-number{
+
+  color:#e777bd;
+}
+
+.game-card:nth-child(4) .game-number{
+
+  color:#62a4ff;
+}
+
+.game-card h2{
+
+  margin:0 0 9px;
+
+  font-family:"Orbitron","Exo 2",sans-serif;
+
+  font-size:22px;
+
+  line-height:1.18;
+
+  color:#fff;
+
+  font-weight:700;
+}
+
+.game-card p{
+
+  max-width:520px;
+
+  margin:0;
+
+  color:#a7a2af;
+
+  font-size:15px;
+
+  line-height:1.55;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.game-icon{
+
+  position:absolute;
+
+  z-index:2;
+
+  top:25px;
+  right:25px;
+
+  width:54px;
+  height:54px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  font-size:34px;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.game-status{
+
+  position:absolute;
+
+  z-index:2;
+
+  right:25px;
+  bottom:23px;
+
+  padding:8px 14px;
+
+  border:1px solid rgba(255,255,255,.11);
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.055);
+
+  color:#8e8997;
+
+  font-family:"Orbitron",sans-serif;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.game-footer{
+
+  padding:30px 0 10px;
+
+  text-align:center;
+
+  color:#5d5966;
+
+  font-family:"Orbitron",sans-serif;
+
+  font-size:10px;
+
+  letter-spacing:1.5px;
+
+  text-transform:uppercase;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:520px){
+
+  .game-card{
+
+    min-height:175px;
+
+    padding:
+      25px 23px 24px;
+  }
+
+  .game-card h2{
+
+    font-size:19px;
+  }
+
+  .game-card p{
+
+    font-size:14px;
+  }
+
+  .game-icon{
+
+    top:22px;
+    right:20px;
+
+    width:46px;
+    height:46px;
+
+    font-size:29px;
+  }
+
+  .game-status{
+
+    right:20px;
+    bottom:19px;
+
+    padding:7px 11px;
+
+    font-size:9px;
+  }
+
+}
+
+
+@media(max-width:420px){
+
+  .game-screen{
+
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .game-card{
+
+    border-radius:26px;
+
+    min-height:180px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game-screen">
+
+  <div class="game-content">
+
+
+    <!-- TOP BAR -->
+
+    <div class="game-topbar">
+
+      <a
+        href="index.html"
+        class="game-back"
+        aria-label="Назад">
+        ←
+      </a>
+
+
+      <div class="game-brand">
+
+        <span class="game-brand-dot"></span>
+
+        Language Practice
+
+      </div>
+
+
+      <div style="width:46px"></div>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="game-hero">
+
+      <div class="game-hero-icon">
+        🎮
+      </div>
+
+
+      <h1>
+        Играй и <span>учи</span>
+      </h1>
+
+
+      <p>
+        Небольшие языковые игры, которые помогут
+        запоминать слова интереснее и веселее.
+      </p>
+
+    </section>
+
+
+    <!-- GAMES -->
+
+    <section>
+
+      <div class="game-section-label">
+        Выбери игру
+      </div>
+
+
+      <div class="game-list">
+
+
+        <!-- GAME 01 -->
+
+        <button
+          class="game-card"
+          type="button">
+
+          <div class="game-icon">
+            🌸
+          </div>
+
+
+          <div class="game-card-content">
+
+            <span class="game-number">
+              GAME 01
+            </span>
+
+
+            <h2>
+              Поймай перевод
+            </h2>
+
+
+            <p>
+              Быстро находи правильный перевод
+              и набирай очки.
+            </p>
+
+          </div>
+
+
+          <div class="game-status">
+            скоро
+          </div>
+
+        </button>
+
+
+        <!-- GAME 02 -->
+
+        <button
+          class="game-card"
+          type="button">
+
+          <div class="game-icon">
+            🧠
+          </div>
+
+
+          <div class="game-card-content">
+
+            <span class="game-number">
+              GAME 02
+            </span>
+
+
+            <h2>
+              Что пропало?
+            </h2>
+
+
+            <p>
+              Проверь память и вспомни,
+              какое слово исчезло.
+            </p>
+
+          </div>
+
+
+          <div class="game-status">
+            скоро
+          </div>
+
+        </button>
+
+
+        <!-- GAME 03 -->
+
+        <button
+          class="game-card"
+          type="button">
+
+          <div class="game-icon">
+            🔗
+          </div>
+
+
+          <div class="game-card-content">
+
+            <span class="game-number">
+              GAME 03
+            </span>
+
+
+            <h2>
+              Собери пару
+            </h2>
+
+
+            <p>
+              Соедини слова и их правильные
+              переводы на скорость.
+            </p>
+
+          </div>
+
+
+          <div class="game-status">
+            скоро
+          </div>
+
+        </button>
+
+
+        <!-- GAME 04 -->
+
+        <button
+          class="game-card"
+          type="button">
+
+          <div class="game-icon">
+            ⚡
+          </div>
+
+
+          <div class="game-card-content">
+
+            <span class="game-number">
+              GAME 04
+            </span>
+
+
+            <h2>
+              60 секунд
+            </h2>
+
+
+            <p>
+              У тебя есть минута. Сколько
+              правильных ответов ты успеешь дать?
+            </p>
+
+          </div>
+
+
+          <div class="game-status">
+            скоро
+          </div>
+
+        </button>
+
+
+      </div>
+
+    </section>
+
+
+    <footer class="game-footer">
+      Language Practice · Game Zone
+    </footer>
+
+
+  </div>
+
+</div>
+
+
+</body>
+</html>
