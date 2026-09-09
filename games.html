@@ -2914,100 +2914,77 @@ function updatePairHUD() {
 
 function renderPairs() {
 
-    clearChoiceFocus();
+    // Полностью сбрасываем предыдущий выбор
 
+    pairState.selectedWord = null;
+
+    pairState.selectedTranslation = null;
 
     const wordsContainer =
-        document.getElementById(
-            "pairWords"
-        );
+
+        document.getElementById("pairWords");
 
     const translationsContainer =
-        document.getElementById(
-            "pairTranslations"
-        );
 
+        document.getElementById("pairTranslations");
 
     wordsContainer.innerHTML = "";
 
     translationsContainer.innerHTML = "";
 
+    pairState.currentWords.forEach(word => {
 
-    pairState.currentWords
+        const card =
+
+            document.createElement("div");
+
+        card.className = "pair-card";
+
+        card.textContent = word.english;
+
+        card.dataset.id =
+
+            getWordId(word);
+
+        card.addEventListener(
+
+            "click",
+
+            () => selectPairWord(card, word)
+
+        );
+
+        wordsContainer.appendChild(card);
+
+    });
+
+    shuffle(pairState.currentWords)
+
         .forEach(word => {
 
             const card =
-                document.createElement(
-                    "div"
-                );
 
+                document.createElement("div");
 
-            card.className =
-                "pair-card";
+            card.className = "pair-card";
 
-
-            card.textContent =
-                word.english;
-
+            card.textContent = word.russian;
 
             card.dataset.id =
+
                 getWordId(word);
 
-
             card.addEventListener(
+
                 "click",
-                () =>
-                    selectPairWord(
-                        card,
-                        word
-                    )
+
+                () => selectPairTranslation(card, word)
+
             );
 
-
-            wordsContainer.appendChild(
-                card
-            );
+            translationsContainer.appendChild(card);
 
         });
-
-
-    shuffle(
-        pairState.currentWords
-    )
-    .forEach(word => {
-
-        const card =
-            document.createElement(
-                "div"
-            );
-
-
-        card.className =
-            "pair-card";
-
-
-        card.textContent =
-            word.russian;
-
-
-        card.dataset.id =
-            getWordId(word);
-
-
-        card.addEventListener(
-            "click",
-            () =>
-                selectPairTranslation(
-                    card,
-                    word
-                )
-        );
-
-
-        translationsContainer
-            .appendChild(card);
-
-    });
 
 }
 
@@ -3025,79 +3002,104 @@ function getWordId(word) {
 
 function selectPairWord(card, word) {
 
-    if (
-        card.classList.contains(
-            "correct"
-        )
-    ) {
+    if (card.classList.contains("correct")) {
+
         return;
+
     }
 
+    // Повторное нажатие на уже выбранное слово отменяет выбор
+
+    if (
+
+        pairState.selectedWord &&
+
+        pairState.selectedWord.card === card
+
+    ) {
+
+        card.classList.remove("selected");
+
+        pairState.selectedWord = null;
+
+        return;
+
+    }
+
+    // Снимаем предыдущий выбор
 
     document.querySelectorAll(
-        "#pairWords .pair-card"
-    )
-    .forEach(item => {
 
-        item.classList.remove(
-            "selected"
-        );
+        "#pairWords .pair-card"
+
+    ).forEach(item => {
+
+        item.classList.remove("selected");
 
     });
 
-
-    card.classList.add(
-        "selected"
-    );
-
+    card.classList.add("selected");
 
     pairState.selectedWord = {
-        card,
-        word
-    };
 
+        card,
+
+        word
+
+    };
 
     checkPair();
 
 }
 
 
-function selectPairTranslation(
-    card,
-    word
-) {
+function selectPairTranslation(card, word) {
 
-    if (
-        card.classList.contains(
-            "correct"
-        )
-    ) {
+    if (card.classList.contains("correct")) {
+
         return;
+
     }
 
+    // Повторное нажатие на уже выбранный перевод отменяет выбор
+
+    if (
+
+        pairState.selectedTranslation &&
+
+        pairState.selectedTranslation.card === card
+
+    ) {
+
+        card.classList.remove("selected");
+
+        pairState.selectedTranslation = null;
+
+        return;
+
+    }
+
+    // Снимаем предыдущий выбор
 
     document.querySelectorAll(
-        "#pairTranslations .pair-card"
-    )
-    .forEach(item => {
 
-        item.classList.remove(
-            "selected"
-        );
+        "#pairTranslations .pair-card"
+
+    ).forEach(item => {
+
+        item.classList.remove("selected");
 
     });
 
-
-    card.classList.add(
-        "selected"
-    );
-
+    card.classList.add("selected");
 
     pairState.selectedTranslation = {
-        card,
-        word
-    };
 
+        card,
+
+        word
+
+    };
 
     checkPair();
 
