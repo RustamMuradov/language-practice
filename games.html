@@ -3,1558 +3,3775 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#090712">
 <title>Game Zone — Language Practice</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg:#120f18;
-  --panel:rgba(30,24,39,.86);
-  --panel2:rgba(41,33,54,.9);
-  --line:rgba(255,255,255,.09);
-  --text:#f8f4fb;
-  --muted:#b9afc5;
-  --pink:#ff8fc8;
-  --purple:#b49be5;
-  --cyan:#8fe8ff;
-  --green:#8de6b2;
-  --yellow:#ffd978;
-  --red:#ff8f9f;
-  --shadow:0 24px 70px rgba(0,0,0,.42);
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    color: #f5f1ff;
+    background:
+        radial-gradient(circle at 85% 5%, rgba(130, 47, 255, .28), transparent 28%),
+        radial-gradient(circle at 5% 55%, rgba(0, 255, 214, .10), transparent 25%),
+        radial-gradient(circle at 90% 85%, rgba(255, 57, 185, .12), transparent 25%),
+        #090712;
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .55;
+    background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+    z-index: -4;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    right: -260px;
+    top: -250px;
+    border-radius: 50%;
+    border: 1px solid rgba(159, 83, 255, .30);
+    box-shadow:
+        0 0 80px rgba(130, 54, 255, .15),
+        inset 0 0 80px rgba(130, 54, 255, .08);
+    pointer-events: none;
+    z-index: -3;
+}
+
+/* декоративные линии */
+
+.neon-orbit {
+    position: fixed;
+    width: 800px;
+    height: 430px;
+    right: -260px;
+    top: -100px;
+    border: 1px solid rgba(163, 77, 255, .35);
+    border-radius: 50%;
+    transform: rotate(18deg);
+    pointer-events: none;
+    z-index: -2;
+}
+
+.neon-orbit::after {
+    content: "";
+    position: absolute;
+    inset: 50px -20px 50px 80px;
+    border: 1px solid rgba(221, 75, 255, .18);
+    border-radius: 50%;
+}
+
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .035;
+    z-index: 20;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,.8) 3px
+        );
+}
+
+/* =========================
+   APP
+========================= */
+
+.app {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 22px 30px 45px;
+    position: relative;
+}
+
+@media (max-width: 600px) {
+    .app {
+        padding: 16px 22px 35px;
+    }
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.back-button {
+    width: 78px;
+    height: 62px;
+    border-radius: 22px;
+    border: 1px solid rgba(213, 187, 255, .20);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+    color: #f7efff;
+    font-size: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+        inset 0 0 25px rgba(255,255,255,.025),
+        0 0 25px rgba(107, 44, 255, .08);
+    transition: .2s ease;
+}
+
+.back-button:hover {
+    border-color: rgba(183, 105, 255, .55);
+    box-shadow:
+        0 0 25px rgba(143, 65, 255, .25),
+        inset 0 0 20px rgba(255,255,255,.04);
+}
+
+.back-button:active {
+    transform: scale(.94);
+}
+
+.brand {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 25px;
+    border-radius: 30px;
+    border: 1px solid rgba(177, 95, 255, .30);
+    background: rgba(35, 19, 60, .42);
+    box-shadow:
+        inset 0 0 25px rgba(145, 63, 255, .08),
+        0 0 30px rgba(126, 46, 255, .08);
+}
+
+.brand-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #9b48ff;
+    box-shadow:
+        0 0 7px #9b48ff,
+        0 0 18px #9b48ff;
+    animation: pulseDot 1.8s infinite;
+}
+
+.brand-text {
+    font-family: "Orbitron", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #b783ff;
+    white-space: nowrap;
+}
+
+@keyframes pulseDot {
+    50% {
+        opacity: .55;
+        transform: scale(.85);
+    }
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 45px;
+}
+
+.controller {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    border-radius: 32px;
+    border: 1px solid rgba(172, 78, 255, .50);
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(144, 60, 255, .25),
+            rgba(47, 17, 74, .30)
+        );
+    box-shadow:
+        0 0 30px rgba(127, 42, 255, .20),
+        inset 0 0 35px rgba(138, 47, 255, .13);
+}
+
+.hero h1 {
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+    font-size: clamp(43px, 8vw, 64px);
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    color: #a55cff;
+    text-shadow:
+        0 0 12px rgba(159, 74, 255, .60),
+        0 0 30px rgba(159, 74, 255, .20);
+}
+
+.hero p {
+    max-width: 660px;
+    margin: 24px auto 0;
+    font-size: 20px;
+    line-height: 1.7;
+    color: rgba(225, 218, 238, .67);
+    font-weight: 500;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.choose-title {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 25px;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.choose-title::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #a34cff;
+    box-shadow:
+        0 0 9px #a34cff,
+        0 0 24px rgba(163, 76, 255, .7);
+}
+
+/* =========================
+   GAME CARDS
+========================= */
+
+.games {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.game-card {
+    position: relative;
+    min-height: 225px;
+    padding: 35px 38px 30px;
+    overflow: hidden;
+    border-radius: 36px;
+    border: 1px solid rgba(225, 201, 255, .17);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(39, 29, 54, .78),
+            rgba(18, 16, 29, .88)
+        );
+    box-shadow:
+        inset 0 0 55px rgba(255,255,255,.018),
+        0 15px 50px rgba(0,0,0,.22);
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+    cursor: pointer;
+}
+
+.game-card::before {
+    content: "";
+    position: absolute;
+    left: -90px;
+    bottom: -100px;
+    width: 320px;
+    height: 220px;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: .45;
+    pointer-events: none;
+}
+
+.game-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            120deg,
+            transparent 0%,
+            rgba(255,255,255,.025) 50%,
+            transparent 100%
+        );
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(190, 117, 255, .38);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.30),
+        0 0 35px rgba(126, 51, 255, .12),
+        inset 0 0 50px rgba(255,255,255,.025);
+}
+
+.game-card:active {
+    transform: scale(.985);
+}
+
+/* разные свечения */
+
+.game-card.pink::before {
+    background: #00dcbf;
+}
+
+.game-card.green::before {
+    background: #00dcbf;
+}
+
+.game-card.purple::before {
+    background: #d13eff;
+}
+
+.game-card.blue::before {
+    background: #197dff;
+}
+
+.game-number {
+    font-family: "Orbitron", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+}
+
+.pink .game-number {
+    color: #ad5cff;
+}
+
+.green .game-number {
+    color: #00d9b7;
+}
+
+.purple .game-number {
+    color: #df62ff;
+}
+
+.blue .game-number {
+    color: #3c9dff;
+}
+
+.game-card h2 {
+    position: relative;
+    z-index: 2;
+    margin: 0 105px 13px 0;
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 900;
+}
+
+.game-card p {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+    margin: 0 105px 25px 0;
+    color: rgba(221, 214, 234, .67);
+    font-size: 19px;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.game-icon {
+    position: absolute;
+    right: 43px;
+    top: 42px;
+    z-index: 3;
+    font-size: 51px;
+    filter:
+        drop-shadow(0 0 10px rgba(255, 101, 218, .4))
+        drop-shadow(0 0 20px rgba(255, 101, 218, .18));
+}
+
+.game-button {
+    position: absolute;
+    right: 34px;
+    bottom: 28px;
+    z-index: 4;
+    min-width: 108px;
+    padding: 11px 18px;
+    border-radius: 25px;
+    border: 1px solid rgba(222, 194, 255, .18);
+    background: rgba(255,255,255,.025);
+    color: rgba(229, 222, 240, .58);
+    font-family: "Orbitron", sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.game-card.available .game-button {
+    color: #fff;
+    border-color: rgba(180, 94, 255, .45);
+    background: rgba(131, 46, 220, .14);
+    box-shadow: 0 0 18px rgba(135, 53, 255, .13);
+}
+
+.game-card.available .game-button:hover {
+    background: rgba(151, 62, 255, .25);
+}
+
+@media (max-width: 600px) {
+
+    .topbar {
+        grid-template-columns: 65px 1fr 65px;
+    }
+
+    .back-button {
+        width: 62px;
+        height: 56px;
+        font-size: 29px;
+    }
+
+    .brand {
+        padding: 11px 17px;
+    }
+
+    .brand-text {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .game-card {
+        min-height: 230px;
+        padding: 29px 25px;
+        border-radius: 30px;
+    }
+
+    .game-card h2 {
+        font-size: 25px;
+        margin-right: 65px;
+    }
+
+    .game-card p {
+        font-size: 17px;
+        margin-right: 35px;
+    }
+
+    .game-icon {
+        right: 24px;
+        top: 32px;
+        font-size: 42px;
+    }
+
+    .game-button {
+        right: 22px;
+        bottom: 20px;
+    }
+}
+
+/* =========================
+   GAME SCREEN
+========================= */
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+.game-screen-header {
+    text-align: center;
+    margin: 25px 0 30px;
+}
+
+.game-screen-label {
+    font-family: "Orbitron", sans-serif;
+    color: #a65aff;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.game-screen-header h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.game-screen-header p {
+    color: rgba(225,218,238,.65);
+    font-size: 17px;
+}
+
+.game-panel {
+    padding: 30px;
+    border-radius: 32px;
+    border: 1px solid rgba(212, 185, 255, .15);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 27, 49, .88),
+            rgba(13, 12, 21, .93)
+        );
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.30),
+        inset 0 0 50px rgba(161, 68, 255, .04);
+}
+
+@media (max-width: 600px) {
+    .game-panel {
+        padding: 22px 18px;
+        border-radius: 27px;
+    }
+}
+
+/* =========================
+   HUD
+========================= */
+
+.hud {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.hud-item {
+    padding: 14px 10px;
+    text-align: center;
+    border-radius: 18px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.07);
+}
+
+.hud-label {
+    display: block;
+    color: rgba(221,214,234,.48);
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
+.hud-value {
+    font-size: 21px;
+    font-weight: 900;
+}
+
+/* =========================
+   QUESTION
+========================= */
+
+.question-box {
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.question-word {
+    font-size: clamp(32px, 7vw, 50px);
+    font-weight: 900;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.question-subtitle {
+    color: rgba(222,214,235,.52);
+    font-size: 14px;
+}
+
+/* =========================
+   ANSWERS
+========================= */
+
+.answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.answer {
+    position: relative;
+    min-height: 72px;
+    border-radius: 21px;
+    border: 1px solid rgba(220, 195, 255, .13);
+    background: rgba(255,255,255,.035);
+    color: #f4effb;
+    padding: 15px;
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .18s ease;
 }
 
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  min-height:100%;
-}
-
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 10% 10%,rgba(255,143,200,.15),transparent 28%),
-    radial-gradient(circle at 90% 15%,rgba(180,155,229,.13),transparent 28%),
-    radial-gradient(circle at 50% 100%,rgba(143,232,255,.08),transparent 32%),
-    var(--bg);
-  overflow-x:hidden;
-}
-
-button,select{
-  font:inherit;
-}
-
-button{
-  -webkit-tap-highlight-color:transparent;
-}
-
-.app{
-  width:min(1100px,calc(100% - 28px));
-  margin:0 auto;
-  padding:24px 0 60px;
-}
-
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:18px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.brand-icon{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#ff8fc8,#b49be5);
-  box-shadow:0 12px 30px rgba(255,143,200,.22);
-  font-size:23px;
-}
-
-.brand-title{
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:-.4px;
-}
-
-.brand-sub{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:2px;
-}
-
-.back-btn{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.05);
-  color:var(--text);
-  padding:11px 15px;
-  border-radius:14px;
-  cursor:pointer;
-  transition:.2s ease;
-}
-
-.back-btn:hover{
-  background:rgba(255,255,255,.09);
-  transform:translateY(-1px);
-}
-
-.hero{
-  background:
-    linear-gradient(135deg,rgba(255,143,200,.13),rgba(180,155,229,.08)),
-    var(--panel);
-  border:1px solid var(--line);
-  border-radius:28px;
-  padding:24px;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(18px);
-  margin-bottom:18px;
-}
-
-.hero h1{
-  margin:0 0 7px;
-  font-size:clamp(28px,5vw,44px);
-  letter-spacing:-1.2px;
-}
-
-.hero p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.55;
-}
-
-.language-bar{
-  margin-top:18px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.lang-btn{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.045);
-  color:var(--muted);
-  padding:9px 13px;
-  border-radius:12px;
-  cursor:pointer;
-  transition:.2s ease;
+.answer:hover {
+    border-color: rgba(168, 83, 255, .50);
+    background: rgba(141, 57, 255, .09);
+    transform: translateY(-2px);
 }
 
-.lang-btn.active{
-  background:linear-gradient(135deg,rgba(255,143,200,.18),rgba(180,155,229,.18));
-  border-color:rgba(255,143,200,.4);
-  color:#fff;
+.answer:active {
+    transform: scale(.97);
 }
 
-.games{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:16px;
+.answer.correct {
+    border-color: #00e1bd;
+    background: rgba(0,225,189,.12);
+    box-shadow:
+        0 0 25px rgba(0,225,189,.15);
+    animation: correctPop .4s ease;
 }
 
-.game-card{
-  position:relative;
-  overflow:hidden;
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:25px;
-  padding:21px;
-  box-shadow:0 16px 45px rgba(0,0,0,.26);
+.answer.wrong {
+    border-color: #ff4d9e;
+    background: rgba(255,77,158,.10);
+    animation: shake .35s ease;
 }
 
-.game-card::before{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  right:-90px;
-  top:-90px;
-  background:radial-gradient(circle,rgba(255,143,200,.12),transparent 68%);
-  pointer-events:none;
+@keyframes correctPop {
+    50% {
+        transform: scale(1.045);
+    }
 }
 
-.game-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:10px;
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
 }
 
-.game-icon{
-  width:50px;
-  height:50px;
-  border-radius:17px;
-  display:grid;
-  place-items:center;
-  font-size:25px;
-  background:rgba(255,255,255,.06);
-  border:1px solid var(--line);
-}
-
-.game-title{
-  flex:1;
-}
-
-.game-title h2{
-  margin:0;
-  font-size:20px;
-}
-
-.game-title p{
-  margin:4px 0 0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.45;
-}
+/* =========================
+   COMBO
+========================= */
 
-.play-btn{
-  border:0;
-  color:#17121b;
-  background:linear-gradient(135deg,#ff9dce,#c4aaf0);
-  padding:11px 15px;
-  border-radius:14px;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(255,143,200,.16);
-  transition:.2s ease;
-}
+.combo {
+    height: 42px;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #ff75d0;
+    text-shadow: 0 0 15px rgba(255, 84, 200, .5);
+}
 
-.play-btn:hover{
-  transform:translateY(-2px);
+.combo.pop {
+    animation: comboPop .4s ease;
 }
 
-.play-btn:active{
-  transform:translateY(0) scale(.98);
+@keyframes comboPop {
+    50% {
+        transform: scale(1.25);
+    }
 }
 
-.game-screen{
-  display:none;
-  margin-top:14px;
-  padding:18px;
-  border-radius:20px;
-  background:rgba(0,0,0,.15);
-  border:1px solid var(--line);
-}
+/* =========================
+   MEMORY GAME
+========================= */
 
-.game-screen.active{
-  display:block;
+.memory-grid {
+    display: grid;
+    gap: 12px;
 }
 
-.game-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:14px;
+.memory-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+    transition: .2s;
 }
+
+.memory-row.missing {
+    border-color: rgba(164, 77, 255, .45);
+    background: rgba(132, 50, 255, .07);
+}
 
-.game-status{
-  color:var(--muted);
-  font-size:12px;
+.memory-word {
+    font-weight: 900;
 }
 
-.score{
-  font-weight:900;
-  color:var(--yellow);
+.memory-translation {
+    color: rgba(225,218,238,.67);
+    font-weight: 700;
 }
 
-.word-box{
-  min-height:125px;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  border-radius:20px;
-  padding:20px;
-  background:
-    linear-gradient(135deg,rgba(255,143,200,.09),rgba(180,155,229,.09));
-  border:1px solid rgba(255,255,255,.08);
-  margin-bottom:14px;
+.memory-hidden {
+    color: #a65cff;
+    font-family: "Orbitron", sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
-.word-box .word{
-  font-size:clamp(25px,6vw,40px);
-  font-weight:900;
-  letter-spacing:-.8px;
-  word-break:break-word;
+.memory-options {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
 
-.word-box .hint{
-  margin-top:5px;
-  color:var(--muted);
-  font-size:12px;
+.memory-start {
+    margin-top: 22px;
+    width: 100%;
 }
 
-.answers{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
-}
+/* =========================
+   MEMORY SETTINGS
+========================= */
 
-.answer,
-.pair-option,
-.memory-option,
-.speed-answer{
-  min-height:52px;
-  border-radius:15px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.045);
-  color:var(--text);
-  padding:12px 13px;
-  cursor:pointer;
-  transition:.16s ease;
-  text-align:left;
+.memory-settings {
+    display: grid;
+    gap: 7px;
+    margin-bottom: 12px;
+    padding: 13px 14px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
 }
 
-.answer:hover,
-.pair-option:hover,
-.memory-option:hover,
-.speed-answer:hover{
-  background:rgba(255,255,255,.08);
-  border-color:rgba(255,255,255,.16);
-  transform:translateY(-1px);
+.memory-settings label {
+    color: rgba(221,214,234,.52);
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
 }
 
-.answer.correct,
-.pair-option.correct,
-.memory-option.correct,
-.speed-answer.correct{
-  background:rgba(141,230,178,.15);
-  border-color:rgba(141,230,178,.48);
-  color:#caffdc;
+.memory-settings select {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(220,195,255,.13);
+    background: rgba(255,255,255,.035);
+    color: #f4effb;
+    padding: 8px 12px;
+    font-family: "Nunito", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    outline: none;
 }
 
-.answer.wrong,
-.pair-option.wrong,
-.memory-option.wrong,
-.speed-answer.wrong{
-  background:rgba(255,143,159,.12);
-  border-color:rgba(255,143,159,.5);
-  animation:shake .25s ease;
+.memory-settings select:focus {
+    border-color: rgba(168,83,255,.50);
 }
 
-.answer.disabled{opacity:.7}
-.pair-option.disabled{opacity:.72}
-.speed-answer.disabled{opacity:.72}
+/* =========================
+   PAIR GAME
+========================= */
 
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  75%{transform:translateX(5px)}
+.pair-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
 }
 
-.feedback{
-  min-height:22px;
-  margin-top:10px;
-  font-size:13px;
-  font-weight:800;
+.pair-column-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(224,215,239,.5);
+    margin-bottom: 10px;
 }
 
-.feedback.good{color:var(--green)}
-.feedback.bad{color:var(--red)}
-
-.combo{
-  color:var(--yellow);
-  font-weight:900;
-}
-
-.pair-wrap{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
+.pair-card {
+    padding: 20px 15px;
+    min-height: 72px;
+    margin-bottom: 10px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: rgba(255,255,255,.035);
+    text-align: center;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.pair-word{
-  padding:22px;
-  border-radius:18px;
-  background:rgba(255,255,255,.045);
-  border:1px solid var(--line);
-  text-align:center;
-  font-size:27px;
-  font-weight:900;
+.pair-card:hover {
+    border-color: rgba(168, 83, 255, .45);
 }
 
-.pair-options{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
+.pair-card.selected {
+    border-color: #a75cff;
+    box-shadow: 0 0 20px rgba(164, 77, 255, .16);
+    background: rgba(155, 68, 255, .10);
 }
 
-.memory-settings{
-  display:grid;gap:7px;margin-bottom:12px;padding:13px 14px;border-radius:18px;
-  background:linear-gradient(135deg,#f7f2ff,#fff8fb);border:1px solid #eadff0;
-}
-.memory-settings label{
-  color:#6f5d8b;font-size:12px;font-weight:800;
+.pair-card.correct {
+    border-color: #00e1bd;
+    background: rgba(0,225,189,.10);
+    animation: flyAway .45s ease forwards;
 }
-.memory-settings select{
-  width:100%;min-height:46px;border:1px solid #e5d9eb;border-radius:15px;
-  background:rgba(255,255,255,.9);color:#4d4350;padding:0 13px;font-size:13px;font-weight:700;
-  outline:none;cursor:pointer;
-}
-.memory-settings select:focus{border-color:#b49be5;box-shadow:0 0 0 3px rgba(155,136,233,.12)}
 
-.memory-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
+.pair-card.wrong {
+    animation: shake .35s ease;
+    border-color: #ff4d9e;
 }
 
-.memory-card{
-  min-height:88px;
-  padding:14px;
-  border-radius:17px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.045);
+@keyframes flyAway {
+    to {
+        opacity: 0;
+        transform: translateY(-25px) scale(.85) rotate(3deg);
+    }
 }
 
-.memory-card .en{
-  font-weight:900;
-  margin-bottom:6px;
-}
+/* =========================
+   60 SEC
+========================= */
 
-.memory-card .ru{
-  color:var(--muted);
-  font-size:12px;
+.speed-timer {
+    text-align: center;
+    margin: 15px 0 25px;
 }
 
-.memory-card.missing .ru{
-  color:var(--pink);
-  font-weight:900;
-  letter-spacing:1px;
+.speed-time {
+    font-family: "Orbitron", sans-serif;
+    font-size: 46px;
+    font-weight: 900;
+    color: #9d5cff;
+    text-shadow: 0 0 25px rgba(155, 82, 255, .4);
 }
 
-.memory-options{
-  margin-top:12px;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
+.speed-progress {
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.07);
+    overflow: hidden;
+    margin-top: 14px;
 }
 
-.memory-option{
-  text-align:center;
+.speed-progress-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #8c45ff, #ef56c4);
+    transform-origin: left;
+    transition: width 1s linear;
 }
 
-.speed-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
+.speed-score {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 20px;
 }
 
-.timer{
-  font-size:27px;
-  font-weight:1000;
-  color:var(--cyan);
+.start-button,
+.restart-button {
+    width: 100%;
+    min-height: 58px;
+    border: 0;
+    border-radius: 20px;
+    background:
+        linear-gradient(
+            90deg,
+            #7737d7,
+            #b64ce6
+        );
+    color: white;
+    font-family: "Orbitron", sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow:
+        0 10px 35px rgba(126, 49, 218, .22),
+        inset 0 1px 0 rgba(255,255,255,.18);
+    transition: .2s;
 }
 
-.speed-score{
-  font-weight:900;
+.start-button:hover,
+.restart-button:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
 }
 
-.speed-word{
-  text-align:center;
-  font-size:31px;
-  font-weight:1000;
-  padding:16px 8px;
+.start-button:active,
+.restart-button:active {
+    transform: scale(.98);
 }
 
-.speed-answers{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
-}
+/* =========================
+   RESULT
+========================= */
 
-.result{
-  margin-top:13px;
-  padding:15px;
-  border-radius:17px;
-  background:rgba(255,255,255,.045);
-  border:1px solid var(--line);
+.result {
+    text-align: center;
+    padding: 25px 10px 10px;
 }
 
-.result-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:8px;
-  margin-top:10px;
+.result-trophy {
+    font-size: 65px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 20px rgba(255, 192, 70, .25));
 }
 
-.result-item{
-  padding:10px;
-  border-radius:13px;
-  background:rgba(255,255,255,.04);
-  text-align:center;
+.result h2 {
+    margin: 0 0 25px;
+    font-size: 31px;
 }
 
-.result-item strong{
-  display:block;
-  font-size:20px;
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
-.result-item span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
+.result-stat {
+    padding: 20px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.07);
 }
 
-.small-btn{
-  margin-top:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.05);
-  color:var(--text);
-  padding:10px 13px;
-  border-radius:12px;
-  cursor:pointer;
+.result-stat strong {
+    display: block;
+    font-size: 27px;
+    margin-bottom: 4px;
 }
 
-.small-btn:hover{
-  background:rgba(255,255,255,.09);
+.result-stat span {
+    color: rgba(225,218,238,.5);
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.hidden{
-  display:none!important;
-}
+/* =========================
+   TOAST
+========================= */
 
-@keyframes pop{
-  0%{transform:scale(.94);opacity:.6}
-  100%{transform:scale(1);opacity:1}
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translate(-50%, 100px);
+    padding: 14px 22px;
+    border-radius: 20px;
+    background: rgba(26, 18, 37, .94);
+    border: 1px solid rgba(186, 103, 255, .32);
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.35),
+        0 0 30px rgba(137, 56, 255, .13);
+    color: white;
+    font-weight: 800;
+    z-index: 100;
+    opacity: 0;
+    transition: .3s ease;
 }
 
-.pop{
-  animation:pop .22s ease;
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
 }
-
-.answer:focus{outline:3px solid rgba(155,136,233,.42);outline-offset:3px}
-.pair-option:focus{outline:3px solid rgba(155,136,233,.42);outline-offset:3px}
-.memory-option:focus{outline:3px solid rgba(155,136,233,.42);outline-offset:3px}
-.speed-answer:focus{outline:3px solid rgba(155,136,233,.42);outline-offset:3px}
-
-@media(max-width:760px){
-  .games{
-    grid-template-columns:1fr;
-  }
-
-  .hero{
-    padding:20px;
-  }
 
-  .answers,
-  .pair-options,
-  .memory-options,
-  .speed-answers{
-    grid-template-columns:1fr;
-  }
+/* =========================
+   FOOTER
+========================= */
 
-  .memory-grid{
-    grid-template-columns:1fr;
-  }
-
-  .result-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .game-head{
-    align-items:center;
-  }
-
-  .play-btn{
-    padding:10px 12px;
-  }
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: rgba(211, 202, 225, .43);
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
 }
-
-@media(max-width:450px){
-  .app{
-    width:min(100% - 18px,1100px);
-    padding-top:14px;
-  }
-
-  .topbar{
-    align-items:flex-start;
-  }
-
-  .brand-title{
-    font-size:19px;
-  }
-
-  .brand-icon{
-    width:43px;
-    height:43px;
-    border-radius:14px;
-  }
-
-  .back-btn{
-    padding:9px 11px;
-    font-size:12px;
-  }
 
-  .game-card{
-    padding:15px;
-  }
+/* =========================
+   HIDDEN
+========================= */
 
-  .game-screen{
-    padding:13px;
-  }
+.hidden {
+    display: none !important;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="neon-orbit"></div>
+<div class="noise"></div>
 
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-icon">🎮</div>
-      <div>
-        <div class="brand-title">Game Zone</div>
-        <div class="brand-sub">Language Practice</div>
-      </div>
-    </div>
+<main class="app">
 
-    <button class="back-btn" onclick="location.href='index.html'">← Назад</button>
-  </div>
+    <!-- =====================
+         TOP
+    ====================== -->
 
-  <section class="hero">
-    <h1>Игры для запоминания</h1>
-    <p>
-      Тренируй английские и корейские слова через быстрые мини-игры.
-      Выбирай режим и попробуй набрать свой лучший результат.
-    </p>
+    <header class="topbar">
 
-    <div class="language-bar">
-      <button class="lang-btn active" data-lang="en-ru">🇬🇧 Английский → русский</button>
-      <button class="lang-btn" data-lang="ko-ru">🇰🇷 Корейский → русский</button>
-      <button class="lang-btn" data-lang="ko-en">🇰🇷 Корейский → английский</button>
-    </div>
-  </section>
+        <button class="back-button" id="backButton" aria-label="Назад">
+            ←
+        </button>
 
-  <section class="games">
-
-    <!-- GAME 1 -->
-    <article class="game-card">
-      <div class="game-head">
-        <div class="game-icon">🎯</div>
-
-        <div class="game-title">
-          <h2>Поймай перевод</h2>
-          <p>Увидь слово и как можно быстрее выбери правильный перевод.</p>
+        <div class="brand">
+            <span class="brand-dot"></span>
+            <span class="brand-text">LANGUAGE PRACTICE</span>
         </div>
 
-        <button class="play-btn" id="catchStart">Играть</button>
-      </div>
+        <div></div>
 
-      <div class="game-screen" id="catchPlay">
-
-        <div class="game-top">
-          <div class="game-status" id="catchProgress">1 / 10</div>
-          <div class="score" id="catchScore">0 очков</div>
-        </div>
-
-        <div class="word-box">
-          <div>
-            <div class="word" id="catchWord">—</div>
-            <div class="hint">Выбери правильный перевод</div>
-          </div>
-        </div>
-
-        <div class="answers" id="catchAnswers"></div>
-
-        <div class="feedback" id="catchFeedback"></div>
-        <div class="combo" id="catchCombo"></div>
-
-      </div>
-    </article>
+    </header>
 
 
-    <!-- GAME 2 -->
-    <article class="game-card">
-      <div class="game-head">
-        <div class="game-icon">🌸</div>
+    <!-- =====================
+         HOME SCREEN
+    ====================== -->
 
-        <div class="game-title">
-          <h2>Собери пару</h2>
-          <p>Соедини слово с правильным переводом.</p>
-        </div>
+    <section id="homeScreen" class="screen active">
 
-        <button class="play-btn" id="pairStart">Играть</button>
-      </div>
+        <div class="hero">
 
-      <div class="game-screen" id="pairPlay">
-
-        <div class="game-top">
-          <div class="game-status" id="pairProgress">1 / 10</div>
-          <div class="score" id="pairScore">0 очков</div>
-        </div>
-
-        <div class="pair-wrap">
-          <div class="pair-word" id="pairWord">—</div>
-          <div class="pair-options" id="pairOptions"></div>
-        </div>
-
-        <div class="feedback" id="pairFeedback"></div>
-
-      </div>
-    </article>
-
-
-    <!-- GAME 3 -->
-    <article class="game-card">
-      <div class="game-head">
-        <div class="game-icon">🧠</div>
-
-        <div class="game-title">
-          <h2>Запомни слово</h2>
-          <p>Запомни пары, а затем найди исчезнувший перевод.</p>
-        </div>
-
-        <button class="play-btn" id="memoryStart">Играть</button>
-      </div>
-
-      <div class="game-screen" id="memoryPlay">
-
-        <div class="memory-settings">
-          <label for="memoryTimeSelect">Время на запоминание</label>
-          <select id="memoryTimeSelect" aria-label="Время на запоминание">
-            <option value="0.5">0.5 секунды</option>
-            <option value="1">1 секунда</option>
-            <option value="1.5">1.5 секунды</option>
-            <option value="2" selected>2 секунды</option>
-            <option value="2.5">2.5 секунды</option>
-            <option value="3">3 секунды</option>
-          </select>
-        </div>
-
-        <div class="game-top">
-          <div class="game-status" id="memoryProgress">1 / 10</div>
-          <div class="score" id="memoryScore">0 очков</div>
-        </div>
-
-        <div class="memory-grid" id="memoryGrid"></div>
-
-        <div class="memory-options" id="memoryOptions"></div>
-
-        <div class="feedback" id="memoryFeedback"></div>
-
-      </div>
-    </article>
-
-
-    <!-- GAME 4 -->
-    <article class="game-card">
-      <div class="game-head">
-        <div class="game-icon">⚡</div>
-
-        <div class="game-title">
-          <h2>60 секунд</h2>
-          <p>Отвечай как можно быстрее и постарайся побить свой рекорд.</p>
-        </div>
-
-        <button class="play-btn" id="speedStart">Играть</button>
-      </div>
-
-      <div class="game-screen" id="speedPlay">
-
-        <div class="speed-head">
-          <div class="timer" id="speedTimer">60</div>
-          <div class="speed-score" id="speedScore">0 очков</div>
-        </div>
-
-        <div class="speed-word" id="speedWord">—</div>
-
-        <div class="speed-answers" id="speedAnswers"></div>
-
-        <div class="feedback" id="speedFeedback"></div>
-
-        <div class="result hidden" id="speedResult">
-          <strong>Раунд закончен!</strong>
-
-          <div class="result-grid">
-            <div class="result-item">
-              <strong id="resultCorrect">0</strong>
-              <span>правильно</span>
+            <div class="controller">
+                🎮
             </div>
 
-            <div class="result-item">
-              <strong id="resultErrors">0</strong>
-              <span>ошибок</span>
-            </div>
+            <h1>
+                Играй и <span>учи</span>
+            </h1>
 
-            <div class="result-item">
-              <strong id="resultAccuracy">0%</strong>
-              <span>точность</span>
-            </div>
+            <p>
+                Небольшие языковые игры, которые помогут
+                запоминать слова интереснее и веселее.
+            </p>
 
-            <div class="result-item">
-              <strong id="resultCombo">0</strong>
-              <span>лучшее комбо</span>
-            </div>
-          </div>
-
-          <button class="small-btn" id="speedAgain">Попробовать ещё раз</button>
         </div>
 
-      </div>
-    </article>
 
-  </section>
+        <div class="choose-title">
+            Выбери игру
+        </div>
 
-</div>
+
+        <div class="games">
+
+            <!-- GAME 01 -->
+
+            <article class="game-card pink available" data-game="catch">
+
+                <div class="game-number">
+                    GAME 01
+                </div>
+
+                <h2>
+                    Поймай перевод
+                </h2>
+
+                <p>
+                    Быстро находи правильный перевод
+                    и набирай очки.
+                </p>
+
+                <div class="game-icon">
+                    🌸
+                </div>
+
+                <button class="game-button">
+                    ИГРАТЬ
+                </button>
+
+            </article>
+
+
+            <!-- GAME 02 -->
+
+            <article class="game-card green available" data-game="memory">
+
+                <div class="game-number">
+                    GAME 02
+                </div>
+
+                <h2>
+                    Что пропало?
+                </h2>
+
+                <p>
+                    Проверь память и вспомни,
+                    какое слово исчезло.
+                </p>
+
+                <div class="game-icon">
+                    🧠
+                </div>
+
+                <button class="game-button">
+                    ИГРАТЬ
+                </button>
+
+            </article>
+
+
+            <!-- GAME 03 -->
+
+            <article class="game-card purple available" data-game="pairs">
+
+                <div class="game-number">
+                    GAME 03
+                </div>
+
+                <h2>
+                    Собери пару
+                </h2>
+
+                <p>
+                    Соедини слова и их правильные
+                    переводы на скорость.
+                </p>
+
+                <div class="game-icon">
+                    🔗
+                </div>
+
+                <button class="game-button">
+                    ИГРАТЬ
+                </button>
+
+            </article>
+
+
+            <!-- GAME 04 -->
+
+            <article class="game-card blue available" data-game="speed">
+
+                <div class="game-number">
+                    GAME 04
+                </div>
+
+                <h2>
+                    60 секунд
+                </h2>
+
+                <p>
+                    У тебя есть минута.
+                    Сколько правильных ответов ты успеешь дать?
+                </p>
+
+                <div class="game-icon">
+                    ⚡
+                </div>
+
+                <button class="game-button">
+                    ИГРАТЬ
+                </button>
+
+            </article>
+
+        </div>
+
+
+        <div class="footer">
+            LANGUAGE PRACTICE · GAME ZONE
+        </div>
+
+    </section>
+
+
+    <!-- =====================
+         GAME SCREEN
+    ====================== -->
+
+    <section id="gameScreen" class="screen">
+
+        <div class="game-screen-header">
+
+            <div class="game-screen-label" id="gameLabel">
+                GAME 01
+            </div>
+
+            <h2 id="gameTitle">
+                Поймай перевод
+            </h2>
+
+            <p id="gameDescription">
+                Найди правильный перевод.
+            </p>
+
+        </div>
+
+
+        <!-- =================
+             GAME 01
+        ================== -->
+
+        <div id="catchGame" class="game-panel hidden">
+
+            <div class="hud">
+
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="catchScore">0</span>
+                </div>
+
+                <div class="hud-item">
+                    <span class="hud-label">ERRORS</span>
+                    <span class="hud-value" id="catchErrors">0</span>
+                </div>
+
+                <div class="hud-item">
+                    <span class="hud-label">WORDS</span>
+                    <span class="hud-value" id="catchWords">0</span>
+                </div>
+
+            </div>
+
+
+            <div class="question-box">
+
+                <div class="question-word" id="catchQuestion">
+                    beautiful
+                </div>
+
+                <div class="question-subtitle">
+                    Выбери правильный перевод
+                </div>
+
+            </div>
+
+
+            <div class="answers" id="catchAnswers"></div>
+
+            <div class="combo" id="catchCombo"></div>
+
+        </div>
+
+
+        <!-- =================
+             GAME 02
+        ================== -->
+
+        <div id="memoryGame" class="game-panel hidden">
+
+            <div class="hud">
+
+                <div class="hud-item">
+                    <span class="hud-label">ROUND</span>
+                    <span class="hud-value" id="memoryRound">1</span>
+                </div>
+
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="memoryScore">0</span>
+                </div>
+
+                <div class="hud-item">
+                    <span class="hud-label">ERRORS</span>
+                    <span class="hud-value" id="memoryErrors">0</span>
+                </div>
+
+            </div>
+
+
+            <div id="memoryContent">
+
+                <div class="memory-settings">
+
+                    <label for="memoryTimeSelect">
+                        Время на запоминание
+                    </label>
+
+                    <select
+                        id="memoryTimeSelect"
+                        aria-label="Время на запоминание"
+                    >
+                        <option value="0.5">
+                            0.5 секунды
+                        </option>
+
+                        <option value="1">
+                            1 секунда
+                        </option>
+
+                        <option value="1.5">
+                            1.5 секунды
+                        </option>
+
+                        <option value="2" selected>
+                            2 секунды
+                        </option>
+
+                        <option value="2.5">
+                            2.5 секунды
+                        </option>
+
+                        <option value="3">
+                            3 секунды
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="question-box">
+
+                    <div class="question-word" style="font-size:32px;">
+                        Запомни слова
+                    </div>
+
+                    <div class="question-subtitle">
+                        Они исчезнут через несколько секунд
+                    </div>
+
+                </div>
+
+                <div class="memory-grid" id="memoryGrid"></div>
+
+                <button class="start-button memory-start" id="memoryStart">
+                    НАЧАТЬ
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================
+             GAME 03
+        ================== -->
+
+        <div id="pairsGame" class="game-panel hidden">
+
+            <div class="hud">
+
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="pairsScore">0</span>
+                </div>
+
+                <div class="hud-item">
+                    <span class="hud-label">ERRORS</span>
+                    <span class="hud-value" id="pairsErrors">0</span>
+                </div>
+
+                <div class="hud-item">
+                    <span class="hud-label">PAIRS</span>
+                    <span class="hud-value" id="pairsCount">0</span>
+                </div>
+
+            </div>
+
+
+            <div class="pair-area">
+
+                <div>
+
+                    <div class="pair-column-title">
+                        WORD
+                    </div>
+
+                    <div id="pairWords"></div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="pair-column-title">
+                        TRANSLATION
+                    </div>
+
+                    <div id="pairTranslations"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================
+             GAME 04
+        ================== -->
+
+        <div id="speedGame" class="game-panel hidden">
+
+            <div class="speed-timer">
+
+                <div class="speed-time" id="speedTime">
+                    60
+                </div>
+
+                <div class="speed-progress">
+                    <div
+                        class="speed-progress-fill"
+                        id="speedProgress"
+                    ></div>
+                </div>
+
+            </div>
+
+
+            <div class="speed-score">
+                ⭐ <span id="speedScore">0</span>
+                &nbsp;&nbsp;
+                ❌ <span id="speedErrors">0</span>
+            </div>
+
+
+            <div id="speedContent">
+
+                <div class="question-box">
+
+                    <div class="question-word" id="speedQuestion">
+                        —
+                    </div>
+
+                    <div class="question-subtitle">
+                        У тебя 60 секунд
+                    </div>
+
+                </div>
+
+                <div class="answers" id="speedAnswers"></div>
+
+            </div>
+
+
+            <div id="speedStartArea">
+
+                <button class="start-button" id="speedStart">
+                    НАЧАТЬ 60 СЕКУНД
+                </button>
+
+            </div>
+
+
+            <div id="speedResult" class="result hidden">
+
+                <div class="result-trophy">
+                    🏆
+                </div>
+
+                <h2>
+                    Твой результат
+                </h2>
+
+                <div class="result-stats">
+
+                    <div class="result-stat">
+                        <strong id="resultCorrect">0</strong>
+                        <span>правильных</span>
+                    </div>
+
+                    <div class="result-stat">
+                        <strong id="resultErrors">0</strong>
+                        <span>ошибок</span>
+                    </div>
+
+                    <div class="result-stat">
+                        <strong id="resultAccuracy">0%</strong>
+                        <span>точности</span>
+                    </div>
+
+                    <div class="result-stat">
+                        <strong id="resultCombo">0</strong>
+                        <span>лучшая серия</span>
+                    </div>
+
+                </div>
+
+                <button class="restart-button" id="speedRestart">
+                    ПОПРОБОВАТЬ ЕЩЁ РАЗ
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="toast" id="toast"></div>
+
+</main>
 
 
 <script>
-const $ = id => document.getElementById(id);
+/* ============================================================
+   LANGUAGE PRACTICE — GAME ZONE
+============================================================ */
 
-let allWords = [];
-let currentLanguage = localStorage.getItem("languagePracticeGameLanguage") || "en-ru";
 
-let gameData = [];
-let currentIndex = 0;
-let score = 0;
-let combo = 0;
-let bestCombo = 0;
-let locked = false;
+/* ============================================================
+   WORD DATA
+============================================================ */
 
+const fallbackWords = [
+    {
+        english: "beautiful",
+        russian: "красивый",
+        korean: "아름다운"
+    },
+    {
+        english: "fast",
+        russian: "быстрый",
+        korean: "빠른"
+    },
+    {
+        english: "sad",
+        russian: "грустный",
+        korean: "슬픈"
+    },
+    {
+        english: "high",
+        russian: "высокий",
+        korean: "높은"
+    },
+    {
+        english: "apple",
+        russian: "яблоко",
+        korean: "사과"
+    },
+    {
+        english: "relieved",
+        russian: "испытывать облегчение",
+        korean: "안도하는"
+    },
+    {
+        english: "arrogant",
+        russian: "высокомерный",
+        korean: "거ман한"
+    },
+    {
+        english: "addiction",
+        russian: "зависимость",
+        korean: "중독"
+    },
+    {
+        english: "happy",
+        russian: "счастливый",
+        korean: "행복한"
+    },
+    {
+        english: "angry",
+        russian: "злой",
+        korean: "화난"
+    },
+    {
+        english: "strong",
+        russian: "сильный",
+        korean: "강한"
+    },
+    {
+        english: "weak",
+        russian: "слабый",
+        korean: "약한"
+    },
+    {
+        english: "important",
+        russian: "важный",
+        korean: "중요한"
+    },
+    {
+        english: "difficult",
+        russian: "сложный",
+        korean: "어려운"
+    },
+    {
+        english: "easy",
+        russian: "лёгкий",
+        korean: "쉬운"
+    },
+    {
+        english: "friend",
+        russian: "друг",
+        korean: "친구"
+    },
+    {
+        english: "family",
+        russian: "семья",
+        korean: "가족"
+    },
+    {
+        english: "school",
+        russian: "школа",
+        korean: "학교"
+    },
+    {
+        english: "water",
+        russian: "вода",
+        korean: "물"
+    },
+    {
+        english: "dream",
+        russian: "мечта",
+        korean: "꿈"
+    }
+];
+
+
+let words = [];
+
+
+/* ============================================================
+   APP STATE
+============================================================ */
+
+let currentGame = null;
+
+let currentLanguage = "english";
+
+
+let catchState = {
+    score: 0,
+    errors: 0,
+    combo: 0,
+    bestCombo: 0,
+    answered: 0,
+    current: null,
+    locked: false
+};
+
+
+/*
+   Список слов для GAME 01.
+   Он создаётся заново при начале игры,
+   перемешивается и проходится строго по одному разу.
+*/
+let catchWords = [];
+let catchIndex = 0;
+
+
+let memoryState = {
+    score: 0,
+    errors: 0,
+    round: 1,
+    currentWords: [],
+    missingIndex: 0,
+    started: false,
+    locked: false
+};
+
+
+/*
+   Время показа слов в GAME 02.
+   По умолчанию — 2 секунды.
+*/
 let memoryShowSeconds = 2;
 
-let speedTimer = null;
-let speedRunning = false;
-let speedTime = 60;
-let speedCorrect = 0;
-let speedErrors = 0;
-let speedCombo = 0;
-let speedBestCombo = 0;
 
-function shuffle(array){
-  const copy = [...array];
+let pairState = {
+    score: 0,
+    errors: 0,
+    pairs: 0,
+    selectedWord: null,
+    selectedTranslation: null,
+    currentWords: []
+};
 
-  for(let i = copy.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i],copy[j]] = [copy[j],copy[i]];
-  }
 
-  return copy;
-}
+let speedState = {
+    score: 0,
+    errors: 0,
+    combo: 0,
+    bestCombo: 0,
+    time: 60,
+    running: false,
+    timer: null,
+    current: null,
+    locked: false
+};
 
-function getText(word){
-  if(currentLanguage === "en-ru") return word.en;
-  if(currentLanguage === "ko-ru") return word.ko;
-  return word.ko;
-}
 
-function getTranslation(word){
-  if(currentLanguage === "en-ru") return word.ru;
-  if(currentLanguage === "ko-ru") return word.ru;
-  return word.en;
-}
+/* ============================================================
+   DOM
+============================================================ */
 
-function getUniqueWords(){
-  const seen = new Set();
-  const result = [];
+const homeScreen = document.getElementById("homeScreen");
+const gameScreen = document.getElementById("gameScreen");
 
-  allWords.forEach(word => {
-    const key = String(getText(word)).trim().toLowerCase();
-    if(seen.has(key)) return;
-    seen.add(key);
-    result.push(word);
-  });
+const backButton = document.getElementById("backButton");
 
-  return result;
-}
+const gameLabel = document.getElementById("gameLabel");
+const gameTitle = document.getElementById("gameTitle");
+const gameDescription = document.getElementById("gameDescription");
 
-function closeAllGames(except){
-  document.querySelectorAll(".game-screen").forEach(screen => {
-    if(screen.id !== except) screen.classList.remove("active");
-  });
-}
+const catchGame = document.getElementById("catchGame");
+const memoryGame = document.getElementById("memoryGame");
+const pairsGame = document.getElementById("pairsGame");
+const speedGame = document.getElementById("speedGame");
 
-function setLanguage(language){
-  currentLanguage = language;
-  localStorage.setItem("languagePracticeGameLanguage",language);
+const toast = document.getElementById("toast");
 
-  document.querySelectorAll(".lang-btn").forEach(btn => {
-    btn.classList.toggle("active",btn.dataset.lang === language);
-  });
 
-  document.querySelectorAll(".game-screen").forEach(screen => {
-    screen.classList.remove("active");
-  });
-}
-
-document.querySelectorAll(".lang-btn").forEach(button => {
-  button.addEventListener("click",() => {
-    setLanguage(button.dataset.lang);
-  });
-});
-
-
-/* =========================
-   GAME 1 — CATCH TRANSLATION
-========================= */
-
-function startCatch(){
-  closeAllGames("catchPlay");
-
-  $("catchPlay").classList.add("active");
-
-  gameData = shuffle(getUniqueWords());
-  currentIndex = 0;
-  score = 0;
-  combo = 0;
-  bestCombo = 0;
-
-  renderCatchQuestion();
-}
-
-function clearChoiceFocus(){
-  document.querySelectorAll(".answer,.pair-option,.memory-option,.speed-answer").forEach(button => {
-    if(button && typeof button.blur === "function") button.blur();
-  });
-}
-
-function setupChoiceFocus(button){
-  button.addEventListener("pointerdown",() => {
-    if(document.activeElement === button) button.blur();
-  });
-}
-
-function renderCatchQuestion(){
-  clearChoiceFocus();
-
-  if(currentIndex >= gameData.length){
-    $("catchWord").textContent = "🎉 Раунд закончен!";
-    $("catchAnswers").innerHTML = "";
-    $("catchProgress").textContent = `${gameData.length} / ${gameData.length}`;
-    $("catchFeedback").textContent = `Результат: ${score} очков`;
-    $("catchCombo").textContent = bestCombo ? `Лучшее комбо: ×${bestCombo}` : "";
-    return;
-  }
-
-  locked = false;
-
-  const word = gameData[currentIndex];
-  const correct = getTranslation(word);
-
-  $("catchProgress").textContent = `${currentIndex + 1} / ${gameData.length}`;
-  $("catchScore").textContent = `${score} очков`;
-  $("catchWord").textContent = getText(word);
-
-  $("catchFeedback").textContent = "";
-  $("catchFeedback").className = "feedback";
-
-  $("catchCombo").textContent = combo >= 2 ? `COMBO ×${combo} 🔥` : "";
-
-  const wrongOptions = shuffle(
-    getUniqueWords().filter(item =>
-      item !== word &&
-      getTranslation(item) !== correct
-    )
-  ).slice(0,3);
-
-  const options = shuffle([
-    {text:correct,correct:true},
-    ...wrongOptions.map(item => ({
-      text:getTranslation(item),
-      correct:false
-    }))
-  ]);
-
-  $("catchAnswers").innerHTML = "";
-
-  options.forEach(option => {
-    const button = document.createElement("button");
-    button.className = "answer";
-    button.textContent = option.text;
-
-    setupChoiceFocus(button);
-
-    button.addEventListener("click",() => {
-      answerCatch(button,option.text,option.correct);
-    });
-
-    $("catchAnswers").appendChild(button);
-  });
-}
-
-function answerCatch(button,text,correct){
-  if(locked){
-    button.blur();
-    return;
-  }
-
-  locked = true;
-
-  document.querySelectorAll("#catchAnswers .answer").forEach(item => {
-    item.classList.add("disabled");
-  });
-
-  if(correct){
-    button.classList.add("correct");
-
-    score += 10 + combo * 2;
-    combo++;
-    bestCombo = Math.max(bestCombo,combo);
-
-    $("catchFeedback").textContent = "✓ Правильно!";
-    $("catchFeedback").className = "feedback good";
-
-  }else{
-    button.classList.add("wrong");
-
-    combo = 0;
-
-    $("catchFeedback").textContent = "✕ Неправильно";
-    $("catchFeedback").className = "feedback bad";
-
-    document.querySelectorAll("#catchAnswers .answer").forEach(item => {
-      if(item.textContent === getTranslation(gameData[currentIndex])){
-        item.classList.add("correct");
-      }
-    });
-  }
-
-  $("catchCombo").textContent = combo >= 2 ? `COMBO ×${combo} 🔥` : "";
-
-  setTimeout(() => {
-    currentIndex++;
-    renderCatchQuestion();
-  },550);
-}
-
-$("catchStart").addEventListener("click",startCatch);
-
-
-/* =========================
-   GAME 2 — PAIR
-========================= */
-
-function startPair(){
-  closeAllGames("pairPlay");
-
-  $("pairPlay").classList.add("active");
-
-  gameData = shuffle(getUniqueWords());
-  currentIndex = 0;
-  score = 0;
-  combo = 0;
-  locked = false;
-
-  renderPairQuestion();
-}
-
-function renderPairQuestion(){
-  clearChoiceFocus();
-
-  if(currentIndex >= gameData.length){
-    $("pairWord").textContent = "🎉 Раунд закончен!";
-    $("pairOptions").innerHTML = "";
-    $("pairProgress").textContent = `${gameData.length} / ${gameData.length}`;
-    $("pairFeedback").textContent = `Результат: ${score} очков`;
-    return;
-  }
-
-  locked = false;
-
-  const word = gameData[currentIndex];
-  const correct = getTranslation(word);
-
-  $("pairProgress").textContent = `${currentIndex + 1} / ${gameData.length}`;
-  $("pairScore").textContent = `${score} очков`;
-  $("pairWord").textContent = getText(word);
-
-  $("pairFeedback").textContent = "";
-  $("pairFeedback").className = "feedback";
-
-  const wrongOptions = shuffle(
-    getUniqueWords().filter(item =>
-      item !== word &&
-      getTranslation(item) !== correct
-    )
-  ).slice(0,3);
-
-  const options = shuffle([
-    {text:correct,correct:true},
-    ...wrongOptions.map(item => ({
-      text:getTranslation(item),
-      correct:false
-    }))
-  ]);
-
-  $("pairOptions").innerHTML = "";
-
-  options.forEach(option => {
-    const button = document.createElement("button");
-    button.className = "pair-option";
-    button.textContent = option.text;
-
-    setupChoiceFocus(button);
-
-    button.addEventListener("click",() => {
-      answerPair(button,option.text,option.correct);
-    });
-
-    $("pairOptions").appendChild(button);
-  });
-}
-
-function answerPair(button,text,correct){
-  if(locked){
-    button.blur();
-    return;
-  }
-
-  locked = true;
-
-  document.querySelectorAll("#pairOptions .pair-option").forEach(item => {
-    item.classList.add("disabled");
-  });
-
-  if(correct){
-    button.classList.add("correct");
-
-    score += 10;
-    combo++;
-
-    $("pairFeedback").textContent = "✓ Отлично!";
-    $("pairFeedback").className = "feedback good";
-
-  }else{
-    button.classList.add("wrong");
-
-    combo = 0;
-
-    $("pairFeedback").textContent = "✕ Попробуй запомнить эту пару";
-    $("pairFeedback").className = "feedback bad";
-
-    document.querySelectorAll("#pairOptions .pair-option").forEach(item => {
-      if(item.textContent === getTranslation(gameData[currentIndex])){
-        item.classList.add("correct");
-      }
-    });
-  }
-
-  setTimeout(() => {
-    currentIndex++;
-    renderPairQuestion();
-  },600);
-}
-
-$("pairStart").addEventListener("click",startPair);
-
-
-/* =========================
-   GAME 3 — MEMORY
-========================= */
-
-function startMemory(){
-  closeAllGames("memoryPlay");
-
-  $("memoryPlay").classList.add("active");
-
-  gameRound = 0;
-  memoryShowSeconds = Number($("memoryTimeSelect").value) || 2;
-
-  score = 0;
-  locked = false;
-
-  gameData = shuffle(getUniqueWords());
-
-  startMemoryRound();
-}
-
-let gameRound = 0;
-
-function startMemoryRound(){
-  clearChoiceFocus();
-
-  if(gameRound >= gameData.length){
-    $("memoryGrid").innerHTML = `
-      <div class="word-box">
-        <div>
-          <div class="word">🎉 Молодец!</div>
-          <div class="hint">Ты прошёл весь раунд</div>
-        </div>
-      </div>
-    `;
-
-    $("memoryOptions").innerHTML = "";
-    $("memoryFeedback").textContent = `Результат: ${score} очков`;
-    return;
-  }
-
-  locked = false;
-
-  const count = Math.min(4,gameData.length);
-
-  const pool = shuffle(gameData).slice(0,count);
-  const missingIndex = Math.floor(Math.random() * pool.length);
-
-  const missingWord = pool[missingIndex];
-  const correct = getText(missingWord);
-
-  $("memoryProgress").textContent = `${gameRound + 1} / ${gameData.length}`;
-  $("memoryScore").textContent = `${score} очков`;
-  $("memoryFeedback").textContent = "";
-  $("memoryFeedback").className = "feedback";
-
-  $("memoryGrid").innerHTML = "";
-
-  pool.forEach((word,index) => {
-    const card = document.createElement("div");
-    card.className = "memory-card";
-
-    card.innerHTML = `
-      <div class="en">${getText(word)}</div>
-      <div class="ru">${getTranslation(word)}</div>
-    `;
-
-    $("memoryGrid").appendChild(card);
-  });
-
-  const showTime = memoryShowSeconds * 1000;
-
-  setTimeout(() => {
-    const cards = document.querySelectorAll("#memoryGrid .memory-card");
-
-    cards[missingIndex].classList.add("missing");
-    cards[missingIndex].querySelector(".ru").textContent = "???";
-
-    const wrongOptions = shuffle(
-      getUniqueWords().filter(item =>
-        item !== missingWord &&
-        getText(item) !== correct
-      )
-    ).slice(0,3);
-
-    const options = shuffle([
-      {text:correct,correct:true},
-      ...wrongOptions.map(item => ({
-        text:getText(item),
-        correct:false
-      }))
-    ]);
-
-    $("memoryOptions").innerHTML = "";
-
-    options.forEach(option => {
-      const button = document.createElement("button");
-      button.className = "memory-option";
-      button.textContent = option.text;
-
-      setupChoiceFocus(button);
-
-      button.addEventListener("click",() => {
-        answerMemory(button,option.text,option.correct);
-      });
-
-      $("memoryOptions").appendChild(button);
-    });
-
-  },showTime);
-}
-
-function answerMemory(button,text,correct){
-  if(locked){
-    button.blur();
-    return;
-  }
-
-  locked = true;
-
-  document.querySelectorAll("#memoryOptions .memory-option").forEach(item => {
-    item.classList.add("disabled");
-  });
-
-  if(correct){
-    button.classList.add("correct");
-
-    score += 10;
-
-    $("memoryFeedback").textContent = "✓ Правильно!";
-    $("memoryFeedback").className = "feedback good";
-
-  }else{
-    button.classList.add("wrong");
-
-    $("memoryFeedback").textContent = "✕ Неправильно";
-    $("memoryFeedback").className = "feedback bad";
-
-    document.querySelectorAll("#memoryOptions .memory-option").forEach(item => {
-      if(item.textContent === getText(gameData[gameRound])){
-        item.classList.add("correct");
-      }
-    });
-  }
-
-  setTimeout(() => {
-    gameRound++;
-    startMemoryRound();
-  },600);
-}
-
-$("memoryStart").addEventListener("click",startMemory);
-
-$("memoryTimeSelect").addEventListener("change",() => {
-  memoryShowSeconds = Number($("memoryTimeSelect").value) || 2;
-});
-
-
-/* =========================
-   GAME 4 — 60 SECONDS
-========================= */
-
-function startSpeed(){
-  closeAllGames("speedPlay");
-
-  $("speedPlay").classList.add("active");
-  $("speedResult").classList.add("hidden");
-
-  speedRunning = true;
-  speedTime = 60;
-  speedCorrect = 0;
-  speedErrors = 0;
-  speedCombo = 0;
-  speedBestCombo = 0;
-
-  $("speedTimer").textContent = speedTime;
-  $("speedScore").textContent = "0 очков";
-  $("speedFeedback").textContent = "";
-
-  renderSpeedQuestion();
-
-  clearInterval(speedTimer);
-
-  speedTimer = setInterval(() => {
-    speedTime--;
-
-    $("speedTimer").textContent = speedTime;
-
-    if(speedTime <= 0){
-      finishSpeed();
-    }
-
-  },1000);
-}
-
-function renderSpeedQuestion(){
-  clearChoiceFocus();
-
-  if(!speedRunning) return;
-
-  locked = false;
-
-  const words = getUniqueWords();
-
-  if(!words.length) return;
-
-  const word = words[Math.floor(Math.random() * words.length)];
-  const correct = getTranslation(word);
-
-  $("speedWord").textContent = getText(word);
-
-  $("speedFeedback").textContent = "";
-  $("speedFeedback").className = "feedback";
-
-  const wrongOptions = shuffle(
-    words.filter(item =>
-      item !== word &&
-      getTranslation(item) !== correct
-    )
-  ).slice(0,3);
-
-  const options = shuffle([
-    {text:correct,correct:true},
-    ...wrongOptions.map(item => ({
-      text:getTranslation(item),
-      correct:false
-    }))
-  ]);
-
-  $("speedAnswers").innerHTML = "";
-
-  options.forEach(option => {
-    const button = document.createElement("button");
-    button.className = "speed-answer";
-    button.textContent = option.text;
-
-    setupChoiceFocus(button);
-
-    button.addEventListener("click",() => {
-      answerSpeed(button,option.text,option.correct);
-    });
-
-    $("speedAnswers").appendChild(button);
-  });
-}
-
-function answerSpeed(button,text,correct){
-  if(!speedRunning) return;
-
-  if(locked){
-    button.blur();
-    return;
-  }
-
-  locked = true;
-
-  document.querySelectorAll("#speedAnswers .speed-answer").forEach(item => {
-    item.classList.add("disabled");
-  });
-
-  if(correct){
-    button.classList.add("correct");
-
-    speedCorrect++;
-    speedCombo++;
-    speedBestCombo = Math.max(speedBestCombo,speedCombo);
-
-    $("speedScore").textContent =
-      `${speedCorrect * 10 + speedBestCombo * 2} очков`;
-
-    $("speedFeedback").textContent = "✓";
-    $("speedFeedback").className = "feedback good";
-
-  }else{
-    button.classList.add("wrong");
-
-    speedErrors++;
-    speedCombo = 0;
-
-    $("speedFeedback").textContent = "✕";
-    $("speedFeedback").className = "feedback bad";
-  }
-
-  setTimeout(() => {
-    if(speedRunning){
-      renderSpeedQuestion();
-    }
-  },180);
-}
-
-function finishSpeed(){
-  if(!speedRunning) return;
-
-  speedRunning = false;
-
-  clearInterval(speedTimer);
-
-  $("speedTimer").textContent = "0";
-
-  const total = speedCorrect + speedErrors;
-  const accuracy = total
-    ? Math.round(speedCorrect / total * 100)
-    : 0;
-
-  $("resultCorrect").textContent = speedCorrect;
-  $("resultErrors").textContent = speedErrors;
-  $("resultAccuracy").textContent = `${accuracy}%`;
-  $("resultCombo").textContent = speedBestCombo;
-
-  $("speedResult").classList.remove("hidden");
-  $("speedAnswers").innerHTML = "";
-  $("speedWord").textContent = "⚡ Время вышло!";
-}
-
-$("speedStart").addEventListener("click",startSpeed);
-$("speedAgain").addEventListener("click",startSpeed);
-
-
-/* =========================
+/* ============================================================
    LOAD WORDS
-========================= */
+============================================================ */
 
-async function loadWords(){
-  try{
-    const response = await fetch("data/words.json",{cache:"no-store"});
+async function loadWords() {
 
-    if(!response.ok){
-      throw new Error("Не удалось загрузить words.json");
+    try {
+
+        const response = await fetch("data/words.json", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("words.json unavailable");
+        }
+
+        const data = await response.json();
+
+        if (Array.isArray(data) && data.length) {
+
+            words = data
+                .filter(word =>
+                    word &&
+                    (
+                        word.english ||
+                        word.russian ||
+                        word.korean
+                    )
+                )
+                .map(word => ({
+                    english: word.english || "",
+                    russian: word.russian || "",
+                    korean: word.korean || ""
+                }));
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Не удалось загрузить data/words.json. Используется встроенный набор слов."
+        );
+
+        words = [...fallbackWords];
     }
 
-    const data = await response.json();
-
-    if(!Array.isArray(data)){
-      throw new Error("words.json должен содержать массив");
+    if (!words.length) {
+        words = [...fallbackWords];
     }
-
-    allWords = data.filter(word =>
-      word &&
-      typeof word === "object" &&
-      word.en &&
-      word.ru &&
-      word.ko
-    );
-
-    if(!allWords.length){
-      throw new Error("В words.json нет слов");
-    }
-
-  }catch(error){
-    console.error(error);
-
-    allWords = [
-      {
-        en:"to feel relieved",
-        ru:"чувствовать облегчение",
-        ko:"안도하다"
-      },
-      {
-        en:"to be proud of something",
-        ru:"гордиться чем-либо",
-        ko:"~을 자랑스러워하다"
-      },
-      {
-        en:"exciting",
-        ru:"волнующий",
-        ko:"흥미진진한"
-      },
-      {
-        en:"to stand out",
-        ru:"выделяться",
-        ko:"눈에 띄다"
-      },
-      {
-        en:"skin",
-        ru:"кожа",
-        ko:"피부"
-      },
-      {
-        en:"freckles",
-        ru:"веснушки",
-        ko:"주근깨"
-      },
-      {
-        en:"imperfection",
-        ru:"несовершенство",
-        ko:"불완전함"
-      },
-      {
-        en:"birthmark",
-        ru:"родимое пятно",
-        ko:"모반"
-      }
-    ];
-  }
 }
-
-
-/* =========================
-   INIT
-========================= */
-
-setLanguage(currentLanguage);
 
 loadWords();
+
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function shuffle(array) {
+
+    const result = [...array];
+
+    for (let i = result.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+
+    return result;
+}
+
+
+function randomWords(count) {
+
+    return shuffle(words).slice(
+        0,
+        Math.min(count, words.length)
+    );
+}
+
+
+/*
+   Убираем дубли слов для игр,
+   чтобы одно и то же отображаемое слово
+   не появлялось несколько раз.
+*/
+function getUniqueWords() {
+
+    const seen = new Set();
+    const result = [];
+
+    words.forEach(word => {
+
+        const key = String(
+            word.english || word.korean || word.russian || ""
+        )
+            .trim()
+            .toLowerCase();
+
+        if (!key || seen.has(key)) {
+            return;
+        }
+
+        seen.add(key);
+        result.push(word);
+
+    });
+
+    return result;
+}
+
+
+function getText(word) {
+
+    if (!word) return "";
+
+    return word[currentLanguage] ||
+           word.russian ||
+           word.english ||
+           word.korean;
+}
+
+
+function getWordLanguageName() {
+
+    if (currentLanguage === "english") {
+        return "ENGLISH";
+    }
+
+    if (currentLanguage === "korean") {
+        return "KOREAN";
+    }
+
+    return "RUSSIAN";
+}
+
+
+function showToast(text) {
+
+    toast.textContent = text;
+    toast.classList.add("show");
+
+    clearTimeout(showToast.timer);
+
+    showToast.timer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
+}
+
+
+/* ============================================================
+   FOCUS
+============================================================ */
+
+/*
+   На телефоне Safari может оставлять визуальный focus
+   на нажатой кнопке. Это не меняет игровой логику,
+   а только убирает "залипший" контур после ответа.
+*/
+function clearChoiceFocus() {
+
+    document
+        .querySelectorAll(
+            ".answer,.pair-card,.memory-option"
+        )
+        .forEach(button => {
+
+            if (
+                button &&
+                typeof button.blur === "function"
+            ) {
+                button.blur();
+            }
+
+        });
+
+}
+
+
+function setupChoiceFocus(button) {
+
+    button.addEventListener(
+        "pointerdown",
+        () => {
+
+            if (
+                document.activeElement === button
+            ) {
+                button.blur();
+            }
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   SOUND
+============================================================ */
+
+let audioContext = null;
+
+function playSound(type) {
+
+    try {
+
+        if (!audioContext) {
+            audioContext = new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+        }
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        if (type === "correct") {
+
+            oscillator.frequency.setValueAtTime(
+                520,
+                audioContext.currentTime
+            );
+
+            oscillator.frequency.exponentialRampToValueAtTime(
+                820,
+                audioContext.currentTime + .12
+            );
+
+        } else if (type === "wrong") {
+
+            oscillator.frequency.setValueAtTime(
+                180,
+                audioContext.currentTime
+            );
+
+            oscillator.frequency.exponentialRampToValueAtTime(
+                110,
+                audioContext.currentTime + .14
+            );
+
+        } else {
+
+            oscillator.frequency.setValueAtTime(
+                400,
+                audioContext.currentTime
+            );
+
+        }
+
+        gain.gain.setValueAtTime(
+            .0001,
+            audioContext.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .08,
+            audioContext.currentTime + .01
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .0001,
+            audioContext.currentTime + .18
+        );
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + .2
+        );
+
+    } catch (error) {
+        // звук необязателен
+    }
+}
+
+
+/* ============================================================
+   OPEN / CLOSE GAME
+============================================================ */
+
+function hideAllGames() {
+
+    catchGame.classList.add("hidden");
+    memoryGame.classList.add("hidden");
+    pairsGame.classList.add("hidden");
+    speedGame.classList.add("hidden");
+}
+
+
+function openGame(game) {
+
+    currentGame = game;
+
+    homeScreen.classList.remove("active");
+    gameScreen.classList.add("active");
+
+    hideAllGames();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    if (game === "catch") {
+
+        gameLabel.textContent = "GAME 01";
+        gameTitle.textContent = "Поймай перевод";
+        gameDescription.textContent =
+            "Быстро находи правильный перевод и набирай очки.";
+
+        catchGame.classList.remove("hidden");
+
+        startCatchGame();
+
+    }
+
+
+    if (game === "memory") {
+
+        gameLabel.textContent = "GAME 02";
+        gameTitle.textContent = "Что пропало?";
+        gameDescription.textContent =
+            "Проверь память и вспомни исчезнувшее слово.";
+
+        memoryGame.classList.remove("hidden");
+
+        startMemoryGame();
+
+    }
+
+
+    if (game === "pairs") {
+
+        gameLabel.textContent = "GAME 03";
+        gameTitle.textContent = "Собери пару";
+        gameDescription.textContent =
+            "Соедини слова и правильные переводы.";
+
+        pairsGame.classList.remove("hidden");
+
+        startPairsGame();
+
+    }
+
+
+    if (game === "speed") {
+
+        gameLabel.textContent = "GAME 04";
+        gameTitle.textContent = "60 секунд";
+        gameDescription.textContent =
+            "Сколько правильных ответов ты успеешь дать?";
+
+        speedGame.classList.remove("hidden");
+
+        prepareSpeedGame();
+
+    }
+}
+
+
+function goHome() {
+
+    if (speedState.timer) {
+        clearInterval(speedState.timer);
+        speedState.timer = null;
+    }
+
+    speedState.running = false;
+
+    currentGame = null;
+
+    gameScreen.classList.remove("active");
+    homeScreen.classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+backButton.addEventListener("click", () => {
+
+    if (currentGame) {
+        goHome();
+    } else {
+        history.back();
+    }
+
+});
+
+
+/* ============================================================
+   GAME CARD BUTTONS
+============================================================ */
+
+document.querySelectorAll(".game-card").forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        const game = card.dataset.game;
+
+        if (game) {
+            openGame(game);
+        }
+
+    });
+
+});
+
+
+/* ============================================================
+   GAME 01 — CATCH TRANSLATION
+============================================================ */
+
+function startCatchGame() {
+
+    catchState = {
+        score: 0,
+        errors: 0,
+        combo: 0,
+        bestCombo: 0,
+        answered: 0,
+        current: null,
+        locked: false
+    };
+
+
+    /*
+       ВАЖНО:
+       Создаём один перемешанный список.
+       Далее игра идёт только по этому списку.
+       Поэтому слово не может случайно повториться.
+    */
+    catchWords = shuffle(
+        getUniqueWords()
+    );
+
+    catchIndex = 0;
+
+    clearChoiceFocus();
+
+    updateCatchHUD();
+
+    nextCatchQuestion();
+
+}
+
+
+function updateCatchHUD() {
+
+    document.getElementById("catchScore").textContent =
+        catchState.score;
+
+    document.getElementById("catchErrors").textContent =
+        catchState.errors;
+
+    document.getElementById("catchWords").textContent =
+        catchState.answered;
+
+    const comboElement =
+        document.getElementById("catchCombo");
+
+    if (catchState.combo >= 2) {
+
+        comboElement.textContent =
+            `COMBO ×${catchState.combo} 🔥`;
+
+    } else {
+
+        comboElement.textContent = "";
+    }
+}
+
+
+function nextCatchQuestion() {
+
+    clearChoiceFocus();
+
+
+    /*
+       Все слова закончились.
+    */
+    if (
+        catchIndex >=
+        catchWords.length
+    ) {
+
+        catchState.locked = true;
+
+        showToast("🏆 Все слова пройдены!");
+
+        return;
+    }
+
+
+    catchState.locked = false;
+
+
+    const current =
+        catchWords[catchIndex];
+
+    catchState.current = current;
+
+
+    document.getElementById("catchQuestion")
+        .textContent =
+        getText(current);
+
+
+    const correct =
+        current.russian;
+
+
+    /*
+       Неправильные ответы выбираются
+       только из других слов.
+    */
+    const wrongWords =
+        shuffle(
+            getUniqueWords().filter(word =>
+                word !== current &&
+                word.russian !== correct
+            )
+        )
+        .slice(0, 3);
+
+
+    const options =
+        shuffle([
+            current,
+            ...wrongWords
+        ]);
+
+
+    const container =
+        document.getElementById("catchAnswers");
+
+    container.innerHTML = "";
+
+
+    options.forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "answer";
+
+        button.textContent =
+            word.russian;
+
+        setupChoiceFocus(button);
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                catchAnswer(
+                    button,
+                    word
+                );
+
+            }
+        );
+
+
+        container.appendChild(button);
+
+    });
+
+}
+
+
+function catchAnswer(button, word) {
+
+    /*
+       После уже принятого ответа
+       повторное нажатие ничего не делает.
+    */
+    if (catchState.locked) {
+
+        button.blur();
+
+        return;
+    }
+
+
+    if (
+        word ===
+        catchState.current
+    ) {
+
+        catchState.locked = true;
+
+        catchState.combo++;
+
+        catchState.bestCombo =
+            Math.max(
+                catchState.bestCombo,
+                catchState.combo
+            );
+
+
+        const comboBonus =
+            catchState.combo >= 2
+                ? catchState.combo
+                : 1;
+
+
+        catchState.score +=
+            comboBonus;
+
+        catchState.answered++;
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        playSound("correct");
+
+
+        if (
+            catchState.combo >= 3
+        ) {
+
+            showToast(
+                `🔥 COMBO ×${catchState.combo}`
+            );
+
+        }
+
+
+        updateCatchHUD();
+
+
+        setTimeout(() => {
+
+            catchIndex++;
+
+            nextCatchQuestion();
+
+        }, 450);
+
+
+    } else {
+
+        /*
+           Ошибка не переводит к следующему слову.
+           Можно спокойно выбрать другой вариант.
+        */
+        catchState.errors++;
+
+        catchState.combo = 0;
+
+        button.classList.add(
+            "wrong"
+        );
+
+        playSound("wrong");
+
+        updateCatchHUD();
+
+
+        setTimeout(() => {
+
+            button.classList.remove(
+                "wrong"
+            );
+
+        }, 350);
+
+    }
+
+}
+
+
+/* ============================================================
+   GAME 02 — WHAT DISAPPEARED
+============================================================ */
+
+function startMemoryGame() {
+
+    memoryState = {
+        score: 0,
+        errors: 0,
+        round: 1,
+        currentWords: [],
+        missingIndex: 0,
+        started: false,
+        locked: false
+    };
+
+
+    document.getElementById(
+        "memoryRound"
+    ).textContent = "1";
+
+
+    document.getElementById(
+        "memoryScore"
+    ).textContent = "0";
+
+
+    document.getElementById(
+        "memoryErrors"
+    ).textContent = "0";
+
+
+    const grid =
+        document.getElementById(
+            "memoryGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    const oldOptions =
+        document.querySelector(
+            ".memory-options"
+        );
+
+
+    if (oldOptions) {
+        oldOptions.remove();
+    }
+
+
+    document.getElementById(
+        "memoryStart"
+    )
+        .classList.remove("hidden");
+
+}
+
+
+document.getElementById(
+    "memoryStart"
+)
+.addEventListener(
+    "click",
+    () => {
+
+        memoryRound();
+
+    }
+);
+
+
+function memoryRound() {
+
+    /*
+       Снимаем блокировку для нового раунда.
+    */
+    memoryState.locked = false;
+
+    memoryState.started = true;
+
+
+    memoryState.currentWords =
+        randomWords(4);
+
+
+    /*
+       Если слов меньше 1, просто прекращаем раунд.
+    */
+    if (
+        !memoryState.currentWords.length
+    ) {
+        return;
+    }
+
+
+    memoryState.missingIndex =
+        Math.floor(
+            Math.random() *
+            memoryState.currentWords.length
+        );
+
+
+    const grid =
+        document.getElementById(
+            "memoryGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    memoryState.currentWords
+        .forEach(
+            (word, index) => {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "memory-row";
+
+
+                row.innerHTML = `
+                    <div class="memory-word">
+                        ${escapeHTML(word.english)}
+                    </div>
+
+                    <div class="memory-translation">
+                        ${escapeHTML(word.russian)}
+                    </div>
+                `;
+
+
+                grid.appendChild(row);
+
+            }
+        );
+
+
+    document.getElementById(
+        "memoryStart"
+    )
+        .classList.add("hidden");
+
+
+    /*
+       Время показа теперь берётся
+       из выбранной настройки.
+    */
+    const showTime =
+        memoryShowSeconds * 1000;
+
+
+    setTimeout(() => {
+
+        /*
+           Если пользователь уже ушёл
+           из игры, ничего не делаем.
+        */
+        if (
+            currentGame !== "memory" ||
+            !memoryState.started
+        ) {
+            return;
+        }
+
+
+        const rows =
+            grid.querySelectorAll(
+                ".memory-row"
+            );
+
+
+        rows.forEach(
+            (row, index) => {
+
+                if (
+                    index ===
+                    memoryState.missingIndex
+                ) {
+
+                    row.classList.add(
+                        "missing"
+                    );
+
+
+                    row.innerHTML = `
+                        <div class="memory-hidden">
+                            ???
+                        </div>
+
+                        <div class="memory-hidden">
+                            СЛОВО ПРОПАЛО
+                        </div>
+                    `;
+
+                }
+
+            }
+        );
+
+
+        showMemoryOptions();
+
+    }, showTime);
+
+}
+
+
+function showMemoryOptions() {
+
+    const oldOptions =
+        document.querySelector(
+            ".memory-options"
+        );
+
+
+    if (oldOptions) {
+        oldOptions.remove();
+    }
+
+
+    const options =
+        document.createElement(
+            "div"
+        );
+
+
+    options.className =
+        "memory-options";
+
+
+    const correct =
+        memoryState.currentWords[
+            memoryState.missingIndex
+        ];
+
+
+    const wrong =
+        shuffle(
+            getUniqueWords().filter(
+                word =>
+                    word !== correct
+            )
+        )
+        .slice(0, 3);
+
+
+    shuffle([
+        correct,
+        ...wrong
+    ])
+    .forEach(word => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "answer";
+
+
+        button.textContent =
+            word.english;
+
+
+        setupChoiceFocus(button);
+
+
+        button.addEventListener(
+            "click",
+            () =>
+                memoryAnswer(
+                    button,
+                    word
+                )
+        );
+
+
+        options.appendChild(
+            button
+        );
+
+    });
+
+
+    document.getElementById(
+        "memoryContent"
+    )
+    .appendChild(options);
+
+}
+
+
+function memoryAnswer(button, word) {
+
+    /*
+       Если правильный ответ уже был принят,
+       второй клик ничего не запускает.
+    */
+    if (memoryState.locked) {
+
+        button.blur();
+
+        return;
+    }
+
+
+    const correct =
+        memoryState.currentWords[
+            memoryState.missingIndex
+        ];
+
+
+    if (
+        word === correct
+    ) {
+
+        memoryState.locked = true;
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        memoryState.score++;
+
+
+        playSound("correct");
+
+
+        document.getElementById(
+            "memoryScore"
+        )
+        .textContent =
+            memoryState.score;
+
+
+        showToast(
+            "✓ Правильно!"
+        );
+
+
+        setTimeout(() => {
+
+            const options =
+                document.querySelector(
+                    ".memory-options"
+                );
+
+
+            if (options) {
+                options.remove();
+            }
+
+
+            memoryState.round++;
+
+
+            document.getElementById(
+                "memoryRound"
+            )
+            .textContent =
+                memoryState.round;
+
+
+            memoryRound();
+
+        }, 500);
+
+
+    } else {
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        memoryState.errors++;
+
+
+        playSound("wrong");
+
+
+        document.getElementById(
+            "memoryErrors"
+        )
+        .textContent =
+            memoryState.errors;
+
+
+        setTimeout(() => {
+
+            button.classList.remove(
+                "wrong"
+            );
+
+        }, 350);
+
+    }
+
+}
+
+
+/*
+   Изменение времени запоминания.
+*/
+document.getElementById(
+    "memoryTimeSelect"
+)
+.addEventListener(
+    "change",
+    () => {
+
+        memoryShowSeconds =
+            Number(
+                document.getElementById(
+                    "memoryTimeSelect"
+                ).value
+            ) || 2;
+
+    }
+);
+
+
+/* ============================================================
+   GAME 03 — PAIRS
+============================================================ */
+
+function startPairsGame() {
+
+    pairState = {
+        score: 0,
+        errors: 0,
+        pairs: 0,
+        selectedWord: null,
+        selectedTranslation: null,
+        currentWords: randomWords(5)
+    };
+
+    updatePairHUD();
+
+    renderPairs();
+
+}
+
+
+function updatePairHUD() {
+
+    document.getElementById("pairsScore")
+        .textContent =
+        pairState.score;
+
+    document.getElementById("pairsErrors")
+        .textContent =
+        pairState.errors;
+
+    document.getElementById("pairsCount")
+        .textContent =
+        pairState.pairs;
+
+}
+
+
+function renderPairs() {
+
+    clearChoiceFocus();
+
+
+    const wordsContainer =
+        document.getElementById(
+            "pairWords"
+        );
+
+    const translationsContainer =
+        document.getElementById(
+            "pairTranslations"
+        );
+
+
+    wordsContainer.innerHTML = "";
+
+    translationsContainer.innerHTML = "";
+
+
+    pairState.currentWords
+        .forEach(word => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "pair-card";
+
+
+            card.textContent =
+                word.english;
+
+
+            card.dataset.id =
+                getWordId(word);
+
+
+            card.addEventListener(
+                "click",
+                () =>
+                    selectPairWord(
+                        card,
+                        word
+                    )
+            );
+
+
+            wordsContainer.appendChild(
+                card
+            );
+
+        });
+
+
+    shuffle(
+        pairState.currentWords
+    )
+    .forEach(word => {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "pair-card";
+
+
+        card.textContent =
+            word.russian;
+
+
+        card.dataset.id =
+            getWordId(word);
+
+
+        card.addEventListener(
+            "click",
+            () =>
+                selectPairTranslation(
+                    card,
+                    word
+                )
+        );
+
+
+        translationsContainer
+            .appendChild(card);
+
+    });
+
+}
+
+
+function getWordId(word) {
+
+    return (
+        word.english +
+        "|" +
+        word.russian
+    );
+
+}
+
+
+function selectPairWord(card, word) {
+
+    if (
+        card.classList.contains(
+            "correct"
+        )
+    ) {
+        return;
+    }
+
+
+    document.querySelectorAll(
+        "#pairWords .pair-card"
+    )
+    .forEach(item => {
+
+        item.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    card.classList.add(
+        "selected"
+    );
+
+
+    pairState.selectedWord = {
+        card,
+        word
+    };
+
+
+    checkPair();
+
+}
+
+
+function selectPairTranslation(
+    card,
+    word
+) {
+
+    if (
+        card.classList.contains(
+            "correct"
+        )
+    ) {
+        return;
+    }
+
+
+    document.querySelectorAll(
+        "#pairTranslations .pair-card"
+    )
+    .forEach(item => {
+
+        item.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    card.classList.add(
+        "selected"
+    );
+
+
+    pairState.selectedTranslation = {
+        card,
+        word
+    };
+
+
+    checkPair();
+
+}
+
+
+function checkPair() {
+
+    if (
+        !pairState.selectedWord ||
+        !pairState.selectedTranslation
+    ) {
+        return;
+    }
+
+
+    const first =
+        pairState.selectedWord;
+
+    const second =
+        pairState.selectedTranslation;
+
+
+    if (
+        first.word === second.word
+    ) {
+
+        first.card.classList.remove(
+            "selected"
+        );
+
+        second.card.classList.remove(
+            "selected"
+        );
+
+
+        first.card.classList.add(
+            "correct"
+        );
+
+        second.card.classList.add(
+            "correct"
+        );
+
+
+        pairState.score++;
+
+        pairState.pairs++;
+
+
+        playSound("correct");
+
+        updatePairHUD();
+
+
+        pairState.selectedWord = null;
+
+        pairState.selectedTranslation =
+            null;
+
+
+        if (
+            pairState.pairs >=
+            pairState.currentWords.length
+        ) {
+
+            setTimeout(() => {
+
+                showToast(
+                    "🏆 Все пары собраны!"
+                );
+
+
+                pairState.currentWords =
+                    randomWords(5);
+
+
+                pairState.pairs = 0;
+
+
+                renderPairs();
+
+                updatePairHUD();
+
+            }, 650);
+
+        }
+
+    } else {
+
+        first.card.classList.add(
+            "wrong"
+        );
+
+        second.card.classList.add(
+            "wrong"
+        );
+
+
+        pairState.errors++;
+
+
+        playSound("wrong");
+
+        updatePairHUD();
+
+
+        setTimeout(() => {
+
+            first.card.classList.remove(
+                "wrong"
+            );
+
+            second.card.classList.remove(
+                "wrong"
+            );
+
+        }, 350);
+
+
+        pairState.selectedWord = null;
+
+        pairState.selectedTranslation =
+            null;
+
+    }
+
+}
+
+
+/* ============================================================
+   GAME 04 — 60 SECONDS
+============================================================ */
+
+function prepareSpeedGame() {
+
+    if (speedState.timer) {
+
+        clearInterval(
+            speedState.timer
+        );
+
+        speedState.timer = null;
+
+    }
+
+
+    speedState = {
+        score: 0,
+        errors: 0,
+        combo: 0,
+        bestCombo: 0,
+        time: 60,
+        running: false,
+        timer: null,
+        current: null,
+        locked: false
+    };
+
+
+    document.getElementById(
+        "speedTime"
+    )
+    .textContent = "60";
+
+
+    document.getElementById(
+        "speedScore"
+    )
+    .textContent = "0";
+
+
+    document.getElementById(
+        "speedErrors"
+    )
+    .textContent = "0";
+
+
+    document.getElementById(
+        "speedProgress"
+    )
+    .style.width = "100%";
+
+
+    document.getElementById(
+        "speedStartArea"
+    )
+    .classList.remove("hidden");
+
+
+    document.getElementById(
+        "speedResult"
+    )
+    .classList.add("hidden");
+
+
+    document.getElementById(
+        "speedContent"
+    )
+    .classList.remove("hidden");
+
+}
+
+
+document.getElementById(
+    "speedStart"
+)
+.addEventListener(
+    "click",
+    startSpeedGame
+);
+
+
+function startSpeedGame() {
+
+    speedState.score = 0;
+    speedState.errors = 0;
+    speedState.combo = 0;
+    speedState.bestCombo = 0;
+    speedState.time = 60;
+    speedState.running = true;
+    speedState.locked = false;
+
+
+    document.getElementById(
+        "speedStartArea"
+    )
+    .classList.add("hidden");
+
+
+    document.getElementById(
+        "speedResult"
+    )
+    .classList.add("hidden");
+
+
+    document.getElementById(
+        "speedContent"
+    )
+    .classList.remove("hidden");
+
+
+    updateSpeedHUD();
+
+    nextSpeedQuestion();
+
+
+    speedState.timer =
+        setInterval(() => {
+
+            speedState.time--;
+
+
+            document.getElementById(
+                "speedTime"
+            )
+            .textContent =
+                speedState.time;
+
+
+            document.getElementById(
+                "speedProgress"
+            )
+            .style.width =
+                `${(speedState.time / 60) * 100}%`;
+
+
+            if (
+                speedState.time <= 0
+            ) {
+
+                finishSpeedGame();
+
+            }
+
+        }, 1000);
+
+}
+
+
+function updateSpeedHUD() {
+
+    document.getElementById(
+        "speedScore"
+    )
+    .textContent =
+        speedState.score;
+
+
+    document.getElementById(
+        "speedErrors"
+    )
+    .textContent =
+        speedState.errors;
+
+}
+
+
+function nextSpeedQuestion() {
+
+    if (
+        !speedState.running
+    ) {
+        return;
+    }
+
+
+    clearChoiceFocus();
+
+
+    speedState.locked = false;
+
+
+    const current =
+        words[
+            Math.floor(
+                Math.random() *
+                words.length
+            )
+        ];
+
+
+    speedState.current =
+        current;
+
+
+    document.getElementById(
+        "speedQuestion"
+    )
+    .textContent =
+        current.english;
+
+
+    const wrong =
+        shuffle(
+            words.filter(
+                word =>
+                    word !== current
+            )
+        )
+        .slice(0, 3);
+
+
+    const answers =
+        shuffle([
+            current,
+            ...wrong
+        ]);
+
+
+    const container =
+        document.getElementById(
+            "speedAnswers"
+        );
+
+
+    container.innerHTML = "";
+
+
+    answers.forEach(word => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "answer";
+
+
+        button.textContent =
+            word.russian;
+
+
+        setupChoiceFocus(button);
+
+
+        button.addEventListener(
+            "click",
+            () =>
+                speedAnswer(
+                    button,
+                    word
+                )
+        );
+
+
+        container.appendChild(
+            button
+        );
+
+    });
+
+}
+
+
+function speedAnswer(button, word) {
+
+    if (
+        !speedState.running
+    ) {
+        return;
+    }
+
+
+    if (
+        speedState.locked
+    ) {
+
+        button.blur();
+
+        return;
+    }
+
+
+    if (
+        word ===
+        speedState.current
+    ) {
+
+        speedState.locked = true;
+
+        speedState.score++;
+
+        speedState.combo++;
+
+
+        speedState.bestCombo =
+            Math.max(
+                speedState.bestCombo,
+                speedState.combo
+            );
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        playSound("correct");
+
+        updateSpeedHUD();
+
+
+        setTimeout(() => {
+
+            if (
+                speedState.running
+            ) {
+
+                nextSpeedQuestion();
+
+            }
+
+        }, 150);
+
+
+    } else {
+
+        speedState.errors++;
+
+        speedState.combo = 0;
+
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        playSound("wrong");
+
+        updateSpeedHUD();
+
+
+        setTimeout(() => {
+
+            button.classList.remove(
+                "wrong"
+            );
+
+        }, 300);
+
+    }
+
+}
+
+
+function finishSpeedGame() {
+
+    if (
+        !speedState.running
+    ) {
+        return;
+    }
+
+
+    speedState.running = false;
+
+
+    if (
+        speedState.timer
+    ) {
+
+        clearInterval(
+            speedState.timer
+        );
+
+        speedState.timer = null;
+
+    }
+
+
+    document.getElementById(
+        "speedContent"
+    )
+    .classList.add("hidden");
+
+
+    document.getElementById(
+        "speedResult"
+    )
+    .classList.remove("hidden");
+
+
+    document.getElementById(
+        "resultCorrect"
+    )
+    .textContent =
+        speedState.score;
+
+
+    document.getElementById(
+        "resultErrors"
+    )
+    .textContent =
+        speedState.errors;
+
+
+    const total =
+        speedState.score +
+        speedState.errors;
+
+
+    const accuracy =
+        total > 0
+            ? Math.round(
+                (
+                    speedState.score /
+                    total
+                ) * 100
+              )
+            : 0;
+
+
+    document.getElementById(
+        "resultAccuracy"
+    )
+    .textContent =
+        `${accuracy}%`;
+
+
+    document.getElementById(
+        "resultCombo"
+    )
+    .textContent =
+        speedState.bestCombo;
+
+
+    playSound("correct");
+
+}
+
+
+/* ============================================================
+   RESTART 60 SECONDS
+============================================================ */
+
+document.getElementById(
+    "speedRestart"
+)
+.addEventListener(
+    "click",
+    prepareSpeedGame
+);
+
+
+/* ============================================================
+   HTML ESCAPE
+============================================================ */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ============================================================
+   LANGUAGE
+============================================================ */
+
+/*
+   Если в основном сайте уже есть выбор языка,
+   сюда можно передавать:
+
+   window.setGameLanguage("english");
+   window.setGameLanguage("korean");
+*/
+
+window.setGameLanguage =
+    function(language) {
+
+        if (
+            language === "english" ||
+            language === "korean" ||
+            language === "russian"
+        ) {
+
+            currentLanguage =
+                language;
+
+        }
+
+    };
+
+
+/* ============================================================
+   KEYBOARD
+============================================================ */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            currentGame
+        ) {
+
+            goHome();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   INITIALIZATION
+============================================================ */
+
+hideAllGames();
+
 </script>
 
 </body>
